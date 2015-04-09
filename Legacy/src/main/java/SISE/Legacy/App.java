@@ -1,5 +1,7 @@
 package SISE.Legacy;
 
+import java.awt.Point;
+
 /**
  * Hello world!
  *
