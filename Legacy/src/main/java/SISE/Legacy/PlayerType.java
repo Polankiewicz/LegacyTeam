@@ -2,5 +2,6 @@ package SISE.Legacy;
 
 public enum PlayerType {
 	PlayerA,
-	PlayerB;
+	PlayerB,
+	NoOne;
 }

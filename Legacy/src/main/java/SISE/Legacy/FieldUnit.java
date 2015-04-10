@@ -9,7 +9,7 @@ public class FieldUnit {
 	private Point coordinates;
 	private ArrayList<Point> neighbours;
 	private int soldiers;
-	private char soldiersType;
+	private PlayerType soldiersType;
 	private BonusType bonusType;
 	
 	public int getSoldiers() {
@@ -20,11 +20,11 @@ public class FieldUnit {
 		this.soldiers = soldiers;
 	}
 
-	public char getSoldiersType() {
+	public PlayerType getSoldiersType() {
 		return soldiersType;
 	}
 
-	public void setSoldiersType(char soldiersType) {
+	public void setSoldiersType(PlayerType soldiersType) {
 		this.soldiersType = soldiersType;
 	}
 
@@ -44,7 +44,7 @@ public class FieldUnit {
 		return new ArrayList<Point>(neighbours);
 	}
 
-	public FieldUnit(Point coordinates, int soldiers, char soldiersType,
+	public FieldUnit(Point coordinates, int soldiers, PlayerType soldiersType,
 			BonusType bonusType) {
 		this.coordinates = coordinates;
 		this.soldiers = soldiers;
