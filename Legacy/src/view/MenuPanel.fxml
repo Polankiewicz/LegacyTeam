@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.menuController">
+   <children>
+      <Pane layoutX="151.0" layoutY="59.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView id="background" fx:id="background" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/background.jpg" />
+               </image>
+            </ImageView>
+            <ImageView id="exit" fx:id="exit" fitHeight="50.0" fitWidth="200.0" layoutX="300.0" layoutY="293.0" onMouseEntered="#changeExitImage" onMouseExited="#defaultExitImage" onMousePressed="#exitGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/exit.png" />
+               </image>
+            </ImageView>
+            <ImageView id="start" fx:id="start" fitHeight="50.0" fitWidth="200.0" layoutX="300.0" layoutY="226.0" onMouseEntered="#changeStartImage" onMouseExited="#defaultStartImage" onMouseReleased="#startGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/start.png" />
+               </image></ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
