@@ -75,5 +75,6 @@ public class SISEGame extends Application {
     
 	public static void main(String[] args) {
 		launch(args);
+		//Base base = new Base(null, 0, null, null);
 	}
 }

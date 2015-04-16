@@ -1,4 +1,4 @@
-package SISE.Legacy;
+package game;
 
 public enum BonusType {
 	POSITIVE,

@@ -1,14 +1,13 @@
-package SISE.Legacy;
+package game;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 public class Player {
 
-	private Base base;
-	private ArrayList<FieldUnit> gameField;
-	private PlayerType playerType;
-	private int howMany;
+	Base base;
+	ArrayList<FieldUnit> gameField;
+	PlayerType playerType;
 	
 	public Player(Base base, ArrayList<FieldUnit> gameField,
 			PlayerType playerType) {
@@ -19,12 +18,11 @@ public class Player {
 	}
 	
 	public boolean move(int howMany, Point destinationPoint, Point currentPoint) {
-		this.howMany=howMany;
 		int destinationPointIndex= fieldUnitStatus(destinationPoint);
 		int currentPointIndex= fieldUnitStatus(destinationPoint);
 		boolean moved=false;
 		if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
-			moved=isSoldiersMoved(destinationPointIndex);
+			moved=isSoldiersMoved(howMany, destinationPointIndex);
 		}
 		return moved;
 	}
@@ -48,26 +46,26 @@ public class Player {
 		return false;
 	}
 	
-	private boolean isSoldiersMoved(int destination){
+	private boolean isSoldiersMoved(int howMany, int destination){
 		if(gameField.get(destination).getSoldiersType()==playerType){
-			howMany+=gameField.get(destination).getSoldiers();
 			gameField.get(destination).setSoldiers(howMany);
+			//sprawdzanie czy sa wojska zeby dodac
 			return true;
 		} 
-		else if(isFieldPlayerChanged(destination)){
+		else if(isFieldPlayerChanged(howMany, destination)){
 			gameField.get(destination).setSoldiers(howMany);
 			return true;
 		}
-		return false;
+		else return false;
 	}
 	
-	private boolean isFieldPlayerChanged(int destination){
+	private boolean isFieldPlayerChanged(int howMany, int destination){
 		if(gameField.get(destination).getSoldiersType()==PlayerType.NoOne){
 			gameField.get(destination).setSoldiersType(playerType);
 			return true;
 		}
 		else if(gameField.get(destination).getSoldiersType()!=playerType){
-			if(isFightWon(destination)){
+			if(isFightWon(howMany, destination)){
 				gameField.get(destination).setSoldiersType(playerType);
 				return true;
 			}
@@ -75,15 +73,9 @@ public class Player {
 		return false;
 	}
 	
-	private boolean isFightWon(int destination){
+	private boolean isFightWon(int howMany, int destination){
 		if(howMany>gameField.get(destination).getSoldiers()){
-			howMany-=gameField.get(destination).getSoldiers();
 			return true;
-		}
-		else{
-			int newNumberOfSoldiers=gameField.get(destination).getSoldiers()-howMany;
-			howMany=0;
-			gameField.get(destination).setSoldiers(newNumberOfSoldiers);
 		}
 		return false;
 	}
