@@ -74,151 +74,151 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="108.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="108.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="163.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="163.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle id="hex3" fx:id="hex3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="219.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle id="hex3" fx:id="hex3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="219.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="274.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="274.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex5" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="329.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex5" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="329.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex9" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="302.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex9" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="302.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex8" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="247.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex8" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="247.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex7" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="191.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex7" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="191.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex6" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="136.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex6" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="136.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex16" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="137.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex16" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="137.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex17" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="192.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex17" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="192.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex18" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="248.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex18" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="248.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex19" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="303.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex19" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="303.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex15" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="330.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex15" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="330.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex14" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="275.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex14" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="275.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex13" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="220.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex13" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="220.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex12" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="164.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex12" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="164.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex11" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="109.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex11" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="109.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex25" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="329.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex25" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="329.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex24" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="274.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex24" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="274.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex23" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="219.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex23" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="219.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex22" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="163.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex22" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="163.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex21" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="108.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex21" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="108.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex20" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="355.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex20" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="355.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex10" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="358.0" onMouseEntered="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Rectangle fx:id="hex10" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="358.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
