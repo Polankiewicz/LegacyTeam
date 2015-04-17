@@ -1,7 +1,9 @@
 package game;
 
 
+import java.awt.Point;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import view.gameController;
 import view.menuController;
@@ -19,7 +21,10 @@ public class SISEGame extends Application {
     private AnchorPane pane;
     private Player bluePlayer;
     private Player redPlayer;
-
+    private static final int GAME_FIELD_WIDTH_HEIGHT_SIZE = 5;
+	private static final int INITIAL_SOLDIERS_QUANTITY = 50;
+	
+	private ArrayList<FieldUnit> gameField;
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -28,7 +33,7 @@ public class SISEGame extends Application {
 		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SISEGame");
-
+		
 		initRoot();
 		showMenu();
 	}
@@ -37,7 +42,7 @@ public class SISEGame extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-    
+ 
     public void initRoot(){
     	try{
 			FXMLLoader load = new FXMLLoader(SISEGame.class.getResource("../view/RootLayout.fxml"));
@@ -49,7 +54,7 @@ public class SISEGame extends Application {
 			e.printStackTrace();
 		}
     }
-    
+
     public void showMenu() {
         try {
             // Load the fxml file and set into the center of the main layout

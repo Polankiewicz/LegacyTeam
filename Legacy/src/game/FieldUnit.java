@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import view.gameController;
 public class FieldUnit {
 	
 	private Point coordinates;
@@ -43,35 +44,35 @@ public class FieldUnit {
 	}
 	
 	private void addNeighboursOfFieldUnitsFromTheEdges() {
-		if (coordinates.x > 0 && coordinates.x < GameManager.getGameFieldWidthHeightSize() && coordinates.y == 0) {
+		if (coordinates.x > 0 && coordinates.x < gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) {
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 		}
-		else if (coordinates.x > 0 && coordinates.x < GameManager.getGameFieldWidthHeightSize()
-				&& coordinates.y == GameManager.getGameFieldWidthHeightSize()) {
+		else if (coordinates.x > 0 && coordinates.x < gameController.getGameFieldWidthHeightSize()
+				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) {
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 		}
-		else if (coordinates.x == 0 && coordinates.y < GameManager.getGameFieldWidthHeightSize()
+		else if (coordinates.x == 0 && coordinates.y < gameController.getGameFieldWidthHeightSize()
 				&& coordinates.y > 0) {
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 		}
-		else if (coordinates.x == GameManager.getGameFieldWidthHeightSize() 
-				&& coordinates.y < GameManager.getGameFieldWidthHeightSize() && coordinates.y > 0) {
+		else if (coordinates.x == gameController.getGameFieldWidthHeightSize() 
+				&& coordinates.y < gameController.getGameFieldWidthHeightSize() && coordinates.y > 0) {
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 		}
-		else if (coordinates.x == GameManager.getGameFieldWidthHeightSize()
-				&& coordinates.y == GameManager.getGameFieldWidthHeightSize()) {
+		else if (coordinates.x == gameController.getGameFieldWidthHeightSize()
+				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) {
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 		}
@@ -79,12 +80,12 @@ public class FieldUnit {
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 		}
-		else if (coordinates.x == 0 && coordinates.y == GameManager.getGameFieldWidthHeightSize()) {
+		else if (coordinates.x == 0 && coordinates.y == gameController.getGameFieldWidthHeightSize()) {
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 		}
-		else if (coordinates.x == GameManager.getGameFieldWidthHeightSize() && coordinates.y == 0) {
+		else if (coordinates.x == gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) {
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
@@ -94,8 +95,8 @@ public class FieldUnit {
 
 	private boolean isNotFieldUnitAtTheEdge() {
 		if (coordinates.x == 0 || coordinates.y == 0
-				|| coordinates.x == GameManager.getGameFieldWidthHeightSize()
-				|| coordinates.y == GameManager.getGameFieldWidthHeightSize())
+				|| coordinates.x == gameController.getGameFieldWidthHeightSize()
+				|| coordinates.y == gameController.getGameFieldWidthHeightSize())
 			return false;
 		else
 			return true;

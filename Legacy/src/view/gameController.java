@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import game.SISEGame;
+import game.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.awt.Point;
 
 public class gameController {
 	//Hexy
@@ -130,8 +132,11 @@ public class gameController {
 	private Label turnID = new Label();
 	@FXML
 	private Label troopsSize = new Label();
-
-	
+	private static final int GAME_FIELD_WIDTH_HEIGHT_SIZE = 4;
+	private static final int INITIAL_SOLDIERS_QUANTITY = 50;
+	private Player playerA;
+	private Player playerB;
+	private ArrayList<FieldUnit> gameField;
 	List<Rectangle> hexy;
 	List values ;
 	/*
@@ -148,8 +153,18 @@ public class gameController {
 	
 	List<Label> army;
 	
-	public gameController(){}
+	public gameController(){
+		
+		this.playerA = new Player(null,null,PlayerType.PlayerA);
+		this.playerB = new Player(null,null,PlayerType.PlayerB);
+		this.gameField = new ArrayList<FieldUnit>();
+		this.createGameField();
+		
+		
+		
+	}
 	@FXML
+	 
 
     private void initialize() {
 		updatePlayer();
@@ -183,6 +198,7 @@ public class gameController {
 		hexy.add(hex24);
 		hexy.add(hex25);
 		
+		army = new ArrayList();
 		army.add(hexLabel1);
 		army.add(hexLabel2);
 		army.add(hexLabel3);
@@ -212,7 +228,22 @@ public class gameController {
 		for(int i=0; i<army.size(); i++){
 			army.get(i).setText("");
 		}
-		
+		for(int i=0; i<hexy.size(); i++){
+			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+			{
+				switchColor(hexy.get(i), "0x0000FF");
+			}
+			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
+			{
+				switchColor(hexy.get(i), "0xFF0000");
+			}
+			else 
+				switchColor(hexy.get(i), "0xFFFFFF");
+			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
+			
+				selectArmy(army.get(i), "0xff0000", soldiersOnUnitCount);
+			
+		}
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
 		for(int i=0; i<hexy.size(); i++){
@@ -227,7 +258,23 @@ public class gameController {
 			players.add(randomGenerator.nextInt()%2);
 		}
 	}
-
+	  private void createGameField() 
+		{
+				for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
+					for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) {
+						if (i == 0 && j == 0) {
+							this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE));
+						}
+						else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) {
+							this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
+						}
+						else {
+							this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
+						}
+					}
+				}
+			}
+		
 	public void setSISEGame(SISEGame game){
 		this.game = game;
 	}
@@ -254,16 +301,23 @@ public class gameController {
 		for(int i=0; i<hexy.size(); i++){
 			if(hexy.get(i).isHover()){
 				System.out.println(hexy.get(i).getId());
-				switchColor(hexy.get(i), true);
+				switchColor(hexy.get(i), "0xFFF000");
+				//selectArmy(army.get(i), "0xff0000", "150");
 			}
+			//if()
 		}
 	}
-	
-	public void switchColor(Rectangle hex, boolean isActive){
-		if(isActive)
-			hex.fillProperty().set(Paint.valueOf("0xfff000"));
-		else
-			hex.fillProperty().set(Paint.valueOf("0x000000"));
+	public ArrayList<FieldUnit> getGameField() {
+		return new ArrayList<FieldUnit>(gameField);
+	}
+
+	public static int getGameFieldWidthHeightSize() {
+		return GAME_FIELD_WIDTH_HEIGHT_SIZE;
+	}
+	public void switchColor(Rectangle hex, String color){
+		
+			hex.fillProperty().set(Paint.valueOf(color));
+		
 	}
 	
 	//kolory to czerwony i niebieski
