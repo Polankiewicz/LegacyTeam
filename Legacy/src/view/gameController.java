@@ -235,7 +235,7 @@ public class gameController {
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexy.get(i), "0xFF0000");
+				switchColor(hexy.get(i), "0xFF00FF");
 			}
 			else 
 				switchColor(hexy.get(i), "0xFFFFFF");
@@ -303,6 +303,18 @@ public class gameController {
 				System.out.println(hexy.get(i).getId());
 				switchColor(hexy.get(i), "0xFFF000");
 				//selectArmy(army.get(i), "0xff0000", "150");
+			}
+			else
+			{
+				switchColor(hexy.get(i), "0xFFFFFF");
+			}
+			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+			{
+				switchColor(hexy.get(i), "0x0000FF");
+			}
+			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
+			{
+				switchColor(hexy.get(i), "0xFF00FF");
 			}
 			//if()
 		}
