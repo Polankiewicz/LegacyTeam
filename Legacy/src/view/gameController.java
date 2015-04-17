@@ -65,6 +65,57 @@ public class gameController {
 	@FXML
 	Rectangle hex25;
 	
+	@FXML
+	Label hexLabel1;
+	@FXML
+	Label hexLabel2;
+	@FXML
+	Label hexLabel3;
+	@FXML
+	Label hexLabel4;
+	@FXML
+	Label hexLabel5;
+	@FXML
+	Label hexLabel6;
+	@FXML
+	Label hexLabel7;
+	@FXML
+	Label hexLabel8;
+	@FXML
+	Label hexLabel9;
+	@FXML
+	Label hexLabel10;
+	@FXML
+	Label hexLabel11;
+	@FXML
+	Label hexLabel12;
+	@FXML
+	Label hexLabel13;
+	@FXML
+	Label hexLabel14;
+	@FXML
+	Label hexLabel15;
+	@FXML
+	Label hexLabel16;
+	@FXML
+	Label hexLabel17;
+	@FXML
+	Label hexLabel18;
+	@FXML
+	Label hexLabel19;
+	@FXML
+	Label hexLabel20;
+	@FXML
+	Label hexLabel21;
+	@FXML
+	Label hexLabel22;
+	@FXML
+	Label hexLabel23;
+	@FXML
+	Label hexLabel24;
+	@FXML
+	Label hexLabel25;
+
 	Image hexHover;
 	Image hexDefault;
 	Stage stage;
@@ -94,6 +145,8 @@ public class gameController {
 	 * False - przeciwnik
 	 * 
 	 * */
+	
+	List<Label> army;
 	
 	public gameController(){}
 	@FXML
@@ -129,6 +182,36 @@ public class gameController {
 		hexy.add(hex23);
 		hexy.add(hex24);
 		hexy.add(hex25);
+		
+		army.add(hexLabel1);
+		army.add(hexLabel2);
+		army.add(hexLabel3);
+		army.add(hexLabel4);
+		army.add(hexLabel5);
+		army.add(hexLabel6);
+		army.add(hexLabel7);
+		army.add(hexLabel8);
+		army.add(hexLabel9);
+		army.add(hexLabel10);
+		army.add(hexLabel11);
+		army.add(hexLabel12);
+		army.add(hexLabel13);
+		army.add(hexLabel14);
+		army.add(hexLabel15);
+		army.add(hexLabel16);
+		army.add(hexLabel17);
+		army.add(hexLabel18);
+		army.add(hexLabel19);
+		army.add(hexLabel20);
+		army.add(hexLabel21);
+		army.add(hexLabel22);
+		army.add(hexLabel23);
+		army.add(hexLabel24);
+		army.add(hexLabel25);
+		
+		for(int i=0; i<army.size(); i++){
+			army.get(i).setText("");
+		}
 		
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
@@ -183,15 +266,10 @@ public class gameController {
 			hex.fillProperty().set(Paint.valueOf("0x000000"));
 	}
 	
-	//Akcja "resetuj¹ca" hover
-	public void defaultHex(){
-		System.out.println("Wyszed³em ze starego");
-	}
-	
-	//Tutaj umieszczacie funkcje niezbêdne do dzia³ania gry
-	
-	//Akcja nastêpuj¹ca po klikniêciu na hexa
-	public void clickHex(){
-		
+	//kolory to czerwony i niebieski
+	//"0xff0000" oraz "0x00ff00"
+	public void selectArmy(Label label, String color, String count){
+		label.setText(count);
+		label.setTextFill(Paint.valueOf(color));
 	}
 }

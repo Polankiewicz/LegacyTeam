@@ -219,6 +219,131 @@
                      </image>
                   </ImageView>
                   <Rectangle fx:id="hex10" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="358.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
+                  <Label fx:id="hexLabel1" layoutX="248.0" layoutY="124.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel2" layoutX="248.0" layoutY="180.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel4" layoutX="248.0" layoutY="291.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel3" layoutX="248.0" layoutY="235.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel8" layoutX="294.0" layoutY="262.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel9" layoutX="294.0" layoutY="318.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel7" layoutX="294.0" layoutY="207.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel6" layoutX="294.0" layoutY="151.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel13" layoutX="341.0" layoutY="236.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel14" layoutX="341.0" layoutY="292.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel12" layoutX="341.0" layoutY="181.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel11" layoutX="341.0" layoutY="125.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel18" layoutX="388.0" layoutY="262.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel19" layoutX="388.0" layoutY="318.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel17" layoutX="388.0" layoutY="207.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel16" layoutX="388.0" layoutY="151.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel23" layoutX="435.0" layoutY="234.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel24" layoutX="435.0" layoutY="290.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel22" layoutX="435.0" layoutY="179.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel21" layoutX="435.0" layoutY="123.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel25" layoutX="435.0" layoutY="344.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel20" layoutX="388.0" layoutY="372.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel15" layoutX="341.0" layoutY="346.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel10" layoutX="294.0" layoutY="372.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="hexLabel5" layoutX="248.0" layoutY="345.0" text="Label">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
         </items>
       </SplitPane>
