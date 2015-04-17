@@ -1,23 +1,14 @@
 package view;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import game.SISEGame;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
-import javafx.scene.Group;
-=======
 import javafx.scene.control.Label;
->>>>>>> 9551cae840a5bdd3f9e1a4d361e675d642575247
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
 public class gameController {
@@ -101,8 +92,12 @@ public class gameController {
 	
 	public gameController(){}
 	@FXML
-<<<<<<< HEAD
-	public void initialize() {
+
+    private void initialize() {
+		updatePlayer();
+		updateTurn();
+		updateTroops();
+		
 		hexy = new ArrayList();
 		hexy.add(hex1);
 		hexy.add(hex2);
@@ -141,29 +136,13 @@ public class gameController {
 			//Generowanie true/false
 			players.add(randomGenerator.nextInt()%2);
 		}
-=======
-    private void initialize() {
-		images = new ImageView[12];
-		updatePlayer();
-		updateTurn();
-		updateTroops();
->>>>>>> 9551cae840a5bdd3f9e1a4d361e675d642575247
 	}
 
 	public void setSISEGame(SISEGame game){
 		this.game = game;
 	}
 	
-<<<<<<< HEAD
 	//jeden warunek takich zabaw - wszystkie hexy musz¹ mieæ t¹ metodê podpiêt¹
-	public void hoverHex(){
-		String text = null; 
-		for(int i=0; i<hexy.size(); i++){
-			if(hexy.get(i).isHover()){
-				System.out.println(hexy.get(i).getId());
-			}
-		}
-=======
 	private void updatePlayer()
 	{
 		playerID.setText("Gracz niebieski");
@@ -180,9 +159,13 @@ public class gameController {
 	}
 	
 	//Akcja nastêpuj¹ca po najechaniu poza hoverem
-	private void hoverHex(){
-		
->>>>>>> 9551cae840a5bdd3f9e1a4d361e675d642575247
+	public void hoverHex(){
+		String text = null; 
+		for(int i=0; i<hexy.size(); i++){
+			if(hexy.get(i).isHover()){
+				System.out.println(hexy.get(i).getId());
+			}
+		}
 	}
 	
 	//Akcja "resetuj¹ca" hover
