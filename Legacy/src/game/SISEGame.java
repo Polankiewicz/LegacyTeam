@@ -17,10 +17,15 @@ public class SISEGame extends Application {
 	private Stage primaryStage;
     private BorderPane rootLayout;
     private AnchorPane pane;
+    private Player bluePlayer;
+    private Player redPlayer;
 
 	@Override
 	public void start(Stage primaryStage) {
 
+		bluePlayer = new Player(null, null, PlayerType.PlayerA);
+		redPlayer = new Player(null, null, PlayerType.PlayerB);
+		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SISEGame");
 
