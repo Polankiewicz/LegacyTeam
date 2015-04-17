@@ -8,6 +8,7 @@ import game.SISEGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -170,8 +171,16 @@ public class gameController {
 		for(int i=0; i<hexy.size(); i++){
 			if(hexy.get(i).isHover()){
 				System.out.println(hexy.get(i).getId());
+				switchColor(hexy.get(i), true);
 			}
 		}
+	}
+	
+	public void switchColor(Rectangle hex, boolean isActive){
+		if(isActive)
+			hex.fillProperty().set(Paint.valueOf("0xfff000"));
+		else
+			hex.fillProperty().set(Paint.valueOf("0x000000"));
 	}
 	
 	//Akcja "resetuj¹ca" hover
