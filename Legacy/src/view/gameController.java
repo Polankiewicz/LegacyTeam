@@ -59,6 +59,10 @@ public class gameController {
 	Rectangle hex22;
 	@FXML
 	Rectangle hex23;
+	@FXML
+	Rectangle hex24;
+	@FXML
+	Rectangle hex25;
 	
 	Image hexHover;
 	Image hexDefault;
@@ -122,6 +126,8 @@ public class gameController {
 		hexy.add(hex21);
 		hexy.add(hex22);
 		hexy.add(hex23);
+		hexy.add(hex24);
+		hexy.add(hex25);
 		
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
