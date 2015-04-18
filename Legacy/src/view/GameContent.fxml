@@ -50,17 +50,17 @@
                         <Image url="@../resources/hex_index.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="playerID" layoutX="100.0" layoutY="9.0" text="Label" textFill="WHITE">
+                  <Label fx:id="playerID" layoutX="123.0" layoutY="8.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="turnID" layoutX="116.0" layoutY="42.0" text="Label" textFill="WHITE">
+                  <Label fx:id="turnID" layoutX="140.0" layoutY="40.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="troopsSize" layoutX="172.0" layoutY="74.0" text="Label" textFill="WHITE">
+                  <Label fx:id="troopsSize" layoutX="235.0" layoutY="72.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
@@ -74,272 +74,272 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="108.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="163.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle id="hex3" fx:id="hex3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="219.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="274.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex5" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="246.0" layoutY="329.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex9" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="302.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex8" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="247.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex7" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="191.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex6" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="136.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex16" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="137.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex17" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="192.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex18" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="248.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex19" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="303.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex15" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="330.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex14" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="275.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex13" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="220.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex12" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="164.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="324.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex11" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="340.0" layoutY="109.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex25" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="329.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex24" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="274.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex23" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="219.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex22" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="163.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="418.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex21" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="434.0" layoutY="108.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="371.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex20" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="387.0" layoutY="355.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="277.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/hex.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="hex10" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="48.0" layoutX="293.0" layoutY="358.0" onMouseReleased="#hoverHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="31.0" />
-                  <Label fx:id="hexLabel1" layoutX="248.0" layoutY="124.0" text="Label">
+                  <Rectangle fx:id="hex0_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="230.0" layoutY="119.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel0_0" layoutX="239.0" layoutY="124.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel2" layoutX="248.0" layoutY="180.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="276.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex1_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="276.0" layoutY="120.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel1_0" layoutX="285.0" layoutY="125.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel4" layoutX="248.0" layoutY="291.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="322.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex2_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="323.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel2_0" layoutX="331.0" layoutY="125.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel3" layoutX="248.0" layoutY="235.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="368.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex3_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="368.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel3_0" layoutX="377.0" layoutY="126.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel8" layoutX="294.0" layoutY="262.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="414.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex4_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="414.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel4_0" layoutX="423.0" layoutY="126.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel9" layoutX="294.0" layoutY="318.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="252.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex0_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="252.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel0_1" layoutX="261.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel7" layoutX="294.0" layoutY="207.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="298.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex1_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel1_1" layoutX="307.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel6" layoutX="294.0" layoutY="151.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="344.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex2_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="345.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel2_1" layoutX="353.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel13" layoutX="341.0" layoutY="236.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="390.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex3_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel3_1" layoutX="399.0" layoutY="165.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel14" layoutX="341.0" layoutY="292.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="436.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex4_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel4_1" layoutX="445.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel12" layoutX="341.0" layoutY="181.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="275.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex0_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="275.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel0_2" layoutX="284.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel11" layoutX="341.0" layoutY="125.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="321.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex1_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel1_2" layoutX="330.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel18" layoutX="388.0" layoutY="262.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="367.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex2_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel2_2" layoutX="376.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel19" layoutX="388.0" layoutY="318.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="413.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex3_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel3_2" layoutX="422.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel17" layoutX="388.0" layoutY="207.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="459.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex4_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel4_2" layoutX="468.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel16" layoutX="388.0" layoutY="151.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="298.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex0_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel0_3" layoutX="307.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel23" layoutX="435.0" layoutY="234.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="344.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex1_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="344.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel1_3" layoutX="353.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel24" layoutX="435.0" layoutY="290.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="390.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex2_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel2_3" layoutX="399.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel22" layoutX="435.0" layoutY="179.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="436.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex3_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel3_3" layoutX="445.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel21" layoutX="435.0" layoutY="123.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="482.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex4_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="482.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel4_3" layoutX="491.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel25" layoutX="435.0" layoutY="344.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="321.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex0_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel0_4" layoutX="330.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel20" layoutX="388.0" layoutY="372.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="367.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex1_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel1_4" layoutX="376.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel15" layoutX="341.0" layoutY="346.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="413.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex2_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel2_4" layoutX="422.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel10" layoutX="294.0" layoutY="372.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="459.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex3_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel3_4" layoutX="468.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hexLabel5" layoutX="248.0" layoutY="345.0" text="Label">
+                  <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="505.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hex.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="hex4_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="505.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Label fx:id="hexLabel4_4" layoutX="514.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
