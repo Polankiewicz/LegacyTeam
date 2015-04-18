@@ -17,107 +17,108 @@ import java.awt.Point;
 public class gameController {
 	//Hexy
 	@FXML
-	Rectangle hex1;
+	Rectangle hex0_0;
 	@FXML
-	Rectangle hex2;
+	Rectangle hex0_1;
 	@FXML
-	Rectangle hex3;
+	Rectangle hex0_2;
 	@FXML
-	Rectangle hex4;
+	Rectangle hex0_3;
 	@FXML
-	Rectangle hex5;
+	Rectangle hex0_4;
 	@FXML
-	Rectangle hex6;
+	Rectangle hex1_0;
 	@FXML
-	Rectangle hex7;
+	Rectangle hex1_1;
 	@FXML
-	Rectangle hex8;
+	Rectangle hex1_2;
 	@FXML
-	Rectangle hex9;
+	Rectangle hex1_3;
 	@FXML
-	Rectangle hex10;
+	Rectangle hex1_4;
 	@FXML
-	Rectangle hex11;
+	Rectangle hex2_0;
 	@FXML
-	Rectangle hex12;
+	Rectangle hex2_1;
 	@FXML
-	Rectangle hex13;
+	Rectangle hex2_2;
 	@FXML
-	Rectangle hex14;
+	Rectangle hex2_3;
 	@FXML
-	Rectangle hex15;
+	Rectangle hex2_4;
 	@FXML
-	Rectangle hex16;
+	Rectangle hex3_0;
 	@FXML
-	Rectangle hex17;
+	Rectangle hex3_1;
 	@FXML
-	Rectangle hex18;
+	Rectangle hex3_2;
 	@FXML
-	Rectangle hex19;
+	Rectangle hex3_3;
 	@FXML
-	Rectangle hex20;
+	Rectangle hex3_4;
 	@FXML
-	Rectangle hex21;
+	Rectangle hex4_0;
 	@FXML
-	Rectangle hex22;
+	Rectangle hex4_1;
 	@FXML
-	Rectangle hex23;
+	Rectangle hex4_2;
 	@FXML
-	Rectangle hex24;
+	Rectangle hex4_3;
 	@FXML
-	Rectangle hex25;
+	Rectangle hex4_4;
 	
 	@FXML
-	Label hexLabel1;
+	Label hexLabel0_0;
 	@FXML
-	Label hexLabel2;
+	Label hexLabel0_1;
 	@FXML
-	Label hexLabel3;
+	Label hexLabel0_2;
 	@FXML
-	Label hexLabel4;
+	Label hexLabel0_3;
 	@FXML
-	Label hexLabel5;
+	Label hexLabel0_4;
 	@FXML
-	Label hexLabel6;
+	Label hexLabel1_0;
 	@FXML
-	Label hexLabel7;
+	Label hexLabel1_1;
 	@FXML
-	Label hexLabel8;
+	Label hexLabel1_2;
 	@FXML
-	Label hexLabel9;
+	Label hexLabel1_3;
 	@FXML
-	Label hexLabel10;
+	Label hexLabel1_4;
 	@FXML
-	Label hexLabel11;
+	Label hexLabel2_0;
 	@FXML
-	Label hexLabel12;
+	Label hexLabel2_1;
 	@FXML
-	Label hexLabel13;
+	Label hexLabel2_2;
 	@FXML
-	Label hexLabel14;
+	Label hexLabel2_3;
 	@FXML
-	Label hexLabel15;
+	Label hexLabel2_4;
 	@FXML
-	Label hexLabel16;
+	Label hexLabel3_0;
 	@FXML
-	Label hexLabel17;
+	Label hexLabel3_1;
 	@FXML
-	Label hexLabel18;
+	Label hexLabel3_2;
 	@FXML
-	Label hexLabel19;
+	Label hexLabel3_3;
 	@FXML
-	Label hexLabel20;
+	Label hexLabel3_4;
 	@FXML
-	Label hexLabel21;
+	Label hexLabel4_0;
 	@FXML
-	Label hexLabel22;
+	Label hexLabel4_1;
 	@FXML
-	Label hexLabel23;
+	Label hexLabel4_2;
 	@FXML
-	Label hexLabel24;
+	Label hexLabel4_3;
 	@FXML
-	Label hexLabel25;
-
+	Label hexLabel4_4;
+	
+	
 	Image hexHover;
 	Image hexDefault;
 	Stage stage;
@@ -159,75 +160,76 @@ public class gameController {
 		this.playerB = new Player(null,null,PlayerType.PlayerB);
 		this.gameField = new ArrayList<FieldUnit>();
 		this.createGameField();
-		
-		
-		
 	}
-	@FXML
-	 
 
-    private void initialize() {
+	public void setSISEGame(SISEGame game){
+		this.game = game;
+	}
+
+	@FXML
+	private void initialize() {
 		updatePlayer();
 		updateTurn();
 		updateTroops();
 		
 		hexy = new ArrayList();
-		hexy.add(hex1);
-		hexy.add(hex2);
-		hexy.add(hex3);
-		hexy.add(hex4);
-		hexy.add(hex5);
-		hexy.add(hex6);
-		hexy.add(hex7);
-		hexy.add(hex8);
-		hexy.add(hex9);
-		hexy.add(hex10);
-		hexy.add(hex11);
-		hexy.add(hex12);
-		hexy.add(hex13);
-		hexy.add(hex14);
-		hexy.add(hex15);
-		hexy.add(hex16);
-		hexy.add(hex17);
-		hexy.add(hex18);
-		hexy.add(hex19);
-		hexy.add(hex20);
-		hexy.add(hex21);
-		hexy.add(hex22);
-		hexy.add(hex23);
-		hexy.add(hex24);
-		hexy.add(hex25);
+		hexy.add(hex0_0);
+		hexy.add(hex0_1);
+		hexy.add(hex0_2);
+		hexy.add(hex0_3);
+		hexy.add(hex0_4);
+		hexy.add(hex1_0);
+		hexy.add(hex1_1);
+		hexy.add(hex1_2);
+		hexy.add(hex1_3);
+		hexy.add(hex1_4);
+		hexy.add(hex2_0);
+		hexy.add(hex2_1);
+		hexy.add(hex2_2);
+		hexy.add(hex2_3);
+		hexy.add(hex2_4);
+		hexy.add(hex3_0);
+		hexy.add(hex3_1);
+		hexy.add(hex3_2);
+		hexy.add(hex3_3);
+		hexy.add(hex3_4);
+		hexy.add(hex4_0);
+		hexy.add(hex4_1);
+		hexy.add(hex4_2);
+		hexy.add(hex4_3);
+		hexy.add(hex4_4);
 		
 		army = new ArrayList();
-		army.add(hexLabel1);
-		army.add(hexLabel2);
-		army.add(hexLabel3);
-		army.add(hexLabel4);
-		army.add(hexLabel5);
-		army.add(hexLabel6);
-		army.add(hexLabel7);
-		army.add(hexLabel8);
-		army.add(hexLabel9);
-		army.add(hexLabel10);
-		army.add(hexLabel11);
-		army.add(hexLabel12);
-		army.add(hexLabel13);
-		army.add(hexLabel14);
-		army.add(hexLabel15);
-		army.add(hexLabel16);
-		army.add(hexLabel17);
-		army.add(hexLabel18);
-		army.add(hexLabel19);
-		army.add(hexLabel20);
-		army.add(hexLabel21);
-		army.add(hexLabel22);
-		army.add(hexLabel23);
-		army.add(hexLabel24);
-		army.add(hexLabel25);
+		army.add(hexLabel0_0);
+		army.add(hexLabel0_1);
+		army.add(hexLabel0_2);
+		army.add(hexLabel0_3);
+		army.add(hexLabel0_4);
+		army.add(hexLabel1_0);
+		army.add(hexLabel1_1);
+		army.add(hexLabel1_2);
+		army.add(hexLabel1_3);
+		army.add(hexLabel1_4);
+		army.add(hexLabel2_0);
+		army.add(hexLabel2_1);
+		army.add(hexLabel2_2);
+		army.add(hexLabel2_3);
+		army.add(hexLabel2_4);
+		army.add(hexLabel3_0);
+		army.add(hexLabel3_1);
+		army.add(hexLabel3_2);
+		army.add(hexLabel3_3);
+		army.add(hexLabel3_4);
+		army.add(hexLabel4_0);
+		army.add(hexLabel4_1);
+		army.add(hexLabel4_2);
+		army.add(hexLabel4_3);
+		army.add(hexLabel4_4);
 		
 		for(int i=0; i<army.size(); i++){
 			army.get(i).setText("");
 		}
+		
 		for(int i=0; i<hexy.size(); i++){
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
@@ -238,11 +240,10 @@ public class gameController {
 				switchColor(hexy.get(i), "0xFF00FF");
 			}
 			else 
-				switchColor(hexy.get(i), "0xFFFFFF");
+				switchColor(hexy.get(i), "0xFFFFFF00");
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
 				selectArmy(army.get(i), "0xff0000", soldiersOnUnitCount);
-			
 		}
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
@@ -257,29 +258,29 @@ public class gameController {
 			//Generowanie true/false
 			players.add(randomGenerator.nextInt()%2);
 		}
+		
+		MainLoop game = new MainLoop();
 	}
-	  private void createGameField() 
-		{
-				for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
-					for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) {
-						if (i == 0 && j == 0) {
-							this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE));
-						}
-						else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) {
-							this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
-						}
-						else {
-							this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
-						}
+	
+	
+	private void createGameField() 
+	{
+			for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
+				for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) {
+					if (i == 0 && j == 0) {
+						this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE));
+					}
+					else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) {
+						this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
+					}
+					else {
+						this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
 					}
 				}
 			}
+		}
 		
-	public void setSISEGame(SISEGame game){
-		this.game = game;
-	}
 	
-	//jeden warunek takich zabaw - wszystkie hexy musz¹ mieæ t¹ metodê podpiêt¹
 	private void updatePlayer()
 	{
 		playerID.setText("Gracz niebieski");
@@ -295,8 +296,8 @@ public class gameController {
 		troopsSize.setText(redTroops + " jednostek");
 	}
 	
-	//Akcja nastêpuj¹ca po najechaniu poza hoverem
-	public void hoverHex(){
+	//Akcja
+	public void clickHex(){
 		String text = null; 
 		for(int i=0; i<hexy.size(); i++){
 			if(hexy.get(i).isHover()){
@@ -306,7 +307,7 @@ public class gameController {
 			}
 			else
 			{
-				switchColor(hexy.get(i), "0xFFFFFF");
+				switchColor(hexy.get(i), "0xFFFFFF00");
 			}
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
