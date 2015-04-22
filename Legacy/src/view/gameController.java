@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.awt.Point;
 
+import model.hexModel;
+
 public class gameController {
 	//Hexy
 	@FXML
@@ -118,6 +120,8 @@ public class gameController {
 	@FXML
 	Label hexLabel4_4;
 	
+	@FXML
+	Label finishRoundLabel;
 	
 	Image hexHover;
 	Image hexDefault;
@@ -149,10 +153,12 @@ public class gameController {
 	/*
 	 * True - gracz
 	 * False - przeciwnik
-	 * 
 	 * */
 	
 	List<Label> army;
+	
+	//NOWE, DO DALSZEGO OBROBIENIA
+	List<hexModel> heksy;
 	
 	public gameController(){
 		
@@ -226,6 +232,13 @@ public class gameController {
 		army.add(hexLabel4_3);
 		army.add(hexLabel4_4);
 		
+		//NOWE, DO DALSZEGO OBROBIENIA, PRZYK£AD DODAWANIA
+		//PRZYK£AD
+		//teraz resztê trzeba tak pododawaæ, najlepiej w magicznej pêtli robi¹cej 
+		//ze stringa obiekt :v
+		heksy = new ArrayList<hexModel>();
+		heksy.add(new hexModel(0,0,1,true,hex0_0, hexLabel0_0));
+		
 		for(int i=0; i<army.size(); i++){
 			army.get(i).setText("");
 		}
@@ -258,8 +271,6 @@ public class gameController {
 			//Generowanie true/false
 			players.add(randomGenerator.nextInt()%2);
 		}
-		
-		MainLoop game = new MainLoop();
 	}
 	
 	
@@ -317,9 +328,9 @@ public class gameController {
 			{
 				switchColor(hexy.get(i), "0xFF00FF");
 			}
-			//if()
 		}
 	}
+	
 	public ArrayList<FieldUnit> getGameField() {
 		return new ArrayList<FieldUnit>(gameField);
 	}
@@ -338,5 +349,26 @@ public class gameController {
 	public void selectArmy(Label label, String color, String count){
 		label.setText(count);
 		label.setTextFill(Paint.valueOf(color));
+	}
+	
+	//Do uzupe³nienie growej logiki
+	public void calculateRound(){
+		if(isGameFinished()){
+			
+		}
+		else{
+			if(players.contains(true))
+				finishRoundLabel.setText("Wygra³ gracz 1");
+			else
+				finishRoundLabel.setText("Wygra³ gracz 2");
+		}
+	}
+	
+	//Je¿eli nie ma na liœcie pola nale¿¹cego do gracza, to game over.
+	public boolean isGameFinished(){
+		if(players.contains(true) && players.contains(false))
+			return true;
+		else
+			return false;
 	}
 }

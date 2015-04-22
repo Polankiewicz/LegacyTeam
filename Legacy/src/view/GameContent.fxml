@@ -69,6 +69,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
+                  <ImageView fitHeight="486.0" fitWidth="798.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
@@ -342,6 +343,11 @@
                   <Label fx:id="hexLabel4_4" layoutX="514.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="finishRoundLabel" layoutX="552.0" layoutY="361.0" onMouseReleased="#calculateRound" text="Click to finish round">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
