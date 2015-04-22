@@ -8,6 +8,9 @@ import game.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -127,7 +130,7 @@ public class gameController {
 	Image hexDefault;
 	Stage stage;
 	SISEGame game;
-	int turnNumber = 0;
+	int turnNumber = 1;
 	int redTroops = 20;
 	int blueTroops = 20;
 	
@@ -181,9 +184,10 @@ public class gameController {
 
 	@FXML
 	private void initialize() {
-		updatePlayer();
 		updateTurn();
 		updateTroops();
+		playerID.setText("Gracz niebieski");
+		playerID.setTextFill(Color.web("#523bff"));
 		
 		hexRepresentation = new ArrayList();
 		hexRepresentation.add(hex0_0);
@@ -253,17 +257,18 @@ public class gameController {
 		for(int i=0; i<hexRepresentation.size(); i++){
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexRepresentation.get(i), "0x0000FF");
+				switchColor(hexRepresentation.get(i), "#523bff");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexRepresentation.get(i), "0xFF00FF");
+				switchColor(hexRepresentation.get(i), "#f84f45");
 			}
 			else 
-				switchColor(hexRepresentation.get(i), "0xFFFFFF00");
+				switchColor(hexRepresentation.get(i), "ffffff");
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
-				selectArmy(armyCount.get(i), "0xff0000", soldiersOnUnitCount);
+				selectArmy(armyCount.get(i), "000000", soldiersOnUnitCount);
+
 		}
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
@@ -301,12 +306,22 @@ public class gameController {
 	
 	private void updatePlayer()
 	{
+		if(playerID.getText() == "Gracz czerwony")
+		{
 		playerID.setText("Gracz niebieski");
+		playerID.setTextFill(Color.web("#523bff"));
+		}
+		else
+		{
+			playerID.setText("Gracz czerwony");
+			playerID.setTextFill(Color.web("#f84f45"));
+		}
 	}
 	
 	private void updateTurn()
 	{
-		turnID.setText("#" + turnNumber+1);
+		turnID.setText("#" + turnNumber);
+		turnNumber++;
 	}
 	
 	private void updateTroops()
@@ -315,25 +330,30 @@ public class gameController {
 	}
 	
 	//Akcja
-	public void clickHex(){
+	public void clickHex(MouseEvent event){
 		String text = null; 
 		for(int i=0; i<hexRepresentation.size(); i++){
-			if(hexRepresentation.get(i).isHover()){
+			if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.SECONDARY){
 				System.out.println(hexRepresentation.get(i).getId());
-				switchColor(hexRepresentation.get(i), "0xFFF000");
+				switchColor(hexRepresentation.get(i), "00ff00");
+
 				//selectArmy(army.get(i), "0xff0000", "150");
+			}
+			else if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.PRIMARY){
+				System.out.println(hexRepresentation.get(i).getId());
+				switchColor(hexRepresentation.get(i), "fff000");
 			}
 			else
 			{
-				switchColor(hexRepresentation.get(i), "0xFFFFFF00");
+				switchColor(hexRepresentation.get(i), "0xFFFFFF");
 			}
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexRepresentation.get(i), "0x0000FF");
+				switchColor(hexRepresentation.get(i), "#523bff");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexRepresentation.get(i), "0xFF00FF");
+				switchColor(hexRepresentation.get(i), "#f84f45");
 			}
 		}
 	}
@@ -347,7 +367,7 @@ public class gameController {
 	}
 	public void switchColor(Rectangle hex, String color){
 		
-			hex.fillProperty().set(Paint.valueOf(color));
+			hex.fillProperty().set(Color.web(color));
 		
 	}
 	
@@ -364,6 +384,9 @@ public class gameController {
 			
 		}
 		else{
+			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
+			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
+			
 			if(players.contains(true))
 				finishRoundLabel.setText("Wygra³ gracz 1");
 			else

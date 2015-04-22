@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" />
       <SplitPane dividerPositions="0.18227424749163879" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
@@ -50,17 +51,17 @@
                         <Image url="@../resources/hex_index.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="playerID" layoutX="123.0" layoutY="8.0" text="Label" textFill="WHITE">
+                  <Label fx:id="playerID" layoutX="106.0" layoutY="10.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="turnID" layoutX="140.0" layoutY="40.0" text="Label" textFill="WHITE">
+                  <Label fx:id="turnID" layoutX="114.0" layoutY="42.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="troopsSize" layoutX="235.0" layoutY="72.0" text="Label" textFill="WHITE">
+                  <Label fx:id="troopsSize" layoutX="172.0" layoutY="74.0" text="Label" textFill="WHITE">
                      <font>
                         <Font name="BebasNeue" size="17.0" />
                      </font>
@@ -69,13 +70,24 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
+                  <ImageView fitHeight="42.0" fitWidth="197.0" layoutX="595.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/button_bg.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
                   <ImageView fitHeight="486.0" fitWidth="798.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="230.0" layoutY="119.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex0_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="230.0" layoutY="119.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel0_0" layoutX="239.0" layoutY="124.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -86,18 +98,27 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="276.0" layoutY="120.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex1_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="276.0" layoutY="120.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel1_0" layoutX="285.0" layoutY="125.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
                   </Label>
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="322.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="323.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex2_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="323.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel2_0" layoutX="331.0" layoutY="125.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -108,7 +129,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex3_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="368.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex3_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="368.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel3_0" layoutX="377.0" layoutY="126.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -119,7 +143,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="414.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex4_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="414.0" layoutY="121.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel4_0" layoutX="423.0" layoutY="126.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -130,7 +157,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="252.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex0_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="252.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel0_1" layoutX="261.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -141,7 +171,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex1_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel1_1" layoutX="307.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -152,7 +185,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="345.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex2_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="345.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel2_1" layoutX="353.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -163,7 +199,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex3_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex3_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel3_1" layoutX="399.0" layoutY="165.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -174,7 +213,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex4_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="159.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel4_1" layoutX="445.0" layoutY="164.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -185,7 +227,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="275.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex0_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="275.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel0_2" layoutX="284.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -196,7 +241,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex1_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel1_2" layoutX="330.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -207,7 +255,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex2_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel2_2" layoutX="376.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -218,7 +269,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex3_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex3_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel3_2" layoutX="422.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -229,7 +283,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex4_2" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="199.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel4_2" layoutX="468.0" layoutY="204.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -240,7 +297,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex0_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="298.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel0_3" layoutX="307.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -251,7 +311,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="344.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex1_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="344.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel1_3" layoutX="353.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -262,7 +325,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex2_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="390.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel2_3" layoutX="399.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -273,7 +339,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex3_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex3_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="436.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel3_3" layoutX="445.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -284,7 +353,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="482.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex4_3" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="482.0" layoutY="239.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel4_3" layoutX="491.0" layoutY="244.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -295,7 +367,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex0_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="321.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel0_4" layoutX="330.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -306,7 +381,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex1_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex1_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="367.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel1_4" layoutX="376.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -317,7 +395,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex2_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="413.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel2_4" layoutX="422.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -328,7 +409,10 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex3_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex3_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="459.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel3_4" layoutX="468.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -339,16 +423,22 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex4_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="505.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0" />
+                  <Rectangle fx:id="hex4_4" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="505.0" layoutY="279.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Rectangle>
                   <Label fx:id="hexLabel4_4" layoutX="514.0" layoutY="284.0" text="Label">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="finishRoundLabel" layoutX="552.0" layoutY="361.0" onMouseReleased="#calculateRound" text="Click to finish round">
+                  <Label fx:id="finishRoundLabel" layoutX="611.0" layoutY="446.0" onMouseReleased="#calculateRound" text="Kliknij, by zakończyć" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </children></AnchorPane>
         </items>
