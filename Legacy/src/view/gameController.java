@@ -142,23 +142,30 @@ public class gameController {
 	private Player playerA;
 	private Player playerB;
 	private ArrayList<FieldUnit> gameField;
-	List<Rectangle> hexy;
+	
+	//Czêœæ clickable danego hexa
+	List<Rectangle> hexRepresentation;
+	
+	//Co dane pole zawiera
 	List values ;
 	/*
 	 * 0 - nieklikniête
 	 * 1 - klikniête
 	 * 2 - zamek do zaatakowania
 	*/
+	
+	//Jaki gracz jest na danym polu
 	List players;
 	/*
 	 * True - gracz
 	 * False - przeciwnik
 	 * */
 	
-	List<Label> army;
+	//Liczebnoœæ woja na danym polu
+	List<Label> armyCount;
 	
 	//NOWE, DO DALSZEGO OBROBIENIA
-	List<hexModel> heksy;
+	List<hexModel> bindingHexModel;
 	
 	public gameController(){
 		
@@ -178,96 +185,96 @@ public class gameController {
 		updateTurn();
 		updateTroops();
 		
-		hexy = new ArrayList();
-		hexy.add(hex0_0);
-		hexy.add(hex0_1);
-		hexy.add(hex0_2);
-		hexy.add(hex0_3);
-		hexy.add(hex0_4);
-		hexy.add(hex1_0);
-		hexy.add(hex1_1);
-		hexy.add(hex1_2);
-		hexy.add(hex1_3);
-		hexy.add(hex1_4);
-		hexy.add(hex2_0);
-		hexy.add(hex2_1);
-		hexy.add(hex2_2);
-		hexy.add(hex2_3);
-		hexy.add(hex2_4);
-		hexy.add(hex3_0);
-		hexy.add(hex3_1);
-		hexy.add(hex3_2);
-		hexy.add(hex3_3);
-		hexy.add(hex3_4);
-		hexy.add(hex4_0);
-		hexy.add(hex4_1);
-		hexy.add(hex4_2);
-		hexy.add(hex4_3);
-		hexy.add(hex4_4);
+		hexRepresentation = new ArrayList();
+		hexRepresentation.add(hex0_0);
+		hexRepresentation.add(hex0_1);
+		hexRepresentation.add(hex0_2);
+		hexRepresentation.add(hex0_3);
+		hexRepresentation.add(hex0_4);
+		hexRepresentation.add(hex1_0);
+		hexRepresentation.add(hex1_1);
+		hexRepresentation.add(hex1_2);
+		hexRepresentation.add(hex1_3);
+		hexRepresentation.add(hex1_4);
+		hexRepresentation.add(hex2_0);
+		hexRepresentation.add(hex2_1);
+		hexRepresentation.add(hex2_2);
+		hexRepresentation.add(hex2_3);
+		hexRepresentation.add(hex2_4);
+		hexRepresentation.add(hex3_0);
+		hexRepresentation.add(hex3_1);
+		hexRepresentation.add(hex3_2);
+		hexRepresentation.add(hex3_3);
+		hexRepresentation.add(hex3_4);
+		hexRepresentation.add(hex4_0);
+		hexRepresentation.add(hex4_1);
+		hexRepresentation.add(hex4_2);
+		hexRepresentation.add(hex4_3);
+		hexRepresentation.add(hex4_4);
 		
-		army = new ArrayList();
-		army.add(hexLabel0_0);
-		army.add(hexLabel0_1);
-		army.add(hexLabel0_2);
-		army.add(hexLabel0_3);
-		army.add(hexLabel0_4);
-		army.add(hexLabel1_0);
-		army.add(hexLabel1_1);
-		army.add(hexLabel1_2);
-		army.add(hexLabel1_3);
-		army.add(hexLabel1_4);
-		army.add(hexLabel2_0);
-		army.add(hexLabel2_1);
-		army.add(hexLabel2_2);
-		army.add(hexLabel2_3);
-		army.add(hexLabel2_4);
-		army.add(hexLabel3_0);
-		army.add(hexLabel3_1);
-		army.add(hexLabel3_2);
-		army.add(hexLabel3_3);
-		army.add(hexLabel3_4);
-		army.add(hexLabel4_0);
-		army.add(hexLabel4_1);
-		army.add(hexLabel4_2);
-		army.add(hexLabel4_3);
-		army.add(hexLabel4_4);
+		armyCount = new ArrayList();
+		armyCount.add(hexLabel0_0);
+		armyCount.add(hexLabel0_1);
+		armyCount.add(hexLabel0_2);
+		armyCount.add(hexLabel0_3);
+		armyCount.add(hexLabel0_4);
+		armyCount.add(hexLabel1_0);
+		armyCount.add(hexLabel1_1);
+		armyCount.add(hexLabel1_2);
+		armyCount.add(hexLabel1_3);
+		armyCount.add(hexLabel1_4);
+		armyCount.add(hexLabel2_0);
+		armyCount.add(hexLabel2_1);
+		armyCount.add(hexLabel2_2);
+		armyCount.add(hexLabel2_3);
+		armyCount.add(hexLabel2_4);
+		armyCount.add(hexLabel3_0);
+		armyCount.add(hexLabel3_1);
+		armyCount.add(hexLabel3_2);
+		armyCount.add(hexLabel3_3);
+		armyCount.add(hexLabel3_4);
+		armyCount.add(hexLabel4_0);
+		armyCount.add(hexLabel4_1);
+		armyCount.add(hexLabel4_2);
+		armyCount.add(hexLabel4_3);
+		armyCount.add(hexLabel4_4);
 		
 		//NOWE, DO DALSZEGO OBROBIENIA, PRZYK£AD DODAWANIA
 		//PRZYK£AD
 		//teraz resztê trzeba tak pododawaæ, najlepiej w magicznej pêtli robi¹cej 
 		//ze stringa obiekt :v
-		heksy = new ArrayList<hexModel>();
-		heksy.add(new hexModel(0,0,1,true,hex0_0, hexLabel0_0));
+		bindingHexModel = new ArrayList<hexModel>();
+		bindingHexModel.add(new hexModel(0,0,1,true,hex0_0, hexLabel0_0));
 		
-		for(int i=0; i<army.size(); i++){
-			army.get(i).setText("");
+		for(int i=0; i<armyCount.size(); i++){
+			armyCount.get(i).setText("");
 		}
 		
-		for(int i=0; i<hexy.size(); i++){
+		for(int i=0; i<hexRepresentation.size(); i++){
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexy.get(i), "0x0000FF");
+				switchColor(hexRepresentation.get(i), "0x0000FF");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexy.get(i), "0xFF00FF");
+				switchColor(hexRepresentation.get(i), "0xFF00FF");
 			}
 			else 
-				switchColor(hexy.get(i), "0xFFFFFF00");
+				switchColor(hexRepresentation.get(i), "0xFFFFFF00");
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
-				selectArmy(army.get(i), "0xff0000", soldiersOnUnitCount);
+				selectArmy(armyCount.get(i), "0xff0000", soldiersOnUnitCount);
 		}
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 		values = new ArrayList();
-		for(int i=0; i<hexy.size(); i++){
+		for(int i=0; i<hexRepresentation.size(); i++){
 			values.add(0);
 		}
 		
 		Random randomGenerator = new Random();
 		//Wygenerowaæ jakoœ rozmieszczenie graczy
 		players = new ArrayList();
-		for(int i=0; i<hexy.size(); i++){
+		for(int i=0; i<hexRepresentation.size(); i++){
 			//Generowanie true/false
 			players.add(randomGenerator.nextInt()%2);
 		}
@@ -310,23 +317,23 @@ public class gameController {
 	//Akcja
 	public void clickHex(){
 		String text = null; 
-		for(int i=0; i<hexy.size(); i++){
-			if(hexy.get(i).isHover()){
-				System.out.println(hexy.get(i).getId());
-				switchColor(hexy.get(i), "0xFFF000");
+		for(int i=0; i<hexRepresentation.size(); i++){
+			if(hexRepresentation.get(i).isHover()){
+				System.out.println(hexRepresentation.get(i).getId());
+				switchColor(hexRepresentation.get(i), "0xFFF000");
 				//selectArmy(army.get(i), "0xff0000", "150");
 			}
 			else
 			{
-				switchColor(hexy.get(i), "0xFFFFFF00");
+				switchColor(hexRepresentation.get(i), "0xFFFFFF00");
 			}
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexy.get(i), "0x0000FF");
+				switchColor(hexRepresentation.get(i), "0x0000FF");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexy.get(i), "0xFF00FF");
+				switchColor(hexRepresentation.get(i), "0xFF00FF");
 			}
 		}
 	}
