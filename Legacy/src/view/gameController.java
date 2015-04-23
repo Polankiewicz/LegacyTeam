@@ -512,6 +512,10 @@ public class gameController {
 		return false;
 	}
 	
+	public void arrangeArmy(){
+		// lelele
+	}
+	
 //Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
 	
 //	public boolean isGameFinished(){

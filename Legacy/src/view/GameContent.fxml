@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" />
       <SplitPane dividerPositions="0.18227424749163879" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
@@ -70,13 +70,13 @@
             </AnchorPane>
           <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fitHeight="42.0" fitWidth="197.0" layoutX="595.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/button_bg.png" />
-                     </image>
+                  <ImageView fx:id="arrangeArmyButton" fitHeight="41.0" fitWidth="586.0" layoutX="14.0" layoutY="431.0" onMouseReleased="#arrangeArmy" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
+                     <image>
+                        <Image url="@../resources/button_bg.png" />
+                     </image>
                   </ImageView>
                   <ImageView fitHeight="486.0" fitWidth="798.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="230.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
@@ -432,7 +432,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="finishRoundLabel" layoutX="611.0" layoutY="446.0" onMouseReleased="#calculateRound" text="Kliknij, by zakończyć" textFill="WHITE">
+                  <Label fx:id="finishRoundLabel" layoutX="24.0" layoutY="439.0" onMouseReleased="#calculateRound" prefHeight="26.0" prefWidth="555.0" text="Kliknij, by zakończyć" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -440,6 +440,15 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
+                  <Separator layoutX="608.0" layoutY="-9.0" orientation="VERTICAL" prefHeight="496.0" prefWidth="14.0" />
+                  <Slider fx:id="troopsSlider" blockIncrement="1.0" layoutX="630.0" layoutY="225.0" majorTickUnit="19.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" />
+                  <Label fx:id="amountOfTroopsL" layoutX="637.0" layoutY="179.0" text="Ilość jednostek">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="630.0" layoutY="279.0" prefHeight="55.0" prefWidth="140.0" text="Użyj suwaka, by wybrać ilość oddziałów." textAlignment="CENTER" wrapText="true" />
+                  <Label layoutX="631.0" layoutY="265.0" text="Wybierz procent oddziału." />
                </children></AnchorPane>
         </items>
       </SplitPane>
