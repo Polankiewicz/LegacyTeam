@@ -68,7 +68,7 @@
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <ImageView fitHeight="42.0" fitWidth="197.0" layoutX="595.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -5,11 +5,17 @@ import java.util.List;
 import java.util.Random;
 
 import game.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -125,6 +131,9 @@ public class gameController {
 	
 	@FXML
 	Label finishRoundLabel;
+	
+	@FXML
+	AnchorPane bottomPane;
 	
 	Image hexHover;
 	Image hexDefault;
@@ -329,6 +338,46 @@ public class gameController {
 		troopsSize.setText(redTroops + " jednostek");
 	}
 	
+	private void showContextMenu(Rectangle singleHex)
+	{
+		final ContextMenu contextMenu = new ContextMenu();
+		MenuItem option1 = new MenuItem("1 opcja");
+		MenuItem option2 = new MenuItem("2 opcja");
+		MenuItem option3 = new MenuItem("3 opcja");
+		
+		contextMenu.getItems().addAll(option1, option2, option3);
+		
+		option1.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		        System.out.println("opt1...");
+		    }
+		});
+		
+		option2.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		        System.out.println("opt2...");
+		    }
+		});
+		
+		option3.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		        System.out.println("opt3...");
+		    }
+		});
+		
+		singleHex.setOnMousePressed(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent event) {
+		        if (event.isSecondaryButtonDown()) {
+		            contextMenu.show(singleHex, event.getScreenX(), event.getScreenY());
+		        }
+		    }
+		});
+	}
+	
 	//Akcja
 	public void clickHex(MouseEvent event){
 		String text = null; 
@@ -336,6 +385,7 @@ public class gameController {
 			if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.SECONDARY){
 				System.out.println(hexRepresentation.get(i).getId());
 				switchColor(hexRepresentation.get(i), "00ff00");
+				showContextMenu(hexRepresentation.get(i));
 
 				//selectArmy(army.get(i), "0xff0000", "150");
 			}
