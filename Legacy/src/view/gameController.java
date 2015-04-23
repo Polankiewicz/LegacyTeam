@@ -329,53 +329,8 @@ public class gameController {
 			updatePlayer(); //zmiana tury
         }
 	}
-	private void showContextMenu(int index, int targetIndex)
-	{
-		Rectangle singleHex = hexModelArray.get(index).getHex();
-		final ContextMenu contextMenu = new ContextMenu();
-		MenuItem option1 = new MenuItem("Rusz wszystkie jednostki z ¿ó³tego na zielone");
-		MenuItem option2 = new MenuItem("Wybierz kilka jednostek z pola");
-		MenuItem option3 = new MenuItem("Kapituluj");
-		
-		contextMenu.getItems().addAll(option1, option2, option3);
-		
-		option1.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent event) {
-		        System.out.println("moveAll");
-		       	int armyCount = gameField.get(index).getSoldiers();
-		     
-		       	
-		        move(armyCount,targetIndex,index);
-		    	
-		    }
-		});
-		
-		option2.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent event) {
-		        System.out.println("opt2...");
-		        
-		        
-		    }
-		});
-		
-		option3.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent event) {
-		        System.out.println("opt3...");
-		    }
-		});
-		
-		singleHex.setOnMousePressed(new EventHandler<MouseEvent>() {
-		    @Override
-		    public void handle(MouseEvent event) {
-		        if (event.isSecondaryButtonDown()) {
-		            contextMenu.show(singleHex, event.getScreenX(), event.getScreenY());
-		        }
-		    }
-		});
-	}
+
+	
 	
 	//Akcja
 	@SuppressWarnings("deprecation")
@@ -394,7 +349,6 @@ public class gameController {
 					{
 						switchColor(hexModelArray.get(this.targetIndex).getHex(), "ffffff");
 						this.targetIndex=i;
-						showContextMenu(sourceIndex,targetIndex);
 					}
 					else
 					{
