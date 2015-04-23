@@ -459,7 +459,7 @@ public class gameController {
 		}
 		else{
 			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
-			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
+	
 			
 			if(turn)
 			{
