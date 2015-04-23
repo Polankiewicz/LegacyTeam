@@ -182,9 +182,9 @@ public class gameController {
 		
 		
 		this.gameField = new ArrayList<FieldUnit>();
-		this.playerA = new Player(null,gameField,PlayerType.PlayerA);
-		this.playerB = new Player(null,gameField,PlayerType.PlayerB);
+		
 		this.createGameField();
+		actualPlayer = playerA;
 	}
 
 	public void setSISEGame(SISEGame game){
@@ -202,7 +202,7 @@ public class gameController {
 		sourceIndex=1;
 		targetIndex=0;
 		isTargetSelected=false;
-		actualPlayer = playerA;
+		
 		hexModelArray = new ArrayList<hexModel>();
 		try{
 			for(int i=0; i<5; i++){
@@ -253,10 +253,18 @@ public class gameController {
 			for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
 				for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) {
 					if (i == 0 && j == 0) {
-						this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE));
+						Base baseA = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE);
+						this.gameField.add(baseA);
+						this.playerA = new Player(baseA,gameField,PlayerType.PlayerA);
+						
+					
 					}
 					else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) {
-						this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
+						Base baseB = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE);
+						this.gameField.add(baseB);
+						//this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
+						this.playerB = new Player(baseB,gameField,PlayerType.PlayerB);
+					
 					}
 					else {
 						this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
@@ -268,16 +276,7 @@ public class gameController {
 	
 	private void updatePlayer()
 	{
-//		if(playerID.getText() == "Gracz czerwony")
-//		{
-//		playerID.setText("Gracz niebieski");
-//		playerID.setTextFill(Color.web("#523bff"));
-//		}
-//		else
-//		{
-//			playerID.setText("Gracz czerwony");
-//			playerID.setTextFill(Color.web("#f84f45"));
-//		}
+		actualPlayer.increaseUnitsAmount();
 		if(actualPlayer.getPlayerType()==PlayerType.PlayerA)
 			{
 			System.out.println("gracz a zmienia sie na gracza b");
@@ -293,6 +292,7 @@ public class gameController {
 			playerID.setTextFill(Color.web("#523bff"));
 		}
 		
+		actualizeHexLabels();
 		
 	}
 	
@@ -325,7 +325,7 @@ public class gameController {
 			
 			actualPlayer.move(armyCount,hexModelArray.get(targetIndex).getPoint(),hexModelArray.get(index).getPoint());
        
-			actualizeHexLabels();
+			
 			updatePlayer(); //zmiana tury
         }
 	}
