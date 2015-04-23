@@ -169,6 +169,10 @@ public class gameController {
 	private int sourceIndex,targetIndex;
 	private boolean isTargetSelected;
 	
+	//Je¿eli tura jest true - kolejka nale¿y do gracza 1
+	//Je¿eli false - do przeciwnika
+	private boolean turn;
+	
 	
 	List<hexModel> hexModelArray;
 	
@@ -188,6 +192,7 @@ public class gameController {
 
 	@FXML
 	private void initialize() {
+		turn = true;
 		updateTurn();
 		updateTroops();
 		playerID.setText("Gracz niebieski");
@@ -224,13 +229,14 @@ public class gameController {
 				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
 			}
 			else 
-				switchColor(hexModelArray.get(i).getHex(), "ffffff");
+				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
 				selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
 
 		}
-		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
+
+//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
 //		values = new ArrayList();
 //		for(int i=0; i<values.size(); i++){
 //			values.add(0);
@@ -245,6 +251,12 @@ public class gameController {
 //				hexModelArray.get(i).setEnemy(true);
 //		}
 		
+			
+		for(hexModel hM : hexModelArray){
+			hM.setEnemy(true);
+		}
+		
+		
 		
 	}
 	
@@ -256,6 +268,7 @@ public class gameController {
 		}
 		return false;
 	}
+	
 	private void createGameField() 
 	{
 			for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
@@ -292,16 +305,31 @@ public class gameController {
 	{
 		turnID.setText("#" + turnNumber);
 		turnNumber++;
+		turn = !turn;
 	}
-	
+	void actualizeHexLabels()
+	{
+		for(int i=0;i<hexModelArray.size();i++)
+		{
+			
+			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
+			
+			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
+		}
+	}
 	private void updateTroops()
 	{
 		troopsSize.setText(redTroops + " jednostek");
 	}
 	private void move(int index,int targetIndex, int armyCount)
 	{
+		int soldiersOnSource = gameField.get(index).getSoldiers();
 		System.out.println("ruch z " + hexModelArray.get(targetIndex).getHex().getId() + " na "+ hexModelArray.get(targetIndex).getHex().getId());
+		gameField.get(targetIndex).setSoldiers(armyCount);//
+		gameField.get(index).setSoldiers(soldiersOnSource - armyCount);
 		
+		
+		actualizeHexLabels();
 	}
 	private void showContextMenu(int index, int targetIndex)
 	{
@@ -445,7 +473,7 @@ public class gameController {
 	}
 	
 	//kolory to czerwony i niebieski
-	//"0xff0000" oraz "0x00ff00"
+	//"0xff0000" oraz "0x0000ff"
 	public void selectArmy(Label label, String color, String count){
 		label.setText(count);
 		label.setTextFill(Paint.valueOf(color));
@@ -453,25 +481,48 @@ public class gameController {
 	
 	//Do uzupe³nienie growej logiki
 	public void calculateRound(){
-//		if(isGameFinished()){
-//			
-//		}
-//		else{
-//			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
-//			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
-//			
-//			if(hexModelArray.contains(true))
-//				finishRoundLabel.setText("Wygra³ gracz 1");
-//			else
-//				finishRoundLabel.setText("Wygra³ gracz 2");
-//		}
+		if(isGameFinished()){
+			if(checkWhoWins())
+				finishRoundLabel.setText("Wygra³ gracz 2");
+			else
+				finishRoundLabel.setText("Wygra³ gracz 1");
+		}
+		else{
+			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
+			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
+			
+			if(turn)
+				finishRoundLabel.setText("Gracz 1 - zakoñcz rundê");
+			else
+				finishRoundLabel.setText("Gracz 2 - zakoñcz rundê");
+		}
 	}
-//	
-//	//Je¿eli nie ma na liœcie pola nale¿¹cego do gracza, to game over.
+	
+	//je¿eli zamek pierwszy zosta³ zajêty przez wroga - wygrywa gracz 2
+	//w przeciwnym razie wygrywa gracz 1
+	public boolean checkWhoWins(){
+		if(!hexModelArray.get(0).isEnemy())
+			return true;
+		return false;
+	}
+	
+	//Je¿eli nie ma na liœcie pola, które jest przeciwnikiem gra siê koñczy
 	public boolean isGameFinished(){
-//		if(players.contains(true) && players.contains(false))
-//			return true;
-//		else
-			return false;
+		for(hexModel hM : hexModelArray){
+			if(hM.isEnemy() == false){
+				return false;
+			}
+		}
+		return true;
 	}
+	
+//Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
+	
+//	public boolean isGameFinished(){
+//		if(hexModelArray.get(0).isEnemy())
+//			return true;
+//		else if(!hexModelArray.get(hexModelArray.size()-1).isEnemy())
+//			return true;
+//		return false;
+//	}
 }
