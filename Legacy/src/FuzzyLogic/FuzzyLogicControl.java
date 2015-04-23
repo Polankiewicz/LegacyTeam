@@ -8,7 +8,7 @@ public class FuzzyLogicControl {
 	
 	public static void main(String[] args) throws Exception {
         
-        String fileName = "src/FuzzyLogic/tipper.fcl";
+        String fileName = "src/FuzzyLogic/fightChances.fcl";
         FIS fis = FIS.load(fileName,true);
 
         if( fis == null ) { 
