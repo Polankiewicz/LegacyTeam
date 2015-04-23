@@ -149,6 +149,9 @@ public class gameController {
 	@FXML
 	Slider troopsSlider;
 	
+	@FXML
+	Label amountOfTroopsL;
+	
 	Image hexHover;
 	Image hexDefault;
 	Stage stage;
@@ -252,6 +255,7 @@ public class gameController {
 		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
 		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100));
 		    armyToMove = (gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100;
+		    amountOfTroopsL.setText(String.valueOf(armyToMove));
 		});	
 	}
 	
@@ -458,9 +462,15 @@ public class gameController {
 			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
 			
 			if(turn)
+			{
 				finishRoundLabel.setText("Gracz 1 - zakoñcz rundê");
+				arrangeArmy();
+			}
 			else
+			{
 				finishRoundLabel.setText("Gracz 2 - zakoñcz rundê");
+				arrangeArmy();
+			}
 		}
 	}
 	
