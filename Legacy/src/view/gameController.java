@@ -297,15 +297,29 @@ public class gameController {
 		turnNumber++;
 		turn = !turn;
 	}
-	
+	void actualizeHexLabels()
+	{
+		for(int i=0;i<hexModelArray.size();i++)
+		{
+			
+			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
+			
+			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
+		}
+	}
 	private void updateTroops()
 	{
 		troopsSize.setText(redTroops + " jednostek");
 	}
 	private void move(int index,int targetIndex, int armyCount)
 	{
+		int soldiersOnSource = gameField.get(index).getSoldiers();
 		System.out.println("ruch z " + hexModelArray.get(targetIndex).getHex().getId() + " na "+ hexModelArray.get(targetIndex).getHex().getId());
+		gameField.get(targetIndex).setSoldiers(armyCount);//
+		gameField.get(index).setSoldiers(soldiersOnSource - armyCount);
 		
+		
+		actualizeHexLabels();
 	}
 	private void showContextMenu(int index, int targetIndex)
 	{
