@@ -21,10 +21,11 @@ public class Player {
 	public boolean move(int howMany, Point destinationPoint, Point currentPoint) {
 		this.howMany=howMany;
 		int destinationPointIndex= fieldUnitStatus(destinationPoint);
-		int currentPointIndex= fieldUnitStatus(destinationPoint);
+		int currentPointIndex= fieldUnitStatus(currentPoint);
 		boolean moved=false;
 		if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
 			moved=isSoldiersMoved(destinationPointIndex);
+			gameField.get(currentPointIndex).setSoldiers(gameField.get(currentPointIndex).getSoldiers()-howMany);
 		}
 		return moved;
 	}
@@ -39,7 +40,7 @@ public class Player {
 		return fieldIndex;
 	}
 	
-	public boolean isFieldNeighbour(int destination, int current){  //tego tu nie uzywam, nawet nie wiem dlaczego to jest w playerze, array pol powinien byc uniwersalny dla wszystkich
+	public boolean isFieldNeighbour(int destination, int current){ 
 		for(Point e : gameField.get(current).getNeighbours()){
 			if(e.equals(gameField.get(destination).getCoordinates())){
 				return true;
@@ -52,6 +53,7 @@ public class Player {
 		if(gameField.get(destination).getSoldiersType()==playerType){
 			howMany+=gameField.get(destination).getSoldiers();
 			gameField.get(destination).setSoldiers(howMany);
+			
 			return true;
 		} 
 		else if(isFieldPlayerChanged(destination)){
@@ -74,7 +76,10 @@ public class Player {
 		}
 		return false;
 	}
-	
+	public PlayerType getPlayerType()
+	{
+		return this.playerType;
+	}
 	private boolean isFightWon(int destination){
 		if(howMany>gameField.get(destination).getSoldiers()){
 			howMany-=gameField.get(destination).getSoldiers();

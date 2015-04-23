@@ -1,13 +1,17 @@
 package model;
 
+import java.awt.Point;
+
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 public class hexModel {
+	
+	private Point point;
+	int index;
 	int x;
 	int y;
-	int index;
 	ImageView image;
 	ImageView hover;
 	Rectangle hex;
@@ -20,8 +24,10 @@ public class hexModel {
 	int ilosc;
 	
 	public hexModel(int x, int y, int index, boolean isCastle, Rectangle hex, Label hexLabel){
-		this.x = x;
-		this.y = y;
+		this.x=x;
+		this.y=y;
+		this.point = new Point(x,y);
+		
 		this.index = index;
 		this.isCastle = isCastle;
 		this.hex = hex;
@@ -58,6 +64,14 @@ public class hexModel {
 
 	public void setCastle(boolean isCastle) {
 		this.isCastle = isCastle;
+	}
+
+	public Point getPoint() {
+		return point;
+	}
+
+	public void setPoint(Point point) {
+		this.point = point;
 	}
 	
 	

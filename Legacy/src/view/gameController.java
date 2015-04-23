@@ -165,7 +165,7 @@ public class gameController {
 	private Player playerB;
 	private ArrayList<FieldUnit> gameField;
 	
-	private Player actual;
+	private Player actualPlayer;
 	private int sourceIndex,targetIndex;
 	private boolean isTargetSelected;
 	
@@ -180,9 +180,10 @@ public class gameController {
 	
 	public gameController(){
 		
-		this.playerA = new Player(null,null,PlayerType.PlayerA);
-		this.playerB = new Player(null,null,PlayerType.PlayerB);
+		
 		this.gameField = new ArrayList<FieldUnit>();
+		this.playerA = new Player(null,gameField,PlayerType.PlayerA);
+		this.playerB = new Player(null,gameField,PlayerType.PlayerB);
 		this.createGameField();
 	}
 
@@ -201,7 +202,7 @@ public class gameController {
 		sourceIndex=1;
 		targetIndex=0;
 		isTargetSelected=false;
-		
+		actualPlayer = playerA;
 		hexModelArray = new ArrayList<hexModel>();
 		try{
 			for(int i=0; i<5; i++){
@@ -236,21 +237,6 @@ public class gameController {
 
 		}
 
-//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
-//		values = new ArrayList();
-//		for(int i=0; i<values.size(); i++){
-//			values.add(0);
-//		}
-		
-		//Jak tru - na tym polu jest gracz, false - przeciwnik
-//		for(int i=1; i<hexModelArray.size()-1; i++){
-//			Random number = new Random();
-//			if(number.nextInt(51)%2 == 1)
-//				hexModelArray.get(i).setEnemy(false);
-//			else
-//				hexModelArray.get(i).setEnemy(true);
-//		}
-		
 			
 		for(hexModel hM : hexModelArray){
 			hM.setEnemy(true);
@@ -260,14 +246,7 @@ public class gameController {
 		
 	}
 	
-	public boolean isFieldNeighbour(int destination, int current){
-		for(Point e : gameField.get(current).getNeighbours()){
-			if(e.equals(gameField.get(destination).getCoordinates())){
-				return true;
-			}
-		}
-		return false;
-	}
+
 	
 	private void createGameField() 
 	{
@@ -289,16 +268,32 @@ public class gameController {
 	
 	private void updatePlayer()
 	{
-		if(playerID.getText() == "Gracz czerwony")
-		{
-		playerID.setText("Gracz niebieski");
-		playerID.setTextFill(Color.web("#523bff"));
-		}
-		else
-		{
+//		if(playerID.getText() == "Gracz czerwony")
+//		{
+//		playerID.setText("Gracz niebieski");
+//		playerID.setTextFill(Color.web("#523bff"));
+//		}
+//		else
+//		{
+//			playerID.setText("Gracz czerwony");
+//			playerID.setTextFill(Color.web("#f84f45"));
+//		}
+		if(actualPlayer.getPlayerType()==PlayerType.PlayerA)
+			{
+			System.out.println("gracz a zmienia sie na gracza b");
+			actualPlayer=playerB;
 			playerID.setText("Gracz czerwony");
 			playerID.setTextFill(Color.web("#f84f45"));
+			
+			}
+		else if(actualPlayer.getPlayerType()==PlayerType.PlayerB) {
+			System.out.println("gracz b zmienia sie na gracza a");
+			actualPlayer=playerA;
+			playerID.setText("Gracz niebieski");
+			playerID.setTextFill(Color.web("#523bff"));
 		}
+		
+		
 	}
 	
 	private void updateTurn()
@@ -315,21 +310,24 @@ public class gameController {
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
 			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
+			
 		}
 	}
 	private void updateTroops()
 	{
 		troopsSize.setText(redTroops + " jednostek");
 	}
-	private void move(int index,int targetIndex, int armyCount)
+	private void move(int armyCount, int targetIndex, int index)
 	{
-		int soldiersOnSource = gameField.get(index).getSoldiers();
-		System.out.println("ruch z " + hexModelArray.get(targetIndex).getHex().getId() + " na "+ hexModelArray.get(targetIndex).getHex().getId());
-		gameField.get(targetIndex).setSoldiers(armyCount);//
-		gameField.get(index).setSoldiers(soldiersOnSource - armyCount);
-		
-		
-		actualizeHexLabels();
+		//sprawdzamy, czy ruch chce sie wykonac z pola nalezacego do aktualnego gracza
+		if(actualPlayer.getPlayerType()==gameField.get(index).getSoldiersType()) 
+        {
+			
+			actualPlayer.move(armyCount,hexModelArray.get(targetIndex).getPoint(),hexModelArray.get(index).getPoint());
+       
+			actualizeHexLabels();
+			updatePlayer(); //zmiana tury
+        }
 	}
 	private void showContextMenu(int index, int targetIndex)
 	{
@@ -346,7 +344,10 @@ public class gameController {
 		    public void handle(ActionEvent event) {
 		        System.out.println("moveAll");
 		       	int armyCount = gameField.get(index).getSoldiers();
-		        move(index,targetIndex,armyCount);
+		     
+		       	
+		        move(armyCount,targetIndex,index);
+		    	
 		    }
 		});
 		
@@ -389,7 +390,7 @@ public class gameController {
 			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY){
 				if(this.isSourceSelected==true)
 				{
-					if(isFieldNeighbour(sourceIndex, i))
+					if(playerA.isFieldNeighbour(sourceIndex, i))
 					{
 						switchColor(hexModelArray.get(this.targetIndex).getHex(), "ffffff");
 						this.targetIndex=i;
@@ -508,12 +509,7 @@ public class gameController {
 	
 	//Je¿eli nie ma na liœcie pola, które jest przeciwnikiem gra siê koñczy
 	public boolean isGameFinished(){
-		for(hexModel hM : hexModelArray){
-			if(hM.isEnemy() == false){
-				return false;
-			}
-		}
-		return true;
+		return false;
 	}
 	
 //Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
