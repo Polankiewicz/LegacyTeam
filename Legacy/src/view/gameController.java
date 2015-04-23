@@ -155,6 +155,10 @@ public class gameController {
 	private Player playerB;
 	private ArrayList<FieldUnit> gameField;
 	
+	private Player actual;
+	private int sourceIndex,targetIndex;
+	private boolean isTargetSelected;
+	
 	//Czêœæ clickable danego hexa
 	List<Rectangle> hexRepresentation;
 	
@@ -178,6 +182,7 @@ public class gameController {
 	
 	//NOWE, DO DALSZEGO OBROBIENIA
 	List<hexModel> bindingHexModel;
+	private boolean isSourceSelected;
 	
 	public gameController(){
 		
@@ -197,6 +202,10 @@ public class gameController {
 		updateTroops();
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
+		
+		sourceIndex=1;
+		targetIndex=1;
+		isTargetSelected=false;
 		
 		hexRepresentation = new ArrayList();
 		hexRepresentation.add(hex0_0);
@@ -259,7 +268,7 @@ public class gameController {
 		bindingHexModel = new ArrayList<hexModel>();
 		bindingHexModel.add(new hexModel(0,0,1,true,hex0_0, hexLabel0_0));
 		
-		for(int i=0; i<armyCount.size(); i++){
+		for(int i=0; i<armyCount.size(); i++){ 
 			armyCount.get(i).setText("");
 		}
 		
@@ -285,16 +294,23 @@ public class gameController {
 			values.add(0);
 		}
 		
-		Random randomGenerator = new Random();
-		//Wygenerowaæ jakoœ rozmieszczenie graczy
-		players = new ArrayList();
-		for(int i=0; i<hexRepresentation.size(); i++){
-			//Generowanie true/false
-			players.add(randomGenerator.nextInt()%2);
-		}
+//		Random randomGenerator = new Random();
+//		//Wygenerowaæ jakoœ rozmieszczenie graczy
+//		players = new ArrayList();
+//		for(int i=0; i<hexRepresentation.size(); i++){
+//			//Generowanie true/false
+//			players.add(randomGenerator.nextInt()%2);
+//		}
 	}
 	
-	
+	public boolean isFieldNeighbour(int destination, int current){
+		for(Point e : gameField.get(current).getNeighbours()){
+			if(e.equals(gameField.get(destination).getCoordinates())){
+				return true;
+			}
+		}
+		return false;
+	}
 	private void createGameField() 
 	{
 			for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
@@ -337,20 +353,27 @@ public class gameController {
 	{
 		troopsSize.setText(redTroops + " jednostek");
 	}
-	
-	private void showContextMenu(Rectangle singleHex)
+	private void move(int index,int targetIndex, int armyCount)
 	{
+		System.out.println("ruch z " + hexRepresentation.get(index).getId() + " na "+ hexRepresentation.get(targetIndex).getId());
+		
+	}
+	private void showContextMenu(int index, int targetIndex)
+	{
+		Rectangle singleHex = hexRepresentation.get(index);
 		final ContextMenu contextMenu = new ContextMenu();
-		MenuItem option1 = new MenuItem("1 opcja");
-		MenuItem option2 = new MenuItem("2 opcja");
-		MenuItem option3 = new MenuItem("3 opcja");
+		MenuItem option1 = new MenuItem("Rusz wszystkie jednostki z ¿ó³tego na zielone");
+		MenuItem option2 = new MenuItem("Wybierz kilka jednostek z pola");
+		MenuItem option3 = new MenuItem("Kapituluj");
 		
 		contextMenu.getItems().addAll(option1, option2, option3);
 		
 		option1.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override
 		    public void handle(ActionEvent event) {
-		        System.out.println("opt1...");
+		        System.out.println("moveAll");
+		        int armyCount = gameField.get(index).getSoldiers();
+		        move(index,targetIndex,armyCount);
 		    }
 		});
 		
@@ -358,6 +381,8 @@ public class gameController {
 		    @Override
 		    public void handle(ActionEvent event) {
 		        System.out.println("opt2...");
+		        
+		        
 		    }
 		});
 		
@@ -381,22 +406,48 @@ public class gameController {
 	//Akcja
 	public void clickHex(MouseEvent event){
 		String text = null; 
+		
 		for(int i=0; i<hexRepresentation.size(); i++){
+			
+			
+			
+			//ustawianie Ÿród³a i celu
 			if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.SECONDARY){
-				System.out.println(hexRepresentation.get(i).getId());
-				switchColor(hexRepresentation.get(i), "00ff00");
-				showContextMenu(hexRepresentation.get(i));
-
-				//selectArmy(army.get(i), "0xff0000", "150");
+				if(this.isSourceSelected==true)
+				{
+					if(isFieldNeighbour(sourceIndex, i))
+					{
+						switchColor(hexRepresentation.get(this.targetIndex), "0xFFFFFF");
+						this.targetIndex=i;
+						showContextMenu(sourceIndex,targetIndex);
+						
+					}
+					
+				}
+				else
+				{
+//					System.out.println("zrodlo wybrane " + hexRepresentation.get(i).getId());
+//					
+//					//switchColor(hexRepresentation.get(sourceIndex), "0xFFFFFF");
+//					sourceIndex=i;
+//					isSourceSelected = true;
+				
+					
+				}
+				
 			}
+			
 			else if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.PRIMARY){
 				System.out.println(hexRepresentation.get(i).getId());
-				switchColor(hexRepresentation.get(i), "fff000");
+				switchColor(hexRepresentation.get(this.sourceIndex), "0xFFFFFF");
+				this.sourceIndex=i;
+				isSourceSelected = true;
+				
 			}
-			else
-			{
-				switchColor(hexRepresentation.get(i), "0xFFFFFF");
-			}
+			
+			
+			//koloryzacja osobnym ifem
+			
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
 				switchColor(hexRepresentation.get(i), "#523bff");
@@ -405,6 +456,22 @@ public class gameController {
 			{
 				switchColor(hexRepresentation.get(i), "#f84f45");
 			}
+			else if(i==targetIndex)
+			{
+				switchColor(hexRepresentation.get(i), "00ff00");
+			}
+			else if(i==sourceIndex)
+			{
+				switchColor(hexRepresentation.get(i), "fff000");
+			}
+			else
+			{
+				switchColor(hexRepresentation.get(i), "0xFFFFFF");
+			}
+			
+			
+			
+			
 		}
 	}
 	

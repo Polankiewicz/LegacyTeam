@@ -39,7 +39,7 @@ public class Player {
 		return fieldIndex;
 	}
 	
-	private boolean isFieldNeighbour(int destination, int current){
+	public boolean isFieldNeighbour(int destination, int current){  //tego tu nie uzywam, nawet nie wiem dlaczego to jest w playerze, array pol powinien byc uniwersalny dla wszystkich
 		for(Point e : gameField.get(current).getNeighbours()){
 			if(e.equals(gameField.get(destination).getCoordinates())){
 				return true;
