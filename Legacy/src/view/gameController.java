@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -145,6 +146,9 @@ public class gameController {
 	@FXML
 	AnchorPane bottomPane;
 	
+	@FXML
+	Slider troopsSlider;
+	
 	Image hexHover;
 	Image hexDefault;
 	Stage stage;
@@ -173,6 +177,8 @@ public class gameController {
 	//Je¿eli false - do przeciwnika
 	private boolean turn;
 	
+	//liczba woja do przesuniêcia ze slidera
+	private int armyToMove;
 	
 	List<hexModel> hexModelArray;
 	
@@ -243,10 +249,12 @@ public class gameController {
 		}
 		
 		
-		
+		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100));
+		    armyToMove = (gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100;
+		});	
 	}
 	
-
 	
 	private void createGameField() 
 	{
@@ -317,6 +325,7 @@ public class gameController {
 	{
 		troopsSize.setText(redTroops + " jednostek");
 	}
+	
 	private void move(int armyCount, int targetIndex, int index)
 	{
 		//sprawdzamy, czy ruch chce sie wykonac z pola nalezacego do aktualnego gracza
@@ -329,6 +338,11 @@ public class gameController {
 			updatePlayer(); //zmiana tury
         }
 	}
+	
+	public void arrangeArmy(){
+		move(armyToMove, targetIndex, sourceIndex);
+	}
+	
 	private void showContextMenu(int index, int targetIndex)
 	{
 		Rectangle singleHex = hexModelArray.get(index).getHex();
