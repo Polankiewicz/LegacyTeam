@@ -441,7 +441,7 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="608.0" layoutY="-9.0" orientation="VERTICAL" prefHeight="496.0" prefWidth="14.0" />
-                  <Slider id="troopSlider" blockIncrement="1.0" layoutX="630.0" layoutY="225.0" majorTickUnit="19.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" />
+                  <Slider id="troopSlider" fx:id="troopsSlider" blockIncrement="1.0" layoutX="630.0" layoutY="225.0" majorTickUnit="19.0" min="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" />
                   <Label fx:id="amountOfTroopsL" layoutX="637.0" layoutY="179.0" text="Ilość jednostek">
                      <font>
                         <Font name="System Bold" size="18.0" />
