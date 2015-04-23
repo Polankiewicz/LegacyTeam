@@ -8,6 +8,9 @@ import game.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -16,13 +19,20 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.Button;
 import java.awt.Point;
 
+import se.mbaeumer.fxmessagebox.MessageBox;
+import se.mbaeumer.fxmessagebox.MessageBoxResult;
+import se.mbaeumer.fxmessagebox.MessageBoxType;
 import model.hexModel;
 
 public class gameController {
@@ -184,7 +194,7 @@ public class gameController {
 		playerID.setTextFill(Color.web("#523bff"));
 		
 		sourceIndex=1;
-		targetIndex=1;
+		targetIndex=0;
 		isTargetSelected=false;
 		
 		hexModelArray = new ArrayList<hexModel>();
@@ -296,7 +306,6 @@ public class gameController {
 	private void showContextMenu(int index, int targetIndex)
 	{
 		Rectangle singleHex = hexModelArray.get(index).getHex();
-//		Rectangle singleHex = hexRepresentation.get(index);
 		final ContextMenu contextMenu = new ContextMenu();
 		MenuItem option1 = new MenuItem("Rusz wszystkie jednostki z ¿ó³tego na zielone");
 		MenuItem option2 = new MenuItem("Wybierz kilka jednostek z pola");
@@ -340,6 +349,7 @@ public class gameController {
 	}
 	
 	//Akcja
+	@SuppressWarnings("deprecation")
 	public void clickHex(MouseEvent event){
 		String text = null; 
 		
@@ -353,9 +363,20 @@ public class gameController {
 				{
 					if(isFieldNeighbour(sourceIndex, i))
 					{
-						switchColor(hexModelArray.get(this.targetIndex).getHex(), "0xffffff00");
+						switchColor(hexModelArray.get(this.targetIndex).getHex(), "ffffff");
 						this.targetIndex=i;
 						showContextMenu(sourceIndex,targetIndex);
+					}
+					else
+					{
+						// <-- DIALOG BOX informuj¹cy gracza o niemo¿liwym do wykonania ruchu -->
+						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
+						mb.showAndWait();
+						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
+						{
+							System.out.println("OK");
+						}
+
 					}
 					
 				}
@@ -374,7 +395,7 @@ public class gameController {
 			
 			else if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY){
 				System.out.println(hexModelArray.get(i).getHex().getId());
-				switchColor(hexModelArray.get(this.sourceIndex).getHex(), "0xffffff00");
+				switchColor(hexModelArray.get(this.sourceIndex).getHex(), "ffffff");
 				this.sourceIndex=i;
 				isSourceSelected = true;
 				
