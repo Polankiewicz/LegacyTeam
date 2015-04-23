@@ -159,29 +159,9 @@ public class gameController {
 	private int sourceIndex,targetIndex;
 	private boolean isTargetSelected;
 	
-	//Czêœæ clickable danego hexa
-	List<Rectangle> hexRepresentation;
 	
-	//Co dane pole zawiera
-	List values ;
-	/*
-	 * 0 - nieklikniête
-	 * 1 - klikniête
-	 * 2 - zamek do zaatakowania
-	*/
+	List<hexModel> hexModelArray;
 	
-	//Jaki gracz jest na danym polu
-	List players;
-	/*
-	 * True - gracz
-	 * False - przeciwnik
-	 * */
-	
-	//Liczebnoœæ woja na danym polu
-	List<Label> armyCount;
-	
-	//NOWE, DO DALSZEGO OBROBIENIA
-	List<hexModel> bindingHexModel;
 	private boolean isSourceSelected;
 	
 	public gameController(){
@@ -207,100 +187,55 @@ public class gameController {
 		targetIndex=1;
 		isTargetSelected=false;
 		
-		hexRepresentation = new ArrayList();
-		hexRepresentation.add(hex0_0);
-		hexRepresentation.add(hex0_1);
-		hexRepresentation.add(hex0_2);
-		hexRepresentation.add(hex0_3);
-		hexRepresentation.add(hex0_4);
-		hexRepresentation.add(hex1_0);
-		hexRepresentation.add(hex1_1);
-		hexRepresentation.add(hex1_2);
-		hexRepresentation.add(hex1_3);
-		hexRepresentation.add(hex1_4);
-		hexRepresentation.add(hex2_0);
-		hexRepresentation.add(hex2_1);
-		hexRepresentation.add(hex2_2);
-		hexRepresentation.add(hex2_3);
-		hexRepresentation.add(hex2_4);
-		hexRepresentation.add(hex3_0);
-		hexRepresentation.add(hex3_1);
-		hexRepresentation.add(hex3_2);
-		hexRepresentation.add(hex3_3);
-		hexRepresentation.add(hex3_4);
-		hexRepresentation.add(hex4_0);
-		hexRepresentation.add(hex4_1);
-		hexRepresentation.add(hex4_2);
-		hexRepresentation.add(hex4_3);
-		hexRepresentation.add(hex4_4);
-		
-		armyCount = new ArrayList();
-		armyCount.add(hexLabel0_0);
-		armyCount.add(hexLabel0_1);
-		armyCount.add(hexLabel0_2);
-		armyCount.add(hexLabel0_3);
-		armyCount.add(hexLabel0_4);
-		armyCount.add(hexLabel1_0);
-		armyCount.add(hexLabel1_1);
-		armyCount.add(hexLabel1_2);
-		armyCount.add(hexLabel1_3);
-		armyCount.add(hexLabel1_4);
-		armyCount.add(hexLabel2_0);
-		armyCount.add(hexLabel2_1);
-		armyCount.add(hexLabel2_2);
-		armyCount.add(hexLabel2_3);
-		armyCount.add(hexLabel2_4);
-		armyCount.add(hexLabel3_0);
-		armyCount.add(hexLabel3_1);
-		armyCount.add(hexLabel3_2);
-		armyCount.add(hexLabel3_3);
-		armyCount.add(hexLabel3_4);
-		armyCount.add(hexLabel4_0);
-		armyCount.add(hexLabel4_1);
-		armyCount.add(hexLabel4_2);
-		armyCount.add(hexLabel4_3);
-		armyCount.add(hexLabel4_4);
-		
-		//NOWE, DO DALSZEGO OBROBIENIA, PRZYK£AD DODAWANIA
-		//PRZYK£AD
-		//teraz resztê trzeba tak pododawaæ, najlepiej w magicznej pêtli robi¹cej 
-		//ze stringa obiekt :v
-		bindingHexModel = new ArrayList<hexModel>();
-		bindingHexModel.add(new hexModel(0,0,1,true,hex0_0, hexLabel0_0));
-		
-		for(int i=0; i<armyCount.size(); i++){ 
-			armyCount.get(i).setText("");
+		hexModelArray = new ArrayList<hexModel>();
+		try{
+			for(int i=0; i<5; i++){
+				for(int j=0; j<5; j++){
+					String hexString = "hex"+(i)+"_"+(j);
+					String hexLabelString = "hexLabel"+(i)+"_"+(j);
+					Object hexInstance = getClass().getDeclaredField(hexString).get(this);
+					Object hexLabelInstance = getClass().getDeclaredField(hexLabelString).get(this);
+					hexModel hexModel = new hexModel(i,j,(i+j),false, (Rectangle)hexInstance, (Label)hexLabelInstance);
+					hexModelArray.add(hexModel);
+				}
+			}
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}		
 		
-		for(int i=0; i<hexRepresentation.size(); i++){
-			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+		for(int i=0; i<hexModelArray.size(); i++){
+				if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexRepresentation.get(i), "#523bff");
+				switchColor(hexModelArray.get(i).getHex(), "#523bff");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexRepresentation.get(i), "#f84f45");
+				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
 			}
 			else 
-				switchColor(hexRepresentation.get(i), "ffffff");
+				switchColor(hexModelArray.get(i).getHex(), "ffffff");
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
-				selectArmy(armyCount.get(i), "000000", soldiersOnUnitCount);
+				selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
 
 		}
 		//zerowanie listy, bo na razie ¿adne pole nie jest zaznaczone
-		values = new ArrayList();
-		for(int i=0; i<hexRepresentation.size(); i++){
-			values.add(0);
-		}
-		
-//		Random randomGenerator = new Random();
-//		//Wygenerowaæ jakoœ rozmieszczenie graczy
-//		players = new ArrayList();
-//		for(int i=0; i<hexRepresentation.size(); i++){
-//			//Generowanie true/false
-//			players.add(randomGenerator.nextInt()%2);
+//		values = new ArrayList();
+//		for(int i=0; i<values.size(); i++){
+//			values.add(0);
 //		}
+		
+		//Jak tru - na tym polu jest gracz, false - przeciwnik
+//		for(int i=1; i<hexModelArray.size()-1; i++){
+//			Random number = new Random();
+//			if(number.nextInt(51)%2 == 1)
+//				hexModelArray.get(i).setEnemy(false);
+//			else
+//				hexModelArray.get(i).setEnemy(true);
+//		}
+		
+		
 	}
 	
 	public boolean isFieldNeighbour(int destination, int current){
@@ -355,12 +290,13 @@ public class gameController {
 	}
 	private void move(int index,int targetIndex, int armyCount)
 	{
-		System.out.println("ruch z " + hexRepresentation.get(index).getId() + " na "+ hexRepresentation.get(targetIndex).getId());
+		System.out.println("ruch z " + hexModelArray.get(targetIndex).getHex().getId() + " na "+ hexModelArray.get(targetIndex).getHex().getId());
 		
 	}
 	private void showContextMenu(int index, int targetIndex)
 	{
-		Rectangle singleHex = hexRepresentation.get(index);
+		Rectangle singleHex = hexModelArray.get(index).getHex();
+//		Rectangle singleHex = hexRepresentation.get(index);
 		final ContextMenu contextMenu = new ContextMenu();
 		MenuItem option1 = new MenuItem("Rusz wszystkie jednostki z ¿ó³tego na zielone");
 		MenuItem option2 = new MenuItem("Wybierz kilka jednostek z pola");
@@ -372,7 +308,7 @@ public class gameController {
 		    @Override
 		    public void handle(ActionEvent event) {
 		        System.out.println("moveAll");
-		        int armyCount = gameField.get(index).getSoldiers();
+		       	int armyCount = gameField.get(index).getSoldiers();
 		        move(index,targetIndex,armyCount);
 		    }
 		});
@@ -407,20 +343,19 @@ public class gameController {
 	public void clickHex(MouseEvent event){
 		String text = null; 
 		
-		for(int i=0; i<hexRepresentation.size(); i++){
+		for(int i=0; i<hexModelArray.size(); i++){
 			
 			
 			
 			//ustawianie Ÿród³a i celu
-			if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.SECONDARY){
+			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY){
 				if(this.isSourceSelected==true)
 				{
 					if(isFieldNeighbour(sourceIndex, i))
 					{
-						switchColor(hexRepresentation.get(this.targetIndex), "0xFFFFFF");
+						switchColor(hexModelArray.get(this.targetIndex).getHex(), "0xffffff00");
 						this.targetIndex=i;
 						showContextMenu(sourceIndex,targetIndex);
-						
 					}
 					
 				}
@@ -428,7 +363,7 @@ public class gameController {
 				{
 //					System.out.println("zrodlo wybrane " + hexRepresentation.get(i).getId());
 //					
-//					//switchColor(hexRepresentation.get(sourceIndex), "0xFFFFFF");
+//					//switchColor(hexRepresentation.get(sourceIndex), "0xffffff00");
 //					sourceIndex=i;
 //					isSourceSelected = true;
 				
@@ -437,9 +372,9 @@ public class gameController {
 				
 			}
 			
-			else if(hexRepresentation.get(i).isHover() && event.getButton() == MouseButton.PRIMARY){
-				System.out.println(hexRepresentation.get(i).getId());
-				switchColor(hexRepresentation.get(this.sourceIndex), "0xFFFFFF");
+			else if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY){
+				System.out.println(hexModelArray.get(i).getHex().getId());
+				switchColor(hexModelArray.get(this.sourceIndex).getHex(), "0xffffff00");
 				this.sourceIndex=i;
 				isSourceSelected = true;
 				
@@ -450,23 +385,23 @@ public class gameController {
 			
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexRepresentation.get(i), "#523bff");
+				switchColor(hexModelArray.get(i).getHex(), "#523bff");
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexRepresentation.get(i), "#f84f45");
+				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
 			}
 			else if(i==targetIndex)
 			{
-				switchColor(hexRepresentation.get(i), "00ff00");
+				switchColor(hexModelArray.get(i).getHex(), "00ff00");
 			}
 			else if(i==sourceIndex)
 			{
-				switchColor(hexRepresentation.get(i), "fff000");
+				switchColor(hexModelArray.get(i).getHex(), "fff000");
 			}
 			else
 			{
-				switchColor(hexRepresentation.get(i), "0xFFFFFF");
+				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
 			}
 			
 			
@@ -497,25 +432,25 @@ public class gameController {
 	
 	//Do uzupe³nienie growej logiki
 	public void calculateRound(){
-		if(isGameFinished()){
-			
-		}
-		else{
-			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
-			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
-			
-			if(players.contains(true))
-				finishRoundLabel.setText("Wygra³ gracz 1");
-			else
-				finishRoundLabel.setText("Wygra³ gracz 2");
-		}
+//		if(isGameFinished()){
+//			
+//		}
+//		else{
+//			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
+//			updatePlayer(); // Zmiana prezentacji etykiety Gracza, po zakoñczeniu tury, je¿eli gra dalej trwa
+//			
+//			if(hexModelArray.contains(true))
+//				finishRoundLabel.setText("Wygra³ gracz 1");
+//			else
+//				finishRoundLabel.setText("Wygra³ gracz 2");
+//		}
 	}
-	
-	//Je¿eli nie ma na liœcie pola nale¿¹cego do gracza, to game over.
+//	
+//	//Je¿eli nie ma na liœcie pola nale¿¹cego do gracza, to game over.
 	public boolean isGameFinished(){
-		if(players.contains(true) && players.contains(false))
-			return true;
-		else
+//		if(players.contains(true) && players.contains(false))
+//			return true;
+//		else
 			return false;
 	}
 }

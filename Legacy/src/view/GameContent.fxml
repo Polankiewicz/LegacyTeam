@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gameController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" />
       <SplitPane dividerPositions="0.18227424749163879" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
@@ -84,7 +84,7 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex0_0" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="230.0" layoutY="119.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                  <Rectangle fx:id="hex0_0" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="27.0" layoutX="230.0" layoutY="119.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Rectangle>
@@ -185,7 +185,7 @@
                         <Image url="@../resources/hex.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="hex2_1" arcHeight="5.0" arcWidth="5.0" fill="#e0161600" height="27.0" layoutX="345.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
+                  <Rectangle fx:id="hex2_1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="27.0" layoutX="345.0" layoutY="160.0" onMouseReleased="#clickHex" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="47.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Rectangle>
