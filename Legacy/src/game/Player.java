@@ -9,13 +9,14 @@ public class Player {
 	private ArrayList<FieldUnit> gameField;
 	private PlayerType playerType;
 	private int howMany;
-	
+	private int controlledFields;
 	public Player(Base base, ArrayList<FieldUnit> gameField,
 			PlayerType playerType) {
 		super();
 		this.base = base;
 		this.gameField = gameField;
 		this.playerType = playerType;
+		this.controlledFields = 1; //bo baza
 	}
 	
 	public boolean move(int howMany, Point destinationPoint, Point currentPoint) {
@@ -23,9 +24,11 @@ public class Player {
 		int destinationPointIndex= fieldUnitStatus(destinationPoint);
 		int currentPointIndex= fieldUnitStatus(currentPoint);
 		boolean moved=false;
+		FieldUnit source = gameField.get(currentPointIndex);
 		if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
 			moved=isSoldiersMoved(destinationPointIndex);
-			gameField.get(currentPointIndex).setSoldiers(gameField.get(currentPointIndex).getSoldiers()-howMany);
+			source.setSoldiers(source.getSoldiers()-howMany);
+			if(source.getSoldiers()==0 && source != this.base) source.setSoldiersType(PlayerType.NoOne);
 		}
 		return moved;
 	}
@@ -40,6 +43,20 @@ public class Player {
 		return fieldIndex;
 	}
 	
+	public void increaseUnitsAmount()
+	{
+		this.controlledFields=0;
+		
+		for (FieldUnit e : gameField)
+		{
+			if(e.getSoldiersType()==this.playerType) this.controlledFields++;
+		}
+		for (FieldUnit e : gameField)
+		{
+			if(e.getSoldiersType()==this.playerType) base.setSoldiers(base.getSoldiers()+this.controlledFields);
+		}
+		
+	}
 	public boolean isFieldNeighbour(int destination, int current){ 
 		for(Point e : gameField.get(current).getNeighbours()){
 			if(e.equals(gameField.get(destination).getCoordinates())){
