@@ -457,7 +457,7 @@ public class gameController {
 			if(checkWhoWins())
 				finishRoundLabel.setText("Wygra³ gracz 2");
 			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
-			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2!", MessageBoxType.OK_ONLY);
+			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
 			mb.showAndWait();
 			if (mb.getMessageBoxResult() == MessageBoxResult.OK)
 			{
@@ -467,7 +467,7 @@ public class gameController {
 			else
 				finishRoundLabel.setText("Wygra³ gracz 1");
 			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
-			MessageBox mb2 = new MessageBox("Hexabattle zdominowa³ gracz nr 1!", MessageBoxType.OK_ONLY);
+			MessageBox mb2 = new MessageBox("Hexabattle zdominowa³ gracz nr 1 (Niebieski)!", MessageBoxType.OK_ONLY);
 			mb2.showAndWait();
 			if (mb2.getMessageBoxResult() == MessageBoxResult.OK)
 			{
