@@ -455,8 +455,23 @@ public class gameController {
 		if(isGameFinished()){
 			if(checkWhoWins())
 				finishRoundLabel.setText("Wygra³ gracz 2");
+			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
+			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2!", MessageBoxType.OK_ONLY);
+			mb.showAndWait();
+			if (mb.getMessageBoxResult() == MessageBoxResult.OK)
+			{
+				System.out.println("Winner: 2");
+			}
+				
 			else
 				finishRoundLabel.setText("Wygra³ gracz 1");
+			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
+			MessageBox mb2 = new MessageBox("Hexabattle zdominowa³ gracz nr 1!", MessageBoxType.OK_ONLY);
+			mb2.showAndWait();
+			if (mb2.getMessageBoxResult() == MessageBoxResult.OK)
+			{
+				System.out.println("Winner: 1");
+			}
 		}
 		else{
 			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
@@ -492,7 +507,7 @@ public class gameController {
 //Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
 	
 	public boolean isGameFinished(){
-		PlayerType firstBaseOwner =gameField.get(0).getSoldiersType();
+		PlayerType firstBaseOwner = gameField.get(0).getSoldiersType();
 		PlayerType secondBaseOwner = gameField.get(gameField.size()-1).getSoldiersType();
 		if(firstBaseOwner==secondBaseOwner)
 			return true;
