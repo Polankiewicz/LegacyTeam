@@ -345,6 +345,7 @@ public class gameController {
 	
 	public void arrangeArmy(){
 		move(armyToMove, targetIndex, sourceIndex);
+		troopsSlider.setValue(1);
 	}
 	
 	//Akcja
