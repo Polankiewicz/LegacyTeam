@@ -1,0 +1,23 @@
+Stan na 24.04.2015
+1. Jakub Dziedzic - obsługa gry za pomocą myszki, elementy interfejsu, poprawki
+2. Bartłomiej Dąbek - logika odpowiadająca za rozgrywkę, połączenie elementów logiki z wyglądem
+3. Bartłomiej Dobrowolski - poprawa layoutu, optymalizacja, połączenie elementów logiki z wyglądem, poprawki
+4. Mariusz Polka - pomoc
+5. Filip Wrzesiński - pomoc
+6. Damian Polankiewicz - prototyp logiki rozmytej
+
+
+
+
+------------------
+Logika gry:
+1. Filip Wrzesiński - metody i klasy dotyczące gracza
+2. Mariusz Polka - metody i klasy dotyczące planszy
+
+Interfejs:
+1. Bartłomiej Dobrowolski - menu, klasy do dynamicznej zmiany elementów w zależności od wydarzeń
+2. Jakub Dziedzic - statyczne elementy graficzne, plansza, połączenie całości
+
+Komunikacja:
+1. Damian Polankiewicz - importowanie biblioteki (logika rozmyta)
+2. Bartłomiej Dąbek - integracja, importowanie biblioteki (logika pierwszego rzędu) 
