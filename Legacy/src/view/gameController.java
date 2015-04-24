@@ -484,18 +484,20 @@ public class gameController {
 	}
 	
 	//Je¿eli nie ma na liœcie pola, które jest przeciwnikiem gra siê koñczy
-	public boolean isGameFinished(){
-		return false;
-	}
-	
+//	public boolean isGameFinished(){
+//		return false;
+//	}
+//	
 	
 //Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
 	
-//	public boolean isGameFinished(){
-//		if(hexModelArray.get(0).isEnemy())
-//			return true;
-//		else if(!hexModelArray.get(hexModelArray.size()-1).isEnemy())
-//			return true;
-//		return false;
-//	}
+	public boolean isGameFinished(){
+		PlayerType firstBaseOwner =gameField.get(0).getSoldiersType();
+		PlayerType secondBaseOwner = gameField.get(gameField.size()-1).getSoldiersType();
+		if(firstBaseOwner==secondBaseOwner)
+			return true;
+			
+		else
+			return false;
+	}
 }
