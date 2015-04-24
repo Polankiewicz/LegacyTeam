@@ -345,7 +345,7 @@ public class gameController {
 	
 	public void arrangeArmy(){
 		move(armyToMove, targetIndex, sourceIndex);
-		troopsSlider.setValue(1);
+		
 	}
 	
 	//Akcja
@@ -396,6 +396,7 @@ public class gameController {
 				System.out.println(hexModelArray.get(i).getHex().getId());
 				switchColor(hexModelArray.get(this.sourceIndex).getHex(), "ffffff");
 				this.sourceIndex=i;
+				troopsSlider.setValue(50);
 				isSourceSelected = true;
 				
 			}
