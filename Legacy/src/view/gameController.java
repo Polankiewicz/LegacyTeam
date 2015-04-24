@@ -159,7 +159,7 @@ public class gameController {
 	int turnNumber = 1;
 	int redTroops = 20;
 	int blueTroops = 20;
-	
+	private int armyCount;
 	@FXML
 	private Label playerID = new Label();
 	@FXML
@@ -171,9 +171,8 @@ public class gameController {
 	private Player playerA;
 	private Player playerB;
 	private ArrayList<FieldUnit> gameField;
-	
+	private MoveDataStructure moveDataStructure;
 	private Player actualPlayer;
-	private int sourceIndex,targetIndex;
 	private boolean isTargetSelected;
 	
 	//Je¿eli tura jest true - kolejka nale¿y do gracza 1
@@ -187,29 +186,32 @@ public class gameController {
 	
 	private boolean isSourceSelected;
 	
-	public gameController(){
+	public gameController(ArrayList<FieldUnit> gameField, Player playerA, 
+		Player playerB, Player actualPlayer,MoveDataStructure moveDataStructure,
+		SISEGame game){
 		
 		
-		this.gameField = new ArrayList<FieldUnit>();
+		this.gameField = gameField;
+		this.playerA = playerA;
+		this.playerB = playerB;
+		this.moveDataStructure = moveDataStructure;
+		this.actualPlayer = actualPlayer;
+		this.game = game;
 		
-		this.createGameField();
-		actualPlayer = playerA;
+		
 	}
 
-	public void setSISEGame(SISEGame game){
-		this.game = game;
-	}
+	
 
 	@FXML
 	private void initialize() {
-		turn = true;
-		updateTurn();
-		updateTroops();
+		
+		
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
-		
-		sourceIndex=1;
-		targetIndex=0;
+		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakoñczyæ turê");
+		turnID.setText("#" + 1);
+		troopsSize.setText("Kupa jednostek");
 		isTargetSelected=false;
 		
 		hexModelArray = new ArrayList<hexModel>();
@@ -232,11 +234,11 @@ public class gameController {
 		for(int i=0; i<hexModelArray.size(); i++){
 				if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 			{
-				switchColor(hexModelArray.get(i).getHex(), "#523bff");
+				switchColor(hexModelArray.get(i).getHex(),  playerA.getPlayerColorString());
 			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
 			{
-				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
+				switchColor(hexModelArray.get(i).getHex(), playerB.getPlayerColorString());
 			}
 			else 
 				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
@@ -253,68 +255,55 @@ public class gameController {
 		
 		
 		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100));
-		    armyToMove = (gameField.get(sourceIndex).getSoldiers()*newValue.intValue())/100;
+		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
+		    armyToMove = (gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100;
 		    amountOfTroopsL.setText(String.valueOf(armyToMove));
+		    moveDataStructure.howMany=armyToMove;
 		});	
 	}
 	
-	
-	private void createGameField() 
+	public void refreshView(Player actualPlayer, int turn)
 	{
-			for (int i = 0; i <= GAME_FIELD_WIDTH_HEIGHT_SIZE; i++) {
-				for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) {
-					if (i == 0 && j == 0) {
-						Base baseA = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE);
-						this.gameField.add(baseA);
-						this.playerA = new Player(baseA,gameField,PlayerType.PlayerA);
-						
-					
-					}
-					else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) {
-						Base baseB = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE);
-						this.gameField.add(baseB);
-						//this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
-						this.playerB = new Player(baseB,gameField,PlayerType.PlayerB);
-					
-					}
-					else {
-						this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
-					}
-				}
-			}
-		}
 		
-	
-	private void updatePlayer()
-	{
-		actualPlayer.increaseUnitsAmount();
-		if(actualPlayer.getPlayerType()==PlayerType.PlayerA)
-			{
-			System.out.println("gracz a zmienia sie na gracza b");
-			actualPlayer=playerB;
-			playerID.setText("Gracz czerwony");
-			playerID.setTextFill(Color.web("#f84f45"));
-			
-			}
-		else if(actualPlayer.getPlayerType()==PlayerType.PlayerB) {
-			System.out.println("gracz b zmienia sie na gracza a");
-			actualPlayer=playerA;
-			playerID.setText("Gracz niebieski");
-			playerID.setTextFill(Color.web("#523bff"));
-		}
-		
-		actualizeHexLabels();
+		System.out.println("GC refresh: " + actualPlayer.getPlayerNameString() + actualPlayer.getPlayerColorString());
+		playerID.setText(actualPlayer.getPlayerNameString());
+		playerID.setTextFill(Color.web(actualPlayer.getPlayerColorString()));
+		turnID.setText("#" + turn);
+		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoñczyæ turê");
+		updateHexLabels();
+		updateHexColors();
 		
 	}
-	
-	private void updateTurn()
+	public void updateHexColors()
 	{
-		turnID.setText("#" + turnNumber);
-		turnNumber++;
-		turn = !turn;
+		for(int i=0;i<gameField.size();i++)
+
+		if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+		{
+			switchColor(hexModelArray.get(i).getHex(), "#523bff");
+		}
+		else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
+		{
+			switchColor(hexModelArray.get(i).getHex(), "#f84f45");
+		}
+		else if(i==moveDataStructure.targetIndex)
+		{
+			switchColor(hexModelArray.get(i).getHex(), "00ff00");
+		}
+		else if(i==moveDataStructure.sourceIndex)
+		{
+			switchColor(hexModelArray.get(i).getHex(), "fff000");
+		}
+		else
+		{
+			switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
+		}
 	}
-	void actualizeHexLabels()
+	
+	
+	
+
+	void updateHexLabels()
 	{
 		for(int i=0;i<hexModelArray.size();i++)
 		{
@@ -324,28 +313,6 @@ public class gameController {
 			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
 			
 		}
-	}
-	private void updateTroops()
-	{
-		troopsSize.setText(redTroops + " jednostek");
-	}
-	
-	private void move(int armyCount, int targetIndex, int index)
-	{
-		//sprawdzamy, czy ruch chce sie wykonac z pola nalezacego do aktualnego gracza
-		if(actualPlayer.getPlayerType()==gameField.get(index).getSoldiersType()) 
-        {
-			
-			actualPlayer.move(armyCount,hexModelArray.get(targetIndex).getPoint(),hexModelArray.get(index).getPoint());
-       
-			
-			updatePlayer(); //zmiana tury
-        }
-	}
-	
-	public void arrangeArmy(){
-		move(armyToMove, targetIndex, sourceIndex);
-		
 	}
 	
 	//Akcja
@@ -361,11 +328,10 @@ public class gameController {
 			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY){
 				if(this.isSourceSelected==true)
 				{
-					if(playerA.isFieldNeighbour(sourceIndex, i))
-					{
-						switchColor(hexModelArray.get(this.targetIndex).getHex(), "ffffff");
-						this.targetIndex=i;
-					}
+					if(playerA.isFieldNeighbour(moveDataStructure.sourceIndex, i))
+					
+						moveDataStructure.targetIndex=i;
+					
 					else
 					{
 						// <-- DIALOG BOX informuj¹cy gracza o niemo¿liwym do wykonania ruchu -->
@@ -379,53 +345,21 @@ public class gameController {
 					}
 					
 				}
-				else
-				{
-//					System.out.println("zrodlo wybrane " + hexRepresentation.get(i).getId());
-//					
-//					//switchColor(hexRepresentation.get(sourceIndex), "0xffffff00");
-//					sourceIndex=i;
-//					isSourceSelected = true;
-				
-					
-				}
 				
 			}
 			
-			else if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY){
+			 if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY){
 				System.out.println(hexModelArray.get(i).getHex().getId());
-				switchColor(hexModelArray.get(this.sourceIndex).getHex(), "ffffff");
-				this.sourceIndex=i;
+			
+				moveDataStructure.sourceIndex=i;
+				
 				troopsSlider.setValue(50);
 				isSourceSelected = true;
 				
 			}
 			
 			
-			//koloryzacja osobnym ifem
-			
-			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
-			{
-				switchColor(hexModelArray.get(i).getHex(), "#523bff");
-			}
-			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
-			{
-				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
-			}
-			else if(i==targetIndex)
-			{
-				switchColor(hexModelArray.get(i).getHex(), "00ff00");
-			}
-			else if(i==sourceIndex)
-			{
-				switchColor(hexModelArray.get(i).getHex(), "fff000");
-			}
-			else
-			{
-				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
-			}
-			
-			
+			updateHexColors();
 			
 			
 		}
@@ -453,8 +387,8 @@ public class gameController {
 	
 	//Do uzupe³nienie growej logiki
 	public void calculateRound(){
-		if(isGameFinished()){
-			if(checkWhoWins())
+		if(game.isGameFinished()){
+			if(game.checkWhoWins())
 				finishRoundLabel.setText("Wygra³ gracz 2");
 			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
 			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
@@ -475,45 +409,14 @@ public class gameController {
 			}
 		}
 		else{
-			updateTurn(); // Inkrementacja licznika kolejek, je¿eli gra dalej trwa, oraz potwierdzono zakoñczenie ruchu
-	
-			
-			if(turn)
-			{
-				finishRoundLabel.setText("Gracz 1 - zakoñcz rundê");
-				arrangeArmy();
-			}
-			else
-			{
-				finishRoundLabel.setText("Gracz 2 - zakoñcz rundê");
-				arrangeArmy();
-			}
+		
+			game.makeMove();
+
 		}
 	}
-	
-	//je¿eli zamek pierwszy zosta³ zajêty przez wroga - wygrywa gracz 2
-	//w przeciwnym razie wygrywa gracz 1
-	public boolean checkWhoWins(){
-		if(!hexModelArray.get(0).isEnemy())
-			return true;
-		return false;
+	public void arrangeArmy(){
+	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsuñTo
+		
 	}
 	
-	//Je¿eli nie ma na liœcie pola, które jest przeciwnikiem gra siê koñczy
-//	public boolean isGameFinished(){
-//		return false;
-//	}
-//	
-	
-//Chyba, ¿e gramy tylko do zdobycia zamku, to zakomentowaæ powy¿sz¹ funkcjê i odkomentowaæ ni¿ej
-	
-	public boolean isGameFinished(){
-		PlayerType firstBaseOwner = gameField.get(0).getSoldiersType();
-		PlayerType secondBaseOwner = gameField.get(gameField.size()-1).getSoldiersType();
-		if(firstBaseOwner==secondBaseOwner)
-			return true;
-			
-		else
-			return false;
-	}
 }

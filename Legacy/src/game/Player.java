@@ -10,27 +10,34 @@ public class Player {
 	private PlayerType playerType;
 	private int howMany;
 	private int controlledFields;
+	private String playerNameString;
+	private String playerColorString;
 	public Player(Base base, ArrayList<FieldUnit> gameField,
-			PlayerType playerType) {
+			PlayerType playerType, String name, String color) {
 		super();
 		this.base = base;
 		this.gameField = gameField;
 		this.playerType = playerType;
 		this.controlledFields = 1; //bo baza
+		this.setPlayerColorString(color);
+		this.setPlayerNameString(name);
 	}
 	
-	public boolean move(int howMany, Point destinationPoint, Point currentPoint) {
+	public boolean move(int howMany,int destinationPointIndex,int currentPointIndex){// Point destinationPoint, Point currentPoint) {
 		this.howMany=howMany;
-		int destinationPointIndex= fieldUnitStatus(destinationPoint);
-		int currentPointIndex= fieldUnitStatus(currentPoint);
+
 		boolean moved=false;
+		if(this.playerType==gameField.get(currentPointIndex).getSoldiersType()) 
+        {
 		FieldUnit source = gameField.get(currentPointIndex);
 		if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
 			moved=isSoldiersMoved(destinationPointIndex);
 			source.setSoldiers(source.getSoldiers()-howMany);
 			if(source.getSoldiers()==0 && source != this.base) source.setSoldiersType(PlayerType.NoOne);
 		}
+        }
 		return moved;
+        
 	}
 	
 	public int fieldUnitStatus(Point searchedPoint) {
@@ -51,10 +58,8 @@ public class Player {
 		{
 			if(e.getSoldiersType()==this.playerType) this.controlledFields++;
 		}
-		for (FieldUnit e : gameField)
-		{
-			if(e.getSoldiersType()==this.playerType) base.setSoldiers(base.getSoldiers()+this.controlledFields);
-		}
+		base.setSoldiers(base.getSoldiers()+this.controlledFields);
+	
 		
 	}
 	public boolean isFieldNeighbour(int destination, int current){ 
@@ -108,5 +113,21 @@ public class Player {
 			gameField.get(destination).setSoldiers(newNumberOfSoldiers);
 		}
 		return false;
+	}
+
+	public String getPlayerColorString() {
+		return playerColorString;
+	}
+
+	public void setPlayerColorString(String playerColorString) {
+		this.playerColorString = playerColorString;
+	}
+
+	public String getPlayerNameString() {
+		return playerNameString;
+	}
+
+	public void setPlayerNameString(String playerNameString) {
+		this.playerNameString = playerNameString;
 	}
 }
