@@ -175,11 +175,11 @@ public class gameController {
 	private Player actualPlayer;
 	private boolean isTargetSelected;
 	
-	//Je¿eli tura jest true - kolejka nale¿y do gracza 1
-	//Je¿eli false - do przeciwnika
+	//Jeï¿½eli tura jest true - kolejka naleï¿½y do gracza 1
+	//Jeï¿½eli false - do przeciwnika
 	private boolean turn;
 	
-	//liczba woja do przesuniêcia ze slidera
+	//liczba woja do przesuniï¿½cia ze slidera
 	private int armyToMove;
 	
 	List<hexModel> hexModelArray;
@@ -203,7 +203,7 @@ public class gameController {
 	{
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
-		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakoñczyæ turê");
+		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakoï¿½czyï¿½ turï¿½");
 		turnID.setText("#" + 1);
 		troopsSize.setText("Kupa jednostek");
 		isTargetSelected=false;
@@ -244,7 +244,7 @@ public class gameController {
 			hM.setEnemy(true);
 		
 		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
+		    System.out.println("Iloï¿½ï¿½ armii do przesuniï¿½cia: "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
 		    armyToMove = (gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100;
 		    amountOfTroopsL.setText(String.valueOf(armyToMove));
 		    moveDataStructure.howMany=armyToMove;
@@ -257,7 +257,7 @@ public class gameController {
 		playerID.setText(actualPlayer.getPlayerNameString());
 		playerID.setTextFill(Color.web(actualPlayer.getPlayerColorString()));
 		turnID.setText("#" + turn);
-		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoñczyæ turê");
+		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoï¿½czyï¿½ turï¿½");
 		updateHexLabels();
 		updateHexColors();
 	}
@@ -295,19 +295,21 @@ public class gameController {
 	{
 		String text = null; 
 		
+
 		for(int i=0; i<hexModelArray.size(); i++)
 		{
-			//ustawianie Ÿród³a i celu
+			//ustawianie ï¿½rï¿½dï¿½a i celu
 			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY)
 			{
+
 				if(this.isSourceSelected==true)
 				{
 					if(playerA.isFieldNeighbour(moveDataStructure.sourceIndex, i))
 						moveDataStructure.targetIndex=i;
 					else
 					{
-						// <-- DIALOG BOX informuj¹cy gracza o niemo¿liwym do wykonania ruchu -->
-						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
+						// <-- DIALOG BOX informujï¿½cy gracza o niemoï¿½liwym do wykonania ruchu -->
+						MessageBox mb = new MessageBox("Moï¿½liwy jest tylko wybï¿½r sï¿½siadujï¿½cego pola", MessageBoxType.OK_ONLY);
 						mb.showAndWait();
 						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
 							System.out.println("OK");
@@ -348,24 +350,22 @@ public class gameController {
 		label.setTextFill(Paint.valueOf(color));
 	}
 	
-	//Do uzupe³nienie growej logiki
-	public void calculateRound()
-	{
-		if(game.isGameFinished())
-		{
+	//Do uzupeï¿½nienie growej logiki
+	public void calculateRound(){
+		if(game.isGameFinished()){
 			if(game.checkWhoWins())
-				finishRoundLabel.setText("Wygra³ gracz 2");
-			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
-			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
+				finishRoundLabel.setText("Wygraï¿½ gracz 2");
+			// <-- DIALOG BOX informujï¿½cy o zwyciestwie gracza 2 -->
+			MessageBox mb = new MessageBox("Hexabattle zdominowaï¿½ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
 			mb.showAndWait();
 			if (mb.getMessageBoxResult() == MessageBoxResult.OK)
 			{
 				System.out.println("Winner: 2");
 			}
 			else
-				finishRoundLabel.setText("Wygra³ gracz 1");
-			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
-			MessageBox mb2 = new MessageBox("Hexabattle zdominowa³ gracz nr 1 (Niebieski)!", MessageBoxType.OK_ONLY);
+				finishRoundLabel.setText("Wygraï¿½ gracz 1");
+			// <-- DIALOG BOX informujï¿½cy o zwyciestwie gracza 2 -->
+			MessageBox mb2 = new MessageBox("Hexabattle zdominowaï¿½ gracz nr 1 (Niebieski)!", MessageBoxType.OK_ONLY);
 			mb2.showAndWait();
 			if (mb2.getMessageBoxResult() == MessageBoxResult.OK)
 			{
@@ -376,9 +376,9 @@ public class gameController {
 			game.makeMove();
 	}
 	
-	public void arrangeArmy()
-	{
-	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsuñTo
+	public void arrangeArmy(){
+	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsuï¿½To
+		
 	}
 	
 }

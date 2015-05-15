@@ -29,7 +29,7 @@ public class TestController {
 
 	public void gameMainLoop()
 	{
-		// tu sie bêdzie bralo  dane o gamefieldzie i wysylalo do ai
+		// tu sie bï¿½dzie bralo  dane o gamefieldzie i wysylalo do ai
 		
 		//zwrocone rzeczy wygladaja mniej wiecej tak
 		moveDataStructure.sourceIndex =0; //zrodlo ruchu

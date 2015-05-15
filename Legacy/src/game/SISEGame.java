@@ -45,8 +45,8 @@ public class SISEGame extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HEXABATTLE");
 		actualPlayer = bluePlayer;
-		turn =1;
-		autoPlay=true;
+		turn = 1;
+		autoPlay = true;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
@@ -82,7 +82,9 @@ public class SISEGame extends Application {
 		}
 	}
    
-    //je¿eli zamek pierwszy zosta³ zajêty przez wroga - wygrywa gracz 2
+
+    //jeï¿½eli zamek pierwszy zostaï¿½ zajï¿½ty przez wroga - wygrywa gracz 2
+
   	//w przeciwnym razie wygrywa gracz 1
   	public boolean checkWhoWins()
   	{
@@ -101,8 +103,7 @@ public class SISEGame extends Application {
 	{
 		PlayerType firstBaseOwner = gameField.get(0).getSoldiersType();
 		PlayerType secondBaseOwner = gameField.get(gameField.size()-1).getSoldiersType();
-		
-		if(firstBaseOwner==secondBaseOwner)
+		if(firstBaseOwner == secondBaseOwner)
 			return true;
 		else
 			return false;
@@ -138,6 +139,7 @@ public class SISEGame extends Application {
     public void initRoot()
     {
     	try {
+
 			FXMLLoader load = new FXMLLoader(SISEGame.class.getResource("../view/RootLayout.fxml"));
 			rootLayout = (BorderPane) load.load();
 			Scene scene = new Scene(rootLayout);
