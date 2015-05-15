@@ -15,8 +15,8 @@ public class FieldUnit {
 	private BonusType bonusType;
 	
 
-	public FieldUnit(Point coordinates, int soldiers, PlayerType soldiersType,
-			BonusType bonusType) {
+	public FieldUnit(Point coordinates, int soldiers, PlayerType soldiersType, BonusType bonusType) 
+	{
 		this.coordinates = coordinates;
 		this.soldiers = soldiers;
 		this.soldiersType = soldiersType;
@@ -25,11 +25,13 @@ public class FieldUnit {
 		this.calculateNeighbours();
 	}
 	
-	private void calculateNeighbours() {
-		if (!neighbours.isEmpty()) {
+	private void calculateNeighbours() 
+	{
+		if (!neighbours.isEmpty()) 
 			neighbours.clear();
-		}
-		if (isNotFieldUnitAtTheEdge()) {
+		
+		if (isNotFieldUnitAtTheEdge()) 
+		{
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
@@ -37,63 +39,70 @@ public class FieldUnit {
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 		}
-		else {
+		else 
 			addNeighboursOfFieldUnitsFromTheEdges();
-		}
-		
 	}
 	
-	private void addNeighboursOfFieldUnitsFromTheEdges() {
-		if (coordinates.x > 0 && coordinates.x < gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) {
+	private void addNeighboursOfFieldUnitsFromTheEdges() 
+	{
+		if (coordinates.x > 0 && coordinates.x < gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) 
+		{
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 		}
 		else if (coordinates.x > 0 && coordinates.x < gameController.getGameFieldWidthHeightSize()
-				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) {
+				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) 
+		{
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 		}
 		else if (coordinates.x == 0 && coordinates.y < gameController.getGameFieldWidthHeightSize()
-				&& coordinates.y > 0) {
+				&& coordinates.y > 0) 
+		{
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 		}
 		else if (coordinates.x == gameController.getGameFieldWidthHeightSize() 
-				&& coordinates.y < gameController.getGameFieldWidthHeightSize() && coordinates.y > 0) {
+				&& coordinates.y < gameController.getGameFieldWidthHeightSize() && coordinates.y > 0) 
+		{
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 		}
 		else if (coordinates.x == gameController.getGameFieldWidthHeightSize()
-				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) {
+				&& coordinates.y == gameController.getGameFieldWidthHeightSize()) 
+		{
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 		}
-		else if (coordinates.x == 0 && coordinates.y == 0) {
+		else if (coordinates.x == 0 && coordinates.y == 0) 
+		{
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 		}
-		else if (coordinates.x == 0 && coordinates.y == gameController.getGameFieldWidthHeightSize()) {
+		else if (coordinates.x == 0 && coordinates.y == gameController.getGameFieldWidthHeightSize()) 
+		{
 			neighbours.add(new Point(coordinates.x, coordinates.y -1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y - 1));
 			neighbours.add(new Point(coordinates.x + 1, coordinates.y));
 		}
-		else if (coordinates.x == gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) {
+		else if (coordinates.x == gameController.getGameFieldWidthHeightSize() && coordinates.y == 0) 
+		{
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y + 1));
 			neighbours.add(new Point(coordinates.x - 1, coordinates.y));
 			neighbours.add(new Point(coordinates.x, coordinates.y + 1));
 		}
-		
 	}
 
-	private boolean isNotFieldUnitAtTheEdge() {
+	private boolean isNotFieldUnitAtTheEdge() 
+	{
 		if (coordinates.x == 0 || coordinates.y == 0
 				|| coordinates.x == gameController.getGameFieldWidthHeightSize()
 				|| coordinates.y == gameController.getGameFieldWidthHeightSize())
@@ -101,7 +110,6 @@ public class FieldUnit {
 		else
 			return true;
 	}
-	
 	
 	public int getSoldiers() {
 		return soldiers;

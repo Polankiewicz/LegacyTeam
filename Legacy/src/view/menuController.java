@@ -16,8 +16,6 @@ public class menuController {
 	
 	private SISEGame menu;
 	
-	public menuController(){}
-	
 	@FXML
     private void initialize() {}
 	
@@ -29,25 +27,29 @@ public class menuController {
 		menu.showGame();
 	}
 	
-	public void changeStartImage(){
+	public void changeStartImage()
+	{
 		System.out.println("I'm hovered");
 		Image img = new Image("resources/startHover.png");
 		start.imageProperty().set(img);
 	}
 	
-	public void defaultStartImage(){
+	public void defaultStartImage()
+	{
 		System.out.println("I'm out");
 		Image img = new Image("resources/start.png");
 		start.imageProperty().set(img);
 	}
 	
-	public void changeExitImage(){
+	public void changeExitImage()
+	{
 		System.out.println("I'm hovered");
 		Image img = new Image("resources/exitHover.png");
 		exit.imageProperty().set(img);
 	}
 	
-	public void defaultExitImage(){
+	public void defaultExitImage()
+	{
 		System.out.println("I'm out");
 		Image img = new Image("resources/exit.png");
 		exit.imageProperty().set(img);
@@ -57,7 +59,8 @@ public class menuController {
 		this.menu = game;
 	}
 	
-	public void exitGame(){
+	public void exitGame()
+	{
 		System.out.println("Exit clicked");
 	    Stage stage = (Stage) exit.getScene().getWindow();
 	    stage.close();

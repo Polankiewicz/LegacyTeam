@@ -188,25 +188,19 @@ public class gameController {
 	
 	public gameController(ArrayList<FieldUnit> gameField, Player playerA, 
 		Player playerB, Player actualPlayer,MoveDataStructure moveDataStructure,
-		SISEGame game){
-		
-		
+		SISEGame game)
+	{
 		this.gameField = gameField;
 		this.playerA = playerA;
 		this.playerB = playerB;
 		this.moveDataStructure = moveDataStructure;
 		this.actualPlayer = actualPlayer;
 		this.game = game;
-		
-		
 	}
 
-	
-
 	@FXML
-	private void initialize() {
-		
-		
+	private void initialize() 
+	{
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
 		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakoñczyæ turê");
@@ -215,9 +209,11 @@ public class gameController {
 		isTargetSelected=false;
 		
 		hexModelArray = new ArrayList<hexModel>();
-		try{
-			for(int i=0; i<5; i++){
-				for(int j=0; j<5; j++){
+		try {
+			for(int i=0; i<5; i++)
+			{
+				for(int j=0; j<5; j++)
+				{
 					String hexString = "hex"+(i)+"_"+(j);
 					String hexLabelString = "hexLabel"+(i)+"_"+(j);
 					Object hexInstance = getClass().getDeclaredField(hexString).get(this);
@@ -227,32 +223,25 @@ public class gameController {
 				}
 			}
 		}
-		catch(Exception e){
+		catch(Exception e) {
 			e.printStackTrace();
 		}		
 		
-		for(int i=0; i<hexModelArray.size(); i++){
-				if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
-			{
+		for(int i=0; i<hexModelArray.size(); i++)
+		{
+			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
 				switchColor(hexModelArray.get(i).getHex(),  playerA.getPlayerColorString());
-			}
 			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
-			{
 				switchColor(hexModelArray.get(i).getHex(), playerB.getPlayerColorString());
-			}
 			else 
 				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
+			
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
-			
-				selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
-
+			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
 		}
 
-			
-		for(hexModel hM : hexModelArray){
+		for(hexModel hM : hexModelArray)
 			hM.setEnemy(true);
-		}
-		
 		
 		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
 		    System.out.println("Iloœæ armii do przesuniêcia: "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
@@ -264,7 +253,6 @@ public class gameController {
 	
 	public void refreshView(Player actualPlayer, int turn)
 	{
-		
 		System.out.println("GC refresh: " + actualPlayer.getPlayerNameString() + actualPlayer.getPlayerColorString());
 		playerID.setText(actualPlayer.getPlayerNameString());
 		playerID.setTextFill(Color.web(actualPlayer.getPlayerColorString()));
@@ -272,96 +260,72 @@ public class gameController {
 		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoñczyæ turê");
 		updateHexLabels();
 		updateHexColors();
-		
 	}
+	
 	public void updateHexColors()
 	{
-		for(int i=0;i<gameField.size();i++)
-
-		if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+		for(int i=0; i<gameField.size(); i++)
 		{
-			switchColor(hexModelArray.get(i).getHex(), "#523bff");
-		}
-		else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
-		{
-			switchColor(hexModelArray.get(i).getHex(), "#f84f45");
-		}
-		else if(i==moveDataStructure.targetIndex)
-		{
-			switchColor(hexModelArray.get(i).getHex(), "00ff00");
-		}
-		else if(i==moveDataStructure.sourceIndex)
-		{
-			switchColor(hexModelArray.get(i).getHex(), "fff000");
-		}
-		else
-		{
-			switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
+			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerA)
+				switchColor(hexModelArray.get(i).getHex(), "#523bff");
+			else if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB)
+				switchColor(hexModelArray.get(i).getHex(), "#f84f45");
+			else if(i==moveDataStructure.targetIndex)
+				switchColor(hexModelArray.get(i).getHex(), "00ff00");
+			else if(i==moveDataStructure.sourceIndex)
+				switchColor(hexModelArray.get(i).getHex(), "fff000");
+			else
+				switchColor(hexModelArray.get(i).getHex(), "0xffffff00");
 		}
 	}
 	
-	
-	
-
 	void updateHexLabels()
 	{
 		for(int i=0;i<hexModelArray.size();i++)
 		{
-			
 			String soldiersOnUnitCount = Integer.toString(gameField.get(i).getSoldiers());
 			
 			selectArmy(hexModelArray.get(i).getHexLabel(), "000000", soldiersOnUnitCount);
-			
 		}
 	}
 	
 	//Akcja
 	@SuppressWarnings("deprecation")
-	public void clickHex(MouseEvent event){
+	public void clickHex(MouseEvent event)
+	{
 		String text = null; 
 		
-		for(int i=0; i<hexModelArray.size(); i++){
-			
-			
-			
+		for(int i=0; i<hexModelArray.size(); i++)
+		{
 			//ustawianie Ÿród³a i celu
-			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY){
+			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.SECONDARY)
+			{
 				if(this.isSourceSelected==true)
 				{
 					if(playerA.isFieldNeighbour(moveDataStructure.sourceIndex, i))
-					
 						moveDataStructure.targetIndex=i;
-					
 					else
 					{
 						// <-- DIALOG BOX informuj¹cy gracza o niemo¿liwym do wykonania ruchu -->
 						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
 						mb.showAndWait();
 						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
-						{
 							System.out.println("OK");
-						}
-
 					}
-					
 				}
-				
 			}
 			
-			 if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY){
+			if(hexModelArray.get(i).getHex().isHover() && event.getButton() == MouseButton.PRIMARY)
+			{
 				System.out.println(hexModelArray.get(i).getHex().getId());
 			
 				moveDataStructure.sourceIndex=i;
 				
 				troopsSlider.setValue(50);
 				isSourceSelected = true;
-				
 			}
 			
-			
 			updateHexColors();
-			
-			
 		}
 	}
 	
@@ -373,21 +337,22 @@ public class gameController {
 		return GAME_FIELD_WIDTH_HEIGHT_SIZE;
 	}
 	public void switchColor(Rectangle hex, String color){
-		
-			hex.fillProperty().set(Color.web(color));
-		
+		hex.fillProperty().set(Color.web(color));
 	}
 	
 	//kolory to czerwony i niebieski
 	//"0xff0000" oraz "0x0000ff"
-	public void selectArmy(Label label, String color, String count){
+	public void selectArmy(Label label, String color, String count)
+	{
 		label.setText(count);
 		label.setTextFill(Paint.valueOf(color));
 	}
 	
 	//Do uzupe³nienie growej logiki
-	public void calculateRound(){
-		if(game.isGameFinished()){
+	public void calculateRound()
+	{
+		if(game.isGameFinished())
+		{
 			if(game.checkWhoWins())
 				finishRoundLabel.setText("Wygra³ gracz 2");
 			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
@@ -397,7 +362,6 @@ public class gameController {
 			{
 				System.out.println("Winner: 2");
 			}
-				
 			else
 				finishRoundLabel.setText("Wygra³ gracz 1");
 			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
@@ -408,15 +372,13 @@ public class gameController {
 				System.out.println("Winner: 1");
 			}
 		}
-		else{
-		
+		else
 			game.makeMove();
-
-		}
 	}
-	public void arrangeArmy(){
+	
+	public void arrangeArmy()
+	{
 	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsuñTo
-		
 	}
 	
 }
