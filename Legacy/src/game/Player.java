@@ -12,6 +12,7 @@ public class Player {
 	private int controlledFields;
 	private String playerNameString;
 	private String playerColorString;
+	
 	public Player(Base base, ArrayList<FieldUnit> gameField,
 			PlayerType playerType, String name, String color) {
 		super();
@@ -24,17 +25,18 @@ public class Player {
 	}
 	
 	public boolean move(int howMany,int destinationPointIndex,int currentPointIndex){// Point destinationPoint, Point currentPoint) {
-		this.howMany=howMany;
+		this.howMany = howMany;
 
-		boolean moved=false;
-		if(this.playerType==gameField.get(currentPointIndex).getSoldiersType()) 
+		boolean moved = false;
+		if(this.playerType == gameField.get(currentPointIndex).getSoldiersType()) 
         {
-		FieldUnit source = gameField.get(currentPointIndex);
-		if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
-			moved=isSoldiersMoved(destinationPointIndex);
-			source.setSoldiers(source.getSoldiers()-howMany);
-			if(source.getSoldiers()==0 && source != this.base) source.setSoldiersType(PlayerType.NoOne);
-		}
+			FieldUnit source = gameField.get(currentPointIndex);
+			if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
+				moved = isSoldiersMoved(destinationPointIndex);
+				source.setSoldiers(source.getSoldiers()-howMany);
+				if(source.getSoldiers() == 0 && source != this.base)
+					source.setSoldiersType(PlayerType.NoOne);
+			}
         }
 		return moved;
         
@@ -52,13 +54,13 @@ public class Player {
 	
 	public void increaseUnitsAmount()
 	{
-		this.controlledFields=0;
+		this.controlledFields = 0;
 		
 		for (FieldUnit e : gameField)
 		{
-			if(e.getSoldiersType()==this.playerType) this.controlledFields++;
+			if(e.getSoldiersType() == this.playerType) this.controlledFields++;
 		}
-		base.setSoldiers(base.getSoldiers()+this.controlledFields);
+		base.setSoldiers(base.getSoldiers() + this.controlledFields);
 	
 		
 	}
@@ -72,8 +74,8 @@ public class Player {
 	}
 	
 	private boolean isSoldiersMoved(int destination){
-		if(gameField.get(destination).getSoldiersType()==playerType){
-			howMany+=gameField.get(destination).getSoldiers();
+		if(gameField.get(destination).getSoldiersType() == playerType){
+			howMany += gameField.get(destination).getSoldiers();
 			gameField.get(destination).setSoldiers(howMany);
 			
 			return true;

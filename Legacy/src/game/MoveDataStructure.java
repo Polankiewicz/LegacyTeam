@@ -6,7 +6,7 @@ public class MoveDataStructure {
 	
 	public MoveDataStructure() {
 		this.sourceIndex = 0;
-		this.targetIndex =0;
+		this.targetIndex = 0;
 		this.howMany = 50;
 		
 	}

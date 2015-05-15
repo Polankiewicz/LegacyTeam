@@ -44,8 +44,8 @@ public class SISEGame extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HEXABATTLE");
 		actualPlayer = bluePlayer;
-		turn =1;
-		autoPlay=true;
+		turn = 1;
+		autoPlay = true;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
@@ -81,7 +81,7 @@ public class SISEGame extends Application {
 			}
 		}
    
-  //je¿eli zamek pierwszy zosta³ zajêty przez wroga - wygrywa gracz 2
+  //jeï¿½eli zamek pierwszy zostaï¿½ zajï¿½ty przez wroga - wygrywa gracz 2
   	//w przeciwnym razie wygrywa gracz 1
   	public boolean checkWhoWins(){
   		if(gameField.get(0).getSoldiersType() != PlayerType.PlayerA)
@@ -95,7 +95,7 @@ public class SISEGame extends Application {
 	public boolean isGameFinished(){
 		PlayerType firstBaseOwner = gameField.get(0).getSoldiersType();
 		PlayerType secondBaseOwner = gameField.get(gameField.size()-1).getSoldiersType();
-		if(firstBaseOwner==secondBaseOwner)
+		if(firstBaseOwner == secondBaseOwner)
 			return true;
 			
 		else
@@ -104,16 +104,16 @@ public class SISEGame extends Application {
 	 public void updatePlayer()
 		{
 			actualPlayer.increaseUnitsAmount();
-			if(actualPlayer.getPlayerType()==PlayerType.PlayerA)
+			if(actualPlayer.getPlayerType() == PlayerType.PlayerA)
 				{
 				System.out.println("gracz a zmienia sie na gracza b");
-				actualPlayer=redPlayer;
+				actualPlayer = redPlayer;
 			
 				
 				}
-			else if(actualPlayer.getPlayerType()==PlayerType.PlayerB) {
+			else if(actualPlayer.getPlayerType() == PlayerType.PlayerB) {
 				System.out.println("gracz b zmienia sie na gracza a");
-				actualPlayer=bluePlayer;
+				actualPlayer = bluePlayer;
 				
 			}
 
@@ -129,15 +129,9 @@ public class SISEGame extends Application {
 	    		updatePlayer();
 	    		turn++;
 	    		gc.refreshView(actualPlayer,turn);
-	    		}
-	    	
-	    	
-	    	
-	    	
+	    		}	
 	    }
-
-	
-	
+		
     public void initRoot(){
     	try{
 			FXMLLoader load = new FXMLLoader(SISEGame.class.getResource("../view/RootLayout.fxml"));
