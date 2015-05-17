@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete 8 elements from project &apos;WinoTest&apos;&#x0D;&#x0A;- Original project: &apos;WinoTest&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     resources&#x0D;&#x0A;     WineDemo.class&#x0D;&#x0A;     WineDemo.java&#x0D;&#x0A;     WineDemo$1.class&#x0D;&#x0A;     WineDemo$2.class&#x0D;&#x0A;     WineDemo$2$1.class&#x0D;&#x0A;     WineDemo$3.class&#x0D;&#x0A;     WineDemo$WeightCellRenderer.class" description="Delete elements" element1="WineDemo$3.class" element2="WineDemo.class" element3="WineDemo$2$1.class" element4="WineDemo$2.class" element5="resources" element6="WineDemo.java" element7="WineDemo$1.class" element8="WineDemo$WeightCellRenderer.class" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="8" stamp="1431635984290" subPackages="false" version="1.0"/>
-</session>
