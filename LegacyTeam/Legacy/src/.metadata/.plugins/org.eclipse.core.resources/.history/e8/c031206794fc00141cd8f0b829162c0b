@@ -53,6 +53,7 @@ public class menuController {
 	}
 	
 	public void defaultExitImage(){
+	{
 		System.out.println("I'm out");
 		Image img = new Image("resources/exit.png");
 		exit.imageProperty().set(img);
