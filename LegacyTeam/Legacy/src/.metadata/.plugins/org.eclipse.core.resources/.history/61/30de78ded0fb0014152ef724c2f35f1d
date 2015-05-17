@@ -1,0 +1,11 @@
+(deftemplate graczInfo
+	(slot coordX (type INTEGER))
+	(slot coordY (type INTEGER))
+	(slot isEnemy 
+		(type SYMBOL)
+    	(allowed-symbols yes no)
+	)
+	(slot iloscWoja (type INTEGER))
+)
+
+(assert (graczInfo(coordX 5)(coordY 6)(isEnemy no)(iloscWoja 500))

@@ -1,0 +1,103 @@
+package view;
+
+import CLIPSJNI.*;
+import game.SISEGame;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+public class menuController {
+	private static Environment clips;
+
+	
+	@FXML
+	private ImageView start;
+	@FXML
+	private ImageView exit;
+	@FXML
+	private ImageView background;
+	
+	private SISEGame menu;
+	
+	public menuController(){}
+	
+	@FXML
+    private void initialize() {}
+	
+	public void setSISEMenu(SISEGame menu){
+		InitializeClips();
+		this.menu = menu;
+	}
+	
+	public void startGame(){
+		menu.showGame();
+	}
+	
+	public void changeStartImage(){
+//		System.out.println("I'm hovered");
+		Image img = new Image("resources/startHover.png");
+		start.imageProperty().set(img);
+	}
+	
+	public void defaultStartImage(){
+//		System.out.println("I'm out");
+		Image img = new Image("resources/start.png");
+		start.imageProperty().set(img);
+	}
+	
+	public void changeExitImage(){
+//		System.out.println("I'm hovered");
+		Image img = new Image("resources/exitHover.png");
+		exit.imageProperty().set(img);
+	}
+	
+	public void defaultExitImage(){
+//		System.out.println("I'm out");
+		Image img = new Image("resources/exit.png");
+		exit.imageProperty().set(img);
+	}
+	
+	public void setSISEGame(SISEGame game){
+		this.menu = game;
+	}
+	
+	public void exitGame(){
+//		System.out.println("Exit clicked");
+	    Stage stage = (Stage) exit.getScene().getWindow();
+	    stage.close();
+	}
+	
+	public void InitializeClips(){
+		clips = new Environment();
+		clips.load("templates.clp");
+		clips.eval("(assert (graczInfo(coordX 5)(coordY 7)(czyAI no)(iloscWoja 500)))");
+		clips.eval("(assert (graczInfo(coordX 4)(coordY 8)(czyAI no)(iloscWoja 300)))");
+		clips.eval("(assert (graczInfo(coordX 2)(coordY 2)(czyAI no)(iloscWoja 400)))");
+		clips.eval("(assert (graczInfo(coordX 8)(coordY 4)(czyAI no)(iloscWoja 800)))");
+		clips.load("ai.clp");
+		clips.run();
+		
+		MultifieldValue questionHandle = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
+		if(questionHandle.listValue().size() != 0){
+			for(int i=0; i< questionHandle.listValue().size(); i++){
+				FactAddressValue questionRecord = (FactAddressValue) questionHandle.listValue().get(i);
+				int coordX = Integer.parseInt(questionRecord.getFactSlot("coordY").toString());
+				int coordY = Integer.parseInt(questionRecord.getFactSlot("coordY").toString());
+				System.out.println("gracz spe³niaj¹cy warunek jest na polu X: "+coordX+" Y: "+coordY);
+			}
+		}
+		else{
+			System.out.println("Brak wyniku do zwrócenia");
+		}
+//		MultifieldValue ZbieranieFaktow = (MultifieldValue) clips.eval("(facts)");
+//		FactAddressValue fakt = (FactAddressValue) ZbieranieFaktow.listValue().get(0);
+//		System.out.println(fakt.getFactSlot("light").toString());
+//		
+//		System.out.println();
+	}
+	
+	public void PrintClipsText(){
+		
+	}
+}

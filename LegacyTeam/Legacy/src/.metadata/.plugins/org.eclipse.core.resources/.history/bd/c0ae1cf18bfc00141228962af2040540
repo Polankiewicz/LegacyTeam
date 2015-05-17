@@ -1,0 +1,13 @@
+; je¿eli w gracz info znajdziemy gracza po asercji, co ma wincyj ni¿ pincet woja to daje znaæ o tym
+; ale musimy te¿ utworzyæ fakt! Wiêc jak rozumujemy na podstawie faktów
+; Fakt 1 - masz 100z³
+; Fakt 2 - dziewoja pod latarni¹ czeka na Ciebie byœ jej zap³aci³ za seks
+; Fakt 3 wynikajcy z rozumowania - ta dziewczyna jest dziwk¹.
+
+(defrule hasMore
+	(graczInfo (coordX ?coordX)(coordY ?coordY)(iloscWoja ?iloscwoja))
+	(test (< ?iloscwoja 500))
+=>
+	(printout t "Wspolrzedne gracza majacego mniej niz 500 to " ?coordX " oraz " ?coordY crlf)
+	(assert (kogoZaatakowac(coordX ?coordX)(coordY ?coordY)))
+)

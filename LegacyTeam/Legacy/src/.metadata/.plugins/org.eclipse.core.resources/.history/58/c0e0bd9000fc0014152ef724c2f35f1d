@@ -1,0 +1,8 @@
+;je¿eli w gracz info znajdziemy gracza po asercji, co ma równo pincet woja to daje znaæ o tym
+
+(defrule isOkay
+	(graczInfo(iloscWoja ?a&:(> ?a 400)))
+	=>
+	(printout t "Ten gracz ma wincyj ni¿ 400 woja bo a¿ " ?a " woja")
+	(assert konkluzja(tekst "znaleziono Gracza"))
+)

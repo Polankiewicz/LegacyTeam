@@ -1,0 +1,14 @@
+(deftemplate book
+  (slot title
+    (type STRING)
+    (default "Unknown"))
+  (slot author
+    (type STRING)
+    (default "Unknown"))
+  (slot date
+    (type INTEGER)
+    (default 2001)
+    (range 1600 2009)))
+    
+(assert (book (title "C++") (author "Stephen Prata") (date 2002)))
+    
