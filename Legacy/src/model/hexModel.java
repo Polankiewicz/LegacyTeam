@@ -23,7 +23,8 @@ public class hexModel {
 	//iloœæ wojska
 	int ilosc;
 	
-	public hexModel(int x, int y, int index, boolean isCastle, Rectangle hex, Label hexLabel){
+	public hexModel(int x, int y, int index, boolean isCastle, Rectangle hex, Label hexLabel)
+	{
 		this.x=x;
 		this.y=y;
 		this.point = new Point(x,y);

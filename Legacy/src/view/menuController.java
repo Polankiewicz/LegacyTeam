@@ -20,8 +20,6 @@ public class menuController {
 	
 	private SISEGame menu;
 	
-	public menuController(){}
-	
 	@FXML
     private void initialize() {}
 	
@@ -34,26 +32,50 @@ public class menuController {
 		menu.showGame();
 	}
 	
+<<<<<<< HEAD
 	public void changeStartImage(){
 //		System.out.println("I'm hovered");
+=======
+	public void changeStartImage()
+	{
+		System.out.println("I'm hovered");
+>>>>>>> 92b087bbd75f70d793785fd9cf75286c58976555
 		Image img = new Image("resources/startHover.png");
 		start.imageProperty().set(img);
 	}
 	
+<<<<<<< HEAD
 	public void defaultStartImage(){
 //		System.out.println("I'm out");
+=======
+	public void defaultStartImage()
+	{
+		System.out.println("I'm out");
+>>>>>>> 92b087bbd75f70d793785fd9cf75286c58976555
 		Image img = new Image("resources/start.png");
 		start.imageProperty().set(img);
 	}
 	
+<<<<<<< HEAD
 	public void changeExitImage(){
 //		System.out.println("I'm hovered");
+=======
+	public void changeExitImage()
+	{
+		System.out.println("I'm hovered");
+>>>>>>> 92b087bbd75f70d793785fd9cf75286c58976555
 		Image img = new Image("resources/exitHover.png");
 		exit.imageProperty().set(img);
 	}
 	
+<<<<<<< HEAD
 	public void defaultExitImage(){
 //		System.out.println("I'm out");
+=======
+	public void defaultExitImage()
+	{
+		System.out.println("I'm out");
+>>>>>>> 92b087bbd75f70d793785fd9cf75286c58976555
 		Image img = new Image("resources/exit.png");
 		exit.imageProperty().set(img);
 	}
@@ -62,8 +84,14 @@ public class menuController {
 		this.menu = game;
 	}
 	
+<<<<<<< HEAD
 	public void exitGame(){
 //		System.out.println("Exit clicked");
+=======
+	public void exitGame()
+	{
+		System.out.println("Exit clicked");
+>>>>>>> 92b087bbd75f70d793785fd9cf75286c58976555
 	    Stage stage = (Stage) exit.getScene().getWindow();
 	    stage.close();
 	}

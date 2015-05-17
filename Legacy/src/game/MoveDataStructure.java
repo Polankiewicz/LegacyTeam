@@ -4,11 +4,11 @@ public class MoveDataStructure {
 	
 	public int sourceIndex,targetIndex,howMany;
 	
-	public MoveDataStructure() {
+	public MoveDataStructure() 
+	{
 		this.sourceIndex = 0;
-		this.targetIndex =0;
+		this.targetIndex = 0;
 		this.howMany = 50;
-		
 	}
 
 }

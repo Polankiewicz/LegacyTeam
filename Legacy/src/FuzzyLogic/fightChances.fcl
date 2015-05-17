@@ -1,4 +1,4 @@
-FUNCTION_BLOCK fightChances
+FUNCTION_BLOCK fightChances		// predict fight result
 
 
 VAR_INPUT
