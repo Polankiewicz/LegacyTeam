@@ -1,5 +1,0 @@
-(deftemplate graczInfo
-	(slot coordX (type INTEGER)))
-
-(assert (graczInfo(coordX 5)))
-

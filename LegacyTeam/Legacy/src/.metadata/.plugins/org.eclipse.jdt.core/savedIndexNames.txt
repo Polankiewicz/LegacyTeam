@@ -1,4 +1,5 @@
 INDEX VERSION 1.127+D:\Semestr VI\Sztuczna Inteligencja\Repo\LegacyTeam\Legacy\src\.metadata\.plugins\org.eclipse.jdt.core
+168982620.index
 4224727638.index
 2674037006.index
 355369697.index
