@@ -9,32 +9,43 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 public class FuzzyLogicControl {
 
 	
-	public static void main(String[] args) throws Exception {
-		
-        
-        String fileName = "src/FuzzyLogic/fightChances.fcl";
-        FIS fis = FIS.load(fileName,true);
+	public static void main(String[] args) throws Exception // temp method :P
+	{
+		FuzzyLogicControl fuzzyLogicControl = new FuzzyLogicControl();
+		fuzzyLogicControl.loadFclFiles();
+    }
+	
+	public void loadFclFiles() 
+	{
+		// values <0,100> - % my units to enemy units
+		FIS fightChancesFCL = FIS.load("src/FuzzyLogic/fightChances.fcl", true);
+		// values <0,25> - number of fields
+		FIS fieldsControledFCL = FIS.load("src/FuzzyLogic/fieldsControled.fcl", true);
+		// values <0,100> - % my all units to units on my one field
+		FIS unitsPerFieldFCL = FIS.load("src/FuzzyLogic/unitsPerField.fcl", true);
+		// values <0,100> - % units in my base to all my units
+		FIS unitsRatioToBaseFCL = FIS.load("src/FuzzyLogic/unitsRatioToBase.fcl", true);
 
-        if( fis == null ) { 
-            System.err.println("Can't load file: '" + fileName + "'");
+        if( fightChancesFCL == null || fieldsControledFCL == null || unitsPerFieldFCL == null || unitsRatioToBaseFCL == null) 
+        { 
+            System.err.println("Can't load fcl file");
             return;
         }
 
-        JFuzzyChart.get().chart(fis);
-        //FunctionBlock functionBlock = fis.getFunctionBlock(null);
-        //functionBlock.chart();
+        // example
+        JFuzzyChart.get().chart(fightChancesFCL);
 
-        fis.setVariable("myUnits", 8);
-        fis.setVariable("enemyUnits", 2);
+        fightChancesFCL.setVariable("myUnits", 8);
+        fightChancesFCL.setVariable("enemyUnits", 2);
 
-        fis.evaluate();
+        fightChancesFCL.evaluate();
 
         
-        System.out.println("Magiczna wartosc: \n" + fis.getVariable("fightResult").getValue() );
-        Variable fightResult =  fis.getVariable("fightResult");
+        System.out.println("Magiczna wartosc: \n" + fightChancesFCL.getVariable("fightResult").getValue() );
+        Variable fightResult =  fightChancesFCL.getVariable("fightResult");
         JFuzzyChart.get().chart(fightResult, fightResult.getDefuzzifier(), true);
         
-        //System.out.println(fis);
-    }
+        //System.out.println(fightChancesFCL);
+	}
 	
 }
