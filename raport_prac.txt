@@ -1,3 +1,12 @@
+Stan na 22.05.2015
+1. Jakub Dziedzic - pomoc
+2. Bartłomiej Dąbek -  pomoc
+3. Bartłomiej Dobrowolski - spięcie CLIPSJNI, sparametryzowanie oraz możliwość wyciągania danych z CLIPSa
+4. Mariusz Polka - pomoc przy logice rozmytej
+5. Filip Wrzesiński - pomoc przy logice rozmytej
+6. Damian Polankiewicz - Logika rozmyta, dodatkowe pliki fcl, kontrollery do rozmytej i komunikacja.
+
+------------------
 Stan na 24.04.2015
 1. Jakub Dziedzic - obsługa gry za pomocą myszki, elementy interfejsu, poprawki
 2. Bartłomiej Dąbek - logika odpowiadająca za rozgrywkę, połączenie elementów logiki z wyglądem
