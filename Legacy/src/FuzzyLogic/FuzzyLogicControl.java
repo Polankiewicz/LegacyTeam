@@ -8,44 +8,77 @@ import net.sourceforge.jFuzzyLogic.rule.Variable;
 
 public class FuzzyLogicControl {
 
+	private FIS fightChancesFCL;
+	private FIS fieldsControledFCL;
+	private FIS unitsPerFieldFCL;
+	private FIS unitsRatioToBaseFCL;
 	
 	public static void main(String[] args) throws Exception // temp method :P
 	{
 		FuzzyLogicControl fuzzyLogicControl = new FuzzyLogicControl();
 		fuzzyLogicControl.loadFclFiles();
+		
+		System.out.println(fuzzyLogicControl.getFuzzyFightChances(5,3));
     }
 	
 	public void loadFclFiles() 
 	{
 		// values <0,100> - % my units to enemy units
-		FIS fightChancesFCL = FIS.load("src/FuzzyLogic/fightChances.fcl", true);
+		fightChancesFCL = FIS.load("src/FuzzyLogic/fightChances.fcl", true);
 		// values <0,25> - number of fields
-		FIS fieldsControledFCL = FIS.load("src/FuzzyLogic/fieldsControled.fcl", true);
+		fieldsControledFCL = FIS.load("src/FuzzyLogic/fieldsControled.fcl", true);
 		// values <0,100> - % my all units to units on my one field
-		FIS unitsPerFieldFCL = FIS.load("src/FuzzyLogic/unitsPerField.fcl", true);
+		unitsPerFieldFCL = FIS.load("src/FuzzyLogic/unitsPerField.fcl", true);
 		// values <0,100> - % units in my base to all my units
-		FIS unitsRatioToBaseFCL = FIS.load("src/FuzzyLogic/unitsRatioToBase.fcl", true);
+		unitsRatioToBaseFCL = FIS.load("src/FuzzyLogic/unitsRatioToBase.fcl", true);
+	}
+	
+	public double getFuzzyFightChances(double myUnits, double enemyUnits)
+	{
+		JFuzzyChart.get().chart(fightChancesFCL);
 
-        if( fightChancesFCL == null || fieldsControledFCL == null || unitsPerFieldFCL == null || unitsRatioToBaseFCL == null) 
-        { 
-            System.err.println("Can't load fcl file");
-            return;
-        }
-
-        // example
-        JFuzzyChart.get().chart(fightChancesFCL);
-
-        fightChancesFCL.setVariable("myUnits", 8);
-        fightChancesFCL.setVariable("enemyUnits", 2);
+        fightChancesFCL.setVariable("myUnits", myUnits);
+        fightChancesFCL.setVariable("enemyUnits", enemyUnits);
 
         fightChancesFCL.evaluate();
+		
+		return fightChancesFCL.getVariable("fightResult").getValue();
+	}
+	
+	public double getFuzzyFieldsControled(double allFields, double myFields)
+	{
+		JFuzzyChart.get().chart(fieldsControledFCL);
 
-        
-        System.out.println("Magiczna wartosc: \n" + fightChancesFCL.getVariable("fightResult").getValue() );
-        Variable fightResult =  fightChancesFCL.getVariable("fightResult");
-        JFuzzyChart.get().chart(fightResult, fightResult.getDefuzzifier(), true);
-        
-        //System.out.println(fightChancesFCL);
+		fieldsControledFCL.setVariable("allFields", allFields);
+		fieldsControledFCL.setVariable("myFields", myFields);
+
+		fieldsControledFCL.evaluate();
+		
+		return fieldsControledFCL.getVariable("fieldsRatio").getValue();
+	}
+	
+	public double getFuzzyUnitsPerField(double allUnits, double unitsOnField)
+	{
+		JFuzzyChart.get().chart(unitsPerFieldFCL);
+
+		unitsPerFieldFCL.setVariable("allUnits", allUnits);
+		unitsPerFieldFCL.setVariable("unitsOnField", unitsOnField);
+
+		unitsPerFieldFCL.evaluate();
+		
+		return unitsPerFieldFCL.getVariable("unitsRatio").getValue();
+	}
+	
+	public double getFuzzyUnitsRatioToBase(double unitsInBase, double otherOurUnits)
+	{
+		JFuzzyChart.get().chart(unitsRatioToBaseFCL);
+
+		unitsRatioToBaseFCL.setVariable("unitsInBase", unitsInBase);
+		unitsRatioToBaseFCL.setVariable("otherOurUnits", otherOurUnits);
+
+		unitsRatioToBaseFCL.evaluate();
+		
+		return unitsRatioToBaseFCL.getVariable("result").getValue();
 	}
 	
 }
