@@ -2,18 +2,12 @@ FUNCTION_BLOCK fieldsControled	// amount of our controlled fields to all fields
 
 
 VAR_INPUT
-    allFields : REAL;
     myFields : REAL;
 END_VAR
 
 VAR_OUTPUT
     fieldsRatio : REAL;
 END_VAR
-
-
-FUZZIFY allFields
-    TERM all := (0, 1) (25, 1); 
-END_FUZZIFY
 
 FUZZIFY myFields
     TERM begining := (0, 1) (1, 0); 
@@ -22,7 +16,7 @@ FUZZIFY myFields
     TERM normal := (9, 1) (13, 0); 
     TERM more := (13, 1) (18, 0);
     TERM big := (18, 1) (24, 0);
-    TERM end := (24, 1) (25, 0);
+    TERM end := (24, 1) (25, 0);	// 25 - number of all fields
 END_FUZZIFY
 
 DEFUZZIFY fieldsRatio
@@ -40,8 +34,7 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-    RULE 1 : IF allFields IS all OR myFields IS small 
-                THEN fieldsRatio IS value1;
+    RULE 1 : IF myFields IS small THEN fieldsRatio IS value1;
 END_RULEBLOCK
 
 

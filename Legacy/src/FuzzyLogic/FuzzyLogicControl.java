@@ -45,11 +45,10 @@ public class FuzzyLogicControl {
 		return fightChancesFCL.getVariable("fightResult").getValue();
 	}
 	
-	public double getFuzzyFieldsControled(double allFields, double myFields)
+	public double getFuzzyFieldsControled(double myFields)
 	{
 		JFuzzyChart.get().chart(fieldsControledFCL);
 
-		fieldsControledFCL.setVariable("allFields", allFields);
 		fieldsControledFCL.setVariable("myFields", myFields);
 
 		fieldsControledFCL.evaluate();
