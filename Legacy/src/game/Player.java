@@ -140,4 +140,12 @@ public class Player {
 	public void setPlayerNameString(String playerNameString) {
 		this.playerNameString = playerNameString;
 	}
+
+	public int getControlledFields() {
+		return controlledFields;
+	}
+
+	public void setControlledFields(int controlledFields) {
+		this.controlledFields = controlledFields;
+	}
 }

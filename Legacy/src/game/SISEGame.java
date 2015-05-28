@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import FuzzyLogic.FuzzyLogicControl;
 import view.gameController;
 import view.menuController;
 import javafx.application.Application;
@@ -26,6 +27,8 @@ public class SISEGame extends Application {
     private Player bluePlayer;
     private Player redPlayer;
     private Player actualPlayer;
+    public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
+    public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
    
     boolean autoPlay; // jesli prawda, to gra testController
 	private MoveDataStructure moveDataStructure;
@@ -39,6 +42,18 @@ public class SISEGame extends Application {
 	{
 		this.gameField = new ArrayList<FieldUnit>();
 		createGameField();
+		//tutaj zestaw fcl-ek niebieskiego gracza
+		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
+				"src/FuzzyLogic/fightChances.fcl", 
+				"src/FuzzyLogic/fieldsControled.fcl", 
+				"src/FuzzyLogic/unitsPerField.fcl", 
+				"src/FuzzyLogic/unitsRatioToBase.fcl");
+		//tutaj zestaw fcl-ek czerwonego gracza
+		this.fuzzyLogicControlForRedPlayer = new FuzzyLogicControl(
+				"src/FuzzyLogic/fightChances.fcl", 
+				"src/FuzzyLogic/fieldsControled.fcl", 
+				"src/FuzzyLogic/unitsPerField.fcl", 
+				"src/FuzzyLogic/unitsRatioToBase.fcl");
 		
 		moveDataStructure = new MoveDataStructure();
 		
@@ -126,7 +141,17 @@ public class SISEGame extends Application {
 	
 	public void makeMove()
 	{
-    	if(actualPlayer.move(moveDataStructure.howMany,moveDataStructure.targetIndex,moveDataStructure.sourceIndex))
+		//tutaj chyba trzeba bedzie załadować w podobny sposób reszte fcl-ek ale juz nie ogarniam co się skad bierze,
+		//takze Polan rob według uznania :D
+		double fuzzyFieldControlled;
+		if(actualPlayer.getPlayerType() == PlayerType.PlayerA){
+			fuzzyFieldControlled = fuzzyLogicControlForBluePlayer.getFuzzyFieldsControled(bluePlayer.getControlledFields());
+		}
+		else{
+			fuzzyFieldControlled = fuzzyLogicControlForRedPlayer.getFuzzyFieldsControled(redPlayer.getControlledFields());
+		}
+		
+		if(actualPlayer.move(moveDataStructure.howMany,moveDataStructure.targetIndex,moveDataStructure.sourceIndex))
     	{
     		System.out.println(moveDataStructure.sourceIndex + " sie ruszyl na " + moveDataStructure.targetIndex);
     		actualPlayer.increaseUnitsAmount();
