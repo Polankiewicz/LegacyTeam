@@ -144,11 +144,34 @@ public class SISEGame extends Application {
 		//tutaj chyba trzeba bedzie załadować w podobny sposób reszte fcl-ek ale juz nie ogarniam co się skad bierze,
 		//takze Polan rob według uznania :D
 		double fuzzyFieldControlled;
+		double fuzzyFightChances;
+		double fuzzyUnitsPerField;
+		double fuzzyUnitsRatioToBase;
 		if(actualPlayer.getPlayerType() == PlayerType.PlayerA){
 			fuzzyFieldControlled = fuzzyLogicControlForBluePlayer.getFuzzyFieldsControled(bluePlayer.getControlledFields());
+			fuzzyFightChances = fuzzyLogicControlForBluePlayer.getFuzzyFightChances(
+					bluePlayer.countAllSoldiers(), 
+					redPlayer.countAllSoldiers());
+			fuzzyUnitsPerField = fuzzyLogicControlForBluePlayer.getFuzzyUnitsPerField(
+					bluePlayer.countAllSoldiers(), 
+					unitsOnField); //tutaj sobie uzyj moveDataStructure.sourceIndex zeby dostac sie do pola i wtedy tylko getSoldiers()
+			//ale jak to jest powiazane to ja nie wiem, tego balaganu nie robilem
+			//szukanie pola miało być po Point, a ktos pozmienial na inty i ja nie wiem o co chodzi
+			fuzzyUnitsRatioToBase = fuzzyLogicControlForBluePlayer.getFuzzyUnitsRatioToBase(
+					bluePlayer.getBase().getSoldiers(), 
+					bluePlayer.countAllSoldiers());
 		}
 		else{
 			fuzzyFieldControlled = fuzzyLogicControlForRedPlayer.getFuzzyFieldsControled(redPlayer.getControlledFields());
+			fuzzyFightChances = fuzzyLogicControlForRedPlayer.getFuzzyFightChances(
+					redPlayer.countAllSoldiers(), 
+					bluePlayer.countAllSoldiers());
+			fuzzyUnitsPerField = fuzzyLogicControlForRedPlayer.getFuzzyUnitsPerField(
+					redPlayer.countAllSoldiers(), 
+					unitsOnField);
+			fuzzyUnitsRatioToBase = fuzzyLogicControlForRedPlayer.getFuzzyUnitsRatioToBase(
+					redPlayer.getBase().getSoldiers(), 
+					redPlayer.countAllSoldiers());
 		}
 		
 		if(actualPlayer.move(moveDataStructure.howMany,moveDataStructure.targetIndex,moveDataStructure.sourceIndex))
