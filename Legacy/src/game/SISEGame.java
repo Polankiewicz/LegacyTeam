@@ -30,9 +30,7 @@ public class SISEGame extends Application {
     private Player actualPlayer;
     public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
     public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
-   
-    private FOLController clipsController;
-    
+       
     boolean autoPlay; // jesli prawda, to gra testController
 	private MoveDataStructure moveDataStructure;
 	private ArrayList<FieldUnit> gameField;
@@ -68,7 +66,6 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-		clipsController = new FOLController(this, gameField, moveDataStructure);
 	}
 
     public Stage getPrimaryStage() {
@@ -232,6 +229,4 @@ public class SISEGame extends Application {
     		e.printStackTrace();
     	}
     }
-    
-    
 }

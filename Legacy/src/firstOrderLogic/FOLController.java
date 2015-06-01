@@ -80,7 +80,7 @@ public class FOLController {
 			moveAI.sourceIndex = coordX + coordY; //Suma daje numer indeksu pola
 			moveAI.targetIndex = coordX + coordY+1; //Testowo wybieramy nastêpne pole
 			moveAI.howMany = 1; //te¿ testowo, potem do podstawienia
-			//nie wiem tylko jak to siê rusza
+			//nie wiem tylko jak to siê rusza, wiêc te¿ do sprawdzenia w 
 		}
 		else{
 			System.out.println("Brak faktów do zwrócenia");

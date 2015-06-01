@@ -384,7 +384,8 @@ public class gameController {
 		else{
 			game.makeMove();
 			if(ai){
-				folcontroller.runAI(game, gameField);
+				FOLController clips = new FOLController();
+				clips.runAI(gameField);
 			}
 		}
 	}
