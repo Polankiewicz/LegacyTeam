@@ -32,7 +32,7 @@ public class TestController {
 		// tu sie b�dzie bralo  dane o gamefieldzie i wysylalo do ai
 		
 		//zwrocone rzeczy wygladaja mniej wiecej tak
-		moveDataStructure.sourceIndex =0; //zrodlo ruchu
+		moveDataStructure.sourceIndex = 0; //zrodlo ruchu
 		moveDataStructure.targetIndex = 1; //cel ruchu
 		moveDataStructure.howMany = 20; //ile woja;brak zabezpieczenia przed podaniem za duzej wartosci poki co
 		

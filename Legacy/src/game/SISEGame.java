@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import firstOrderLogic.FOLController;
 import FuzzyLogic.FuzzyLogicControl;
 import view.gameController;
 import view.menuController;
@@ -30,6 +31,8 @@ public class SISEGame extends Application {
     public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
     public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
    
+    private FOLController clipsController;
+    
     boolean autoPlay; // jesli prawda, to gra testController
 	private MoveDataStructure moveDataStructure;
 	private ArrayList<FieldUnit> gameField;
@@ -65,6 +68,7 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
+		clipsController = new FOLController(this, gameField, moveDataStructure);
 	}
 
     public Stage getPrimaryStage() {
@@ -158,7 +162,7 @@ public class SISEGame extends Application {
     		updatePlayer();
     		turn++;
     		gc.refreshView(actualPlayer,turn);
-    	}	
+    	}
 	 }
 
     public void initRoot()

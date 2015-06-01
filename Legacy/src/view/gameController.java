@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import firstOrderLogic.FOLController;
 import game.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +32,9 @@ import javafx.stage.Stage;
 import java.awt.Button;
 import java.awt.Point;
 
+import CLIPSJNI.Environment;
+import CLIPSJNI.FactAddressValue;
+import CLIPSJNI.MultifieldValue;
 import se.mbaeumer.fxmessagebox.MessageBox;
 import se.mbaeumer.fxmessagebox.MessageBoxResult;
 import se.mbaeumer.fxmessagebox.MessageBoxType;
@@ -186,6 +190,10 @@ public class gameController {
 	
 	private boolean isSourceSelected;
 	
+	
+	private FOLController folcontroller;
+	private Boolean ai = true;
+	
 	public gameController(ArrayList<FieldUnit> gameField, Player playerA, 
 		Player playerB, Player actualPlayer,MoveDataStructure moveDataStructure,
 		SISEGame game)
@@ -201,6 +209,7 @@ public class gameController {
 	@FXML
 	private void initialize() 
 	{
+		folcontroller = new FOLController();
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
 		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zako�czy� tur�");
@@ -372,13 +381,16 @@ public class gameController {
 				System.out.println("Winner: 1");
 			}
 		}
-		else
+		else{
 			game.makeMove();
+			if(ai){
+				folcontroller.runAI(game, gameField);
+			}
+		}
 	}
 	
 	public void arrangeArmy(){
 	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsu�To
 		
-	}
-	
+	}	
 }
