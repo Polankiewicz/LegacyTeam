@@ -23,6 +23,16 @@ public class Player {
 		this.setPlayerNameString(name);
 	}
 	
+	public int countAllSoldiers() {
+		int soldiersCounter = 0;
+		for (FieldUnit fieldUnit : gameField) {
+			if (fieldUnit.getSoldiersType().equals(this.playerType)) {
+				soldiersCounter += fieldUnit.getSoldiers();
+			}
+		}
+		return soldiersCounter;
+	}
+	
 	public boolean move(int howMany,int destinationPointIndex,int currentPointIndex){// Point destinationPoint, Point currentPoint) {
 		this.howMany = howMany;
 
@@ -147,5 +157,9 @@ public class Player {
 
 	public void setControlledFields(int controlledFields) {
 		this.controlledFields = controlledFields;
+	}
+
+	public Base getBase() {
+		return base;
 	}
 }

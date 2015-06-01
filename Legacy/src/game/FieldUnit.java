@@ -142,4 +142,48 @@ public class FieldUnit {
 	public ArrayList<Point> getNeighbours() {
 		return new ArrayList<Point>(neighbours);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bonusType == null) ? 0 : bonusType.hashCode());
+		result = prime * result
+				+ ((coordinates == null) ? 0 : coordinates.hashCode());
+		result = prime * result
+				+ ((neighbours == null) ? 0 : neighbours.hashCode());
+		result = prime * result + soldiers;
+		result = prime * result
+				+ ((soldiersType == null) ? 0 : soldiersType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FieldUnit other = (FieldUnit) obj;
+		if (bonusType != other.bonusType)
+			return false;
+		if (coordinates == null) {
+			if (other.coordinates != null)
+				return false;
+		} else if (!coordinates.equals(other.coordinates))
+			return false;
+		if (neighbours == null) {
+			if (other.neighbours != null)
+				return false;
+		} else if (!neighbours.equals(other.neighbours))
+			return false;
+		if (soldiers != other.soldiers)
+			return false;
+		if (soldiersType != other.soldiersType)
+			return false;
+		return true;
+	}
 }
