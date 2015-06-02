@@ -34,7 +34,13 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-    RULE 1 : IF myFields IS small THEN fieldsRatio IS value1;
+    RULE 1 : IF myFields IS begining THEN fieldsRatio IS value1;
+    RULE 2 : IF myFields IS small THEN fieldsRatio IS value1;
+    RULE 3 : IF myFields IS avarge THEN fieldsRatio IS value1;
+    RULE 4 : IF myFields IS normal THEN fieldsRatio IS value1;
+    RULE 5 : IF myFields IS more THEN fieldsRatio IS value2;
+    RULE 6 : IF myFields IS big THEN fieldsRatio IS value2;
+    RULE 7 : IF myFields IS end THEN fieldsRatio IS value3;
 END_RULEBLOCK
 
 

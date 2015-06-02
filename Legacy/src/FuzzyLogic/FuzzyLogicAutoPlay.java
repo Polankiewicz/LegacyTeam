@@ -59,27 +59,25 @@ public class FuzzyLogicAutoPlay {
 			// check ours controlled fields  
 			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
 					actualPlayer.getControlledFields());
-			// next steps...
+			// check if we can fight and chances to win in each situation
 			fuzzyFightChances = actualFuzzyLogicControl.getFuzzyFightChances(
-					actualPlayer.countAllSoldiers(), 
-					otherPlayer.countAllSoldiers());
-			fuzzyUnitsPerField = actualFuzzyLogicControl.getFuzzyUnitsPerField(
-					actualPlayer.countAllSoldiers(), 
-					actualPlayer.getGameField().get(0).getSoldiers()); 
+					actualPlayer.getGameField().get(0).getSoldiers(), 
+					otherPlayer.getGameField().get(1).getSoldiers());
+			// check if we have huge amount of units in base so we can place them on next fields 
 			fuzzyUnitsRatioToBase = actualFuzzyLogicControl.getFuzzyUnitsRatioToBase(
 					actualPlayer.getBase().getSoldiers(), 
 					actualPlayer.countAllSoldiers());
-			
-			
-			
-			
-			// temp move
+			// check amount of units in base to other our units and decide witch fields need help
+			fuzzyUnitsPerField = actualFuzzyLogicControl.getFuzzyUnitsPerField(
+					actualPlayer.countAllSoldiers(), 
+					actualPlayer.getGameField().get(0).getSoldiers()); 
+			// decide: move units
+			// example move
 			moveDataStructure.sourceIndex = 0;
 			moveDataStructure.targetIndex = 1;
 			moveDataStructure.howMany = 20;
 			
 			game.makeMove();
-			
 			
 			//if( WYGRANA )
 				break;
