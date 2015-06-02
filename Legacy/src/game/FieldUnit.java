@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import view.gameController;
+
 public class FieldUnit {
 	
 	private Point coordinates;

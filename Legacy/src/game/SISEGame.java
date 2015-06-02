@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import firstOrderLogic.FOLController;
+import FuzzyLogic.FuzzyLogicAutoPlay;
 import FuzzyLogic.FuzzyLogicControl;
 import view.gameController;
 import view.menuController;
@@ -30,8 +31,10 @@ public class SISEGame extends Application {
     private Player actualPlayer;
     public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
     public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
+    private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
        
-    boolean autoPlay; // jesli prawda, to gra testController
+    boolean autoPlay; // jesli prawda, to gra komputer
+    boolean fuzzyOrFOL; // jessli prawda, to gra rozmyta jesli nie to druga brzydka :P
 	private MoveDataStructure moveDataStructure;
 	private ArrayList<FieldUnit> gameField;
 	private gameController gc;
@@ -66,9 +69,12 @@ public class SISEGame extends Application {
 		actualPlayer = bluePlayer;
 		turn = 1;
 		autoPlay = true;
+		fuzzyOrFOL = false;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
+		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
+				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
 	}
 
     public Stage getPrimaryStage() {
@@ -144,40 +150,7 @@ public class SISEGame extends Application {
 	}
 	
 	public void makeMove()
-	{
-		//tutaj chyba trzeba bedzie załadować w podobny sposób reszte fcl-ek ale juz nie ogarniam co się skad bierze,
-		//takze Polan rob według uznania :D
-		double fuzzyFieldControlled;
-		double fuzzyFightChances;
-		double fuzzyUnitsPerField;
-		double fuzzyUnitsRatioToBase;
-		if(actualPlayer.getPlayerType() == PlayerType.PlayerA){
-			fuzzyFieldControlled = fuzzyLogicControlForBluePlayer.getFuzzyFieldsControled(bluePlayer.getControlledFields());
-			fuzzyFightChances = fuzzyLogicControlForBluePlayer.getFuzzyFightChances(
-					bluePlayer.countAllSoldiers(), 
-					redPlayer.countAllSoldiers());
-//			fuzzyUnitsPerField = fuzzyLogicControlForBluePlayer.getFuzzyUnitsPerField(
-//					bluePlayer.countAllSoldiers(), 
-//					unitsOnField); //tutaj sobie uzyj moveDataStructure.sourceIndex zeby dostac sie do pola i wtedy tylko getSoldiers()
-			//ale jak to jest powiazane to ja nie wiem, tego balaganu nie robilem
-			//szukanie pola miało być po Point, a ktos pozmienial na inty i ja nie wiem o co chodzi
-			fuzzyUnitsRatioToBase = fuzzyLogicControlForBluePlayer.getFuzzyUnitsRatioToBase(
-					bluePlayer.getBase().getSoldiers(), 
-					bluePlayer.countAllSoldiers());
-		}
-		else{
-			fuzzyFieldControlled = fuzzyLogicControlForRedPlayer.getFuzzyFieldsControled(redPlayer.getControlledFields());
-			fuzzyFightChances = fuzzyLogicControlForRedPlayer.getFuzzyFightChances(
-					redPlayer.countAllSoldiers(), 
-					bluePlayer.countAllSoldiers());
-//			fuzzyUnitsPerField = fuzzyLogicControlForRedPlayer.getFuzzyUnitsPerField(
-//					redPlayer.countAllSoldiers(), 
-//					unitsOnField);
-			fuzzyUnitsRatioToBase = fuzzyLogicControlForRedPlayer.getFuzzyUnitsRatioToBase(
-					redPlayer.getBase().getSoldiers(), 
-					redPlayer.countAllSoldiers());
-		}
-		
+	{	
 		if(actualPlayer.move(moveDataStructure.howMany,moveDataStructure.targetIndex,moveDataStructure.sourceIndex))
     	{
     		System.out.println(moveDataStructure.sourceIndex + " sie ruszyl na " + moveDataStructure.targetIndex);
@@ -226,8 +199,15 @@ public class SISEGame extends Application {
     		load.setController(gc);
     		AnchorPane gamePanel = (AnchorPane) load.load();
     		rootLayout.setCenter(gamePanel);
-    		if(autoPlay) 
-    			testController.gameMainLoop(); //wywolanie gracza testowego
+    		
+    		if(autoPlay) //wywolanie gracza testowego 
+    		{
+    			if(fuzzyOrFOL)
+    				fuzzyLogicAutoPlay.gameMainLoop();
+    			else
+    				testController.gameMainLoop(); 
+    		}
+    			
     	} catch(IOException e) {
     		e.printStackTrace();
     	}

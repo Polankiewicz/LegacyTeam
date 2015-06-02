@@ -162,4 +162,9 @@ public class Player {
 	public Base getBase() {
 		return base;
 	}
+	
+	public ArrayList<FieldUnit> getGameField() {
+		return gameField;
+	}
+	
 }
