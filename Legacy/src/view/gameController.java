@@ -253,7 +253,7 @@ public class gameController {
 			hM.setEnemy(true);
 		
 		troopsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-		    System.out.println("Iloï¿½ï¿½ armii do przesuniï¿½cia: "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
+		    System.out.println("Iloœæ armi do przesuniêcia "+((gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100));
 		    armyToMove = (gameField.get(moveDataStructure.sourceIndex).getSoldiers()*newValue.intValue())/100;
 		    amountOfTroopsL.setText(String.valueOf(armyToMove));
 		    moveDataStructure.howMany=armyToMove;
@@ -262,11 +262,12 @@ public class gameController {
 	
 	public void refreshView(Player actualPlayer, int turn)
 	{
-		System.out.println("GC refresh: " + actualPlayer.getPlayerNameString() + actualPlayer.getPlayerColorString());
+		System.out.println("Gracz numer: " + actualPlayer.getPlayerNameString() + " oraz numer rundy: " + turn);
+//		System.out.println("GC refresh: " + actualPlayer.getPlayerNameString() + actualPlayer.getPlayerColorString());
 		playerID.setText(actualPlayer.getPlayerNameString());
 		playerID.setTextFill(Color.web(actualPlayer.getPlayerColorString()));
 		turnID.setText("#" + turn);
-		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoï¿½czyï¿½ turï¿½");
+		finishRoundLabel.setText(actualPlayer.getPlayerNameString() + " - kliknij, by zakoñczyæ rundê");
 		updateHexLabels();
 		updateHexColors();
 	}
@@ -318,7 +319,7 @@ public class gameController {
 					else
 					{
 						// <-- DIALOG BOX informujï¿½cy gracza o niemoï¿½liwym do wykonania ruchu -->
-						MessageBox mb = new MessageBox("Moï¿½liwy jest tylko wybï¿½r sï¿½siadujï¿½cego pola", MessageBoxType.OK_ONLY);
+						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
 						mb.showAndWait();
 						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
 							System.out.println("OK");
@@ -359,13 +360,13 @@ public class gameController {
 		label.setTextFill(Paint.valueOf(color));
 	}
 	
-	//Do uzupeï¿½nienie growej logiki
+	//Do uzupe³nienia growej logiki
 	public void calculateRound(){
 		if(game.isGameFinished()){
 			if(game.checkWhoWins())
-				finishRoundLabel.setText("Wygraï¿½ gracz 2");
-			// <-- DIALOG BOX informujï¿½cy o zwyciestwie gracza 2 -->
-			MessageBox mb = new MessageBox("Hexabattle zdominowaï¿½ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
+				finishRoundLabel.setText("Wygra³½ gracz 2");
+			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
+			MessageBox mb = new MessageBox("Hexabattle zdominowa³ gracz nr 2 (Czerwony)!", MessageBoxType.OK_ONLY);
 			mb.showAndWait();
 			if (mb.getMessageBoxResult() == MessageBoxResult.OK)
 			{
@@ -373,7 +374,7 @@ public class gameController {
 			}
 			else
 				finishRoundLabel.setText("Wygraï¿½ gracz 1");
-			// <-- DIALOG BOX informujï¿½cy o zwyciestwie gracza 2 -->
+			// <-- DIALOG BOX informuj¹cy o zwyciestwie gracza 2 -->
 			MessageBox mb2 = new MessageBox("Hexabattle zdominowaï¿½ gracz nr 1 (Niebieski)!", MessageBoxType.OK_ONLY);
 			mb2.showAndWait();
 			if (mb2.getMessageBoxResult() == MessageBoxResult.OK)
@@ -382,16 +383,12 @@ public class gameController {
 			}
 		}
 		else{
-			game.makeMove();
+			game.makeMove(); //najpierw ruch wykonuje gracz
 			if(ai){
-				FOLController clips = new FOLController();
-				clips.runAI(gameField);
+				game.setTurn(game.getTurn()+1);	//update rundy
+				refreshView(playerB, game.getTurn()); //pokazujemy
+				folcontroller.runAI(gameField); //potem ruch wykonuje AI
 			}
 		}
 	}
-	
-	public void arrangeArmy(){
-	//to juz nie jest uzywane, ale nie moge usunac, bo fxml wymaga #KubaUsuï¿½To
-		
-	}	
 }

@@ -38,6 +38,9 @@ public class SISEGame extends Application {
 	private TestController testController;
 	private int turn;
 	
+	public int getTurn() 			{ return turn; }
+	public void setTurn(int turn) 	{ this.turn = turn; }
+
 	@Override
 	public void start(Stage primaryStage) 
 	{
@@ -153,9 +156,9 @@ public class SISEGame extends Application {
 			fuzzyFightChances = fuzzyLogicControlForBluePlayer.getFuzzyFightChances(
 					bluePlayer.countAllSoldiers(), 
 					redPlayer.countAllSoldiers());
-			fuzzyUnitsPerField = fuzzyLogicControlForBluePlayer.getFuzzyUnitsPerField(
-					bluePlayer.countAllSoldiers(), 
-					unitsOnField); //tutaj sobie uzyj moveDataStructure.sourceIndex zeby dostac sie do pola i wtedy tylko getSoldiers()
+//			fuzzyUnitsPerField = fuzzyLogicControlForBluePlayer.getFuzzyUnitsPerField(
+//					bluePlayer.countAllSoldiers(), 
+//					unitsOnField); //tutaj sobie uzyj moveDataStructure.sourceIndex zeby dostac sie do pola i wtedy tylko getSoldiers()
 			//ale jak to jest powiazane to ja nie wiem, tego balaganu nie robilem
 			//szukanie pola miało być po Point, a ktos pozmienial na inty i ja nie wiem o co chodzi
 			fuzzyUnitsRatioToBase = fuzzyLogicControlForBluePlayer.getFuzzyUnitsRatioToBase(
@@ -167,9 +170,9 @@ public class SISEGame extends Application {
 			fuzzyFightChances = fuzzyLogicControlForRedPlayer.getFuzzyFightChances(
 					redPlayer.countAllSoldiers(), 
 					bluePlayer.countAllSoldiers());
-			fuzzyUnitsPerField = fuzzyLogicControlForRedPlayer.getFuzzyUnitsPerField(
-					redPlayer.countAllSoldiers(), 
-					unitsOnField);
+//			fuzzyUnitsPerField = fuzzyLogicControlForRedPlayer.getFuzzyUnitsPerField(
+//					redPlayer.countAllSoldiers(), 
+//					unitsOnField);
 			fuzzyUnitsRatioToBase = fuzzyLogicControlForRedPlayer.getFuzzyUnitsRatioToBase(
 					redPlayer.getBase().getSoldiers(), 
 					redPlayer.countAllSoldiers());
@@ -181,7 +184,7 @@ public class SISEGame extends Application {
     		actualPlayer.increaseUnitsAmount();
     		updatePlayer();
     		turn++;
-    		gc.refreshView(actualPlayer,turn);
+    		gc.refreshView(actualPlayer, turn);
     	}
 	 }
 

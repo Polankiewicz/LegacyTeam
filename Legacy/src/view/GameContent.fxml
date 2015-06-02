@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" />
       <SplitPane dividerPositions="0.18227424749163879" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
@@ -70,7 +70,7 @@
             </AnchorPane>
           <AnchorPane fx:id="bottomPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fx:id="arrangeArmyButton" fitHeight="41.0" fitWidth="586.0" layoutX="14.0" layoutY="431.0" onMouseReleased="#arrangeArmy" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="41.0" fitWidth="586.0" layoutX="14.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
