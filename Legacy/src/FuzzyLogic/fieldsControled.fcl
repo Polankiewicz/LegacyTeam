@@ -10,13 +10,13 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY myFields
-    TERM begining := (0, 1) (1, 0); 
+    TERM begining := (1, 1) (2, 0); 
     TERM small := (1, 1) (4, 0); 
-    TERM avarge := (4, 1) (9, 0); 
-    TERM normal := (9, 1) (13, 0); 
-    TERM more := (13, 1) (18, 0);
-    TERM big := (18, 1) (24, 0);
-    TERM end := (24, 1) (25, 0);	// 25 - number of all fields
+    TERM avarge := (3, 1) (9, 0); 
+    TERM normal := (8, 1) (13, 0); 
+    TERM more := (12, 1) (18, 0);
+    TERM big := (17, 1) (24, 0);
+    TERM end := (23, 1) (25, 0);	// 25 - number of all fields
 END_FUZZIFY
 
 DEFUZZIFY fieldsRatio

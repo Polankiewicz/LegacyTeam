@@ -73,7 +73,7 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
+		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
 				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
 	}
 

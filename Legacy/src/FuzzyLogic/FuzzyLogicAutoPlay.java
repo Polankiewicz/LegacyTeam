@@ -15,84 +15,76 @@ public class FuzzyLogicAutoPlay {
 	private Player bluePlayer;
     private Player redPlayer;
     private Player actualPlayer;
+    private Player otherPlayer;
    
 	private MoveDataStructure moveDataStructure;
-	private ArrayList<FieldUnit> gameField;
-	private gameController gc;
-	SISEGame game;
+	//private ArrayList<FieldUnit> gameField;
+	//private gameController gc;
+	private SISEGame game;
 	
-	FuzzyLogicControl fuzzyLogicControlForBluePlayer; 
-	FuzzyLogicControl fuzzyLogicControlForRedPlayer;
+	private FuzzyLogicControl fuzzyLogicControlForBluePlayer; 
+	private FuzzyLogicControl fuzzyLogicControlForRedPlayer;
+	private FuzzyLogicControl actualFuzzyLogicControl;
+	
+	private double fuzzyFieldControlled, fuzzyFightChances, fuzzyUnitsPerField, fuzzyUnitsRatioToBase;
 		
-	public FuzzyLogicAutoPlay(ArrayList<FieldUnit> gameField, Player bluePlayer,
-			Player redPlayer, Player actualPlayer,
-			MoveDataStructure moveDataStructure, SISEGame siseGame,
+	
+	public FuzzyLogicAutoPlay(Player bluePlayer, Player redPlayer, Player actualPlayer,
+			MoveDataStructure moveDataStructure, SISEGame game,
 			FuzzyLogicControl fuzzyLogicControlForBluePlayer, FuzzyLogicControl fuzzyLogicControlForRedPlayer) 
 	{
-		this.gameField = gameField;
 		this.redPlayer = redPlayer;
 		this.bluePlayer = bluePlayer;
-		this.moveDataStructure = moveDataStructure;
 		this.actualPlayer = actualPlayer;
-		this.game = siseGame;
-		
+		this.moveDataStructure = moveDataStructure;
+		this.game = game;
 		this.fuzzyLogicControlForBluePlayer = fuzzyLogicControlForBluePlayer;
 		this.fuzzyLogicControlForRedPlayer = fuzzyLogicControlForRedPlayer;
 	}
 
 	public void gameMainLoop()
 	{
-		double fuzzyFieldControlled;
-		double fuzzyFightChances;
-		double fuzzyUnitsPerField;
-		double fuzzyUnitsRatioToBase;
-		if(actualPlayer.getPlayerType() == PlayerType.PlayerA){
-			fuzzyFieldControlled = fuzzyLogicControlForBluePlayer.getFuzzyFieldsControled(bluePlayer.getControlledFields());
-			fuzzyFightChances = fuzzyLogicControlForBluePlayer.getFuzzyFightChances(
-					bluePlayer.countAllSoldiers(), 
-					redPlayer.countAllSoldiers());
-			fuzzyUnitsPerField = fuzzyLogicControlForBluePlayer.getFuzzyUnitsPerField(
-					bluePlayer.countAllSoldiers(), 
-					bluePlayer.getGameField().get(0).getSoldiers()); 
-			fuzzyUnitsRatioToBase = fuzzyLogicControlForBluePlayer.getFuzzyUnitsRatioToBase(
-					bluePlayer.getBase().getSoldiers(), 
-					bluePlayer.countAllSoldiers());
+		for(;;)
+		{
+			if(actualPlayer.getPlayerType() == PlayerType.PlayerA) {
+				otherPlayer = redPlayer;
+				actualFuzzyLogicControl = fuzzyLogicControlForBluePlayer;
+			}
+			else {
+				otherPlayer = bluePlayer;
+				actualFuzzyLogicControl = fuzzyLogicControlForRedPlayer;
+			}
+			
+			
+			// check ours controlled fields  
+			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
+					actualPlayer.getControlledFields());
+			// next steps...
+			fuzzyFightChances = actualFuzzyLogicControl.getFuzzyFightChances(
+					actualPlayer.countAllSoldiers(), 
+					otherPlayer.countAllSoldiers());
+			fuzzyUnitsPerField = actualFuzzyLogicControl.getFuzzyUnitsPerField(
+					actualPlayer.countAllSoldiers(), 
+					actualPlayer.getGameField().get(0).getSoldiers()); 
+			fuzzyUnitsRatioToBase = actualFuzzyLogicControl.getFuzzyUnitsRatioToBase(
+					actualPlayer.getBase().getSoldiers(), 
+					actualPlayer.countAllSoldiers());
+			
+			
+			
+			
+			// temp move
+			moveDataStructure.sourceIndex = 0;
+			moveDataStructure.targetIndex = 1;
+			moveDataStructure.howMany = 20;
+			
+			game.makeMove();
+			
+			
+			//if( WYGRANA )
+				break;
 		}
-		else{
-			fuzzyFieldControlled = fuzzyLogicControlForRedPlayer.getFuzzyFieldsControled(redPlayer.getControlledFields());
-			fuzzyFightChances = fuzzyLogicControlForRedPlayer.getFuzzyFightChances(
-					redPlayer.countAllSoldiers(), 
-					bluePlayer.countAllSoldiers());
-			fuzzyUnitsPerField = fuzzyLogicControlForRedPlayer.getFuzzyUnitsPerField(
-					redPlayer.countAllSoldiers(), 
-					redPlayer.getGameField().get(24).getSoldiers() );
-			fuzzyUnitsRatioToBase = fuzzyLogicControlForRedPlayer.getFuzzyUnitsRatioToBase(
-					redPlayer.getBase().getSoldiers(), 
-					redPlayer.countAllSoldiers());
-		}
 		
-		
-		
-		// tu sie b�dzie bralo  dane o gamefieldzie i wysylalo do ai
-		
-		//zwrocone rzeczy wygladaja mniej wiecej tak
-		moveDataStructure.sourceIndex = 0; //zrodlo ruchu
-		moveDataStructure.targetIndex = 1; //cel ruchu
-		moveDataStructure.howMany = 20; //ile woja;brak zabezpieczenia przed podaniem za duzej wartosci poki co
-		
-		game.makeMove();//wykonanie ruchu dla actualPlayera i wszystkie inne rzeczy z automatu tu;
-		//to konczy ture i zaczyna ture nastepnego gracza
-		moveDataStructure.sourceIndex =24; //zrodlo ruchu
-		moveDataStructure.targetIndex = 23; //cel ruchu
-		moveDataStructure.howMany = 20; //ile woja
-		
-		game.makeMove();//wykonanie ruchu dla actualPlayera i wszystkie inne rzeczy z automatu tu;
-		
-		moveDataStructure.sourceIndex =0; //zrodlo ruchu
-		moveDataStructure.targetIndex = 5; //cel ruchu
-		moveDataStructure.howMany = 5; //ile woja
-		
-		game.makeMove();//wykonanie ruchu dla actualPlayera i wszystkie inne rzeczy z automatu tu;	
 	}
 	
 }
