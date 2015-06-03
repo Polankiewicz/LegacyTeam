@@ -1,3 +1,13 @@
+Stan na 03.06.2015
+1. Jakub Dziedzic - pomoc
+2. Bartłomiej Dąbek -  pomoc przy logice pierwszego rzedu
+3. Bartłomiej Dobrowolski - podpiecie Clipsa do silnika i działanie naprzemiennie z graczem
+4. Mariusz Polka - pomoc przy logice rozmytej
+5. Filip Wrzesiński - pomoc przy logice rozmytej
+6. Damian Polankiewicz - Logika rozmyta, usprawnienie przykladowych fcl'ek, przygotowanie miejsca na logike
+
+-----------------
+
 Stan na 22.05.2015
 1. Jakub Dziedzic - pomoc
 2. Bartłomiej Dąbek -  pomoc
