@@ -40,12 +40,12 @@ public class Player {
 		if(this.playerType == gameField.get(currentPointIndex).getSoldiersType()) 
         {
 			FieldUnit source = gameField.get(currentPointIndex);
-			if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
+			//if(isFieldNeighbour(destinationPointIndex, currentPointIndex)){
 				moved = isSoldiersMoved(destinationPointIndex);
 				source.setSoldiers(source.getSoldiers()-howMany);
 				if(source.getSoldiers() == 0 && source != this.base)
 					source.setSoldiersType(PlayerType.NoOne);
-			}
+			//}
         }
 		return moved;
 	}

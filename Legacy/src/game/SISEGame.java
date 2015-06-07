@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import firstOrderLogic.FOLController;
 import FuzzyLogic.FuzzyLogicAutoPlay;
-import FuzzyLogic.FuzzyLogicControl;
 import view.gameController;
 import view.menuController;
 import javafx.application.Application;
@@ -15,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -53,11 +51,11 @@ public class SISEGame extends Application {
 		actualPlayer = bluePlayer;
 		turn = 1;
 		autoPlay = true;
-		fuzzyOrFOL = true;
+		fuzzyOrFOL = false;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
+		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 	}
 
     public Stage getPrimaryStage() {
