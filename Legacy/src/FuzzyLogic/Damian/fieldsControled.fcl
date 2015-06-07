@@ -1,0 +1,47 @@
+FUNCTION_BLOCK fieldsControled	// amount of our controlled fields to all fields 
+
+
+VAR_INPUT
+    myFields : REAL;
+END_VAR
+
+VAR_OUTPUT
+    fieldsRatio : REAL;
+END_VAR
+
+FUZZIFY myFields
+    TERM begining := (1, 1) (2, 0); 
+    TERM small := (1, 1) (4, 0); 
+    TERM avarge := (3, 1) (9, 0); 
+    TERM normal := (8, 1) (13, 0); 
+    TERM more := (12, 1) (18, 0);
+    TERM big := (17, 1) (24, 0);
+    TERM end := (23, 1) (25, 0);	// 25 - number of all fields
+END_FUZZIFY
+
+DEFUZZIFY fieldsRatio
+    TERM value1 := (0,0) (5,1) (10,0);
+    TERM value2 := (10,0) (15,1) (20,0);
+    TERM value3 := (20,0) (25,1) (30,0);
+    
+    METHOD : COG; // Use 'Center Of Gravity' defuzzification method
+    DEFAULT := 0; // if no rule activates defuzzifier
+END_DEFUZZIFY
+
+
+RULEBLOCK No1
+    AND : MIN; // Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+    ACT : MIN; // Use 'min' activation method
+    ACCU : MAX; // Use 'max' accumulation method
+
+    RULE 1 : IF myFields IS begining THEN fieldsRatio IS value1;
+    RULE 2 : IF myFields IS small THEN fieldsRatio IS value1;
+    RULE 3 : IF myFields IS avarge THEN fieldsRatio IS value1;
+    RULE 4 : IF myFields IS normal THEN fieldsRatio IS value1;
+    RULE 5 : IF myFields IS more THEN fieldsRatio IS value2;
+    RULE 6 : IF myFields IS big THEN fieldsRatio IS value2;
+    RULE 7 : IF myFields IS end THEN fieldsRatio IS value3;
+END_RULEBLOCK
+
+
+END_FUNCTION_BLOCK

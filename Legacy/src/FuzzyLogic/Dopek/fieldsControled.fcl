@@ -1,0 +1,34 @@
+FUNCTION_BLOCK fieldsControled	// amount of our controlled fields to all fields 
+
+
+VAR_INPUT
+    myFields : REAL;
+END_VAR
+
+VAR_OUTPUT
+    fieldsRatio : REAL;
+END_VAR
+
+FUZZIFY myFields
+    TERM val1 := (1, 1) (24, 1); 	// 25 - number of all fields
+END_FUZZIFY
+
+DEFUZZIFY fieldsRatio
+    TERM value1 := (0,0) (12,1) (24,0);
+    
+    METHOD : COG; // Use 'Center Of Gravity' defuzzification method
+    DEFAULT := 0; // if no rule activates defuzzifier
+END_DEFUZZIFY
+
+
+RULEBLOCK No1
+    AND : MIN; // Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+    ACT : MIN; // Use 'min' activation method
+    ACCU : MAX; // Use 'max' accumulation method
+
+    RULE 1 : IF myFields IS val1 THEN fieldsRatio IS value1;
+
+END_RULEBLOCK
+
+
+END_FUNCTION_BLOCK

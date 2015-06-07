@@ -29,8 +29,6 @@ public class SISEGame extends Application {
     private Player bluePlayer;
     private Player redPlayer;
     private Player actualPlayer;
-    public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
-    public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
     private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
        
     boolean autoPlay; // jesli prawda, to gra komputer
@@ -49,32 +47,17 @@ public class SISEGame extends Application {
 	{
 		this.gameField = new ArrayList<FieldUnit>();
 		createGameField();
-		//tutaj zestaw fcl-ek niebieskiego gracza
-		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
-				"src/FuzzyLogic/fightChances.fcl", 
-				"src/FuzzyLogic/fieldsControled.fcl", 
-				"src/FuzzyLogic/unitsPerField.fcl", 
-				"src/FuzzyLogic/unitsRatioToBase.fcl");
-		//tutaj zestaw fcl-ek czerwonego gracza
-		this.fuzzyLogicControlForRedPlayer = new FuzzyLogicControl(
-				"src/FuzzyLogic/fightChances.fcl", 
-				"src/FuzzyLogic/fieldsControled.fcl", 
-				"src/FuzzyLogic/unitsPerField.fcl", 
-				"src/FuzzyLogic/unitsRatioToBase.fcl");
-		
 		moveDataStructure = new MoveDataStructure();
-		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HEXABATTLE");
 		actualPlayer = bluePlayer;
 		turn = 1;
 		autoPlay = true;
-		fuzzyOrFOL = false;
+		fuzzyOrFOL = true;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
-				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
+		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 	}
 
     public Stage getPrimaryStage() {

@@ -26,20 +26,37 @@ public class FuzzyLogicAutoPlay {
 	private FuzzyLogicControl fuzzyLogicControlForRedPlayer;
 	private FuzzyLogicControl actualFuzzyLogicControl;
 	
+	private String autoBluePlayer;
+	private String autoRedPlayer;
+	
 	private double fuzzyFieldControlled, fuzzyFightChances, fuzzyUnitsPerField, fuzzyUnitsRatioToBase;
 		
 	
 	public FuzzyLogicAutoPlay(Player bluePlayer, Player redPlayer, Player actualPlayer,
-			MoveDataStructure moveDataStructure, SISEGame game,
-			FuzzyLogicControl fuzzyLogicControlForBluePlayer, FuzzyLogicControl fuzzyLogicControlForRedPlayer) 
+			MoveDataStructure moveDataStructure, SISEGame game) 
 	{
 		this.redPlayer = redPlayer;
 		this.bluePlayer = bluePlayer;
 		this.actualPlayer = actualPlayer;
 		this.moveDataStructure = moveDataStructure;
 		this.game = game;
-		this.fuzzyLogicControlForBluePlayer = fuzzyLogicControlForBluePlayer;
-		this.fuzzyLogicControlForRedPlayer = fuzzyLogicControlForRedPlayer;
+		
+		// Auto Players: Damian, Dopek, Polka, Grzesio, Dziedzic, Dobrotek
+		autoBluePlayer = new String("Damian");
+		autoRedPlayer = new String("Dopek");
+		
+		// Blue Player FCL files
+		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
+				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/fightChances.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/fieldsControled.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/unitsPerField.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/unitsRatioToBase.fcl").toString());
+		// Red Player FCL files
+		this.fuzzyLogicControlForRedPlayer = new FuzzyLogicControl(
+				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fightChances.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fieldsControled.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsPerField.fcl").toString(),
+				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsRatioToBase.fcl").toString());
 	}
 
 	public void gameMainLoop()
