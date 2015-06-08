@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import firstOrderLogic.FOLController;
-import FuzzyLogic.FuzzyLogicAutoPlay;
+//import FuzzyLogic.FuzzyLogicAutoPlay;
 import FuzzyLogic.FuzzyLogicControl;
 import view.gameController;
 import view.menuController;
@@ -31,7 +31,7 @@ public class SISEGame extends Application {
     private Player actualPlayer;
     public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
     public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
-    private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
+//    private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
        
     boolean autoPlay; // jesli prawda, to gra komputer
     boolean fuzzyOrFOL; // jessli prawda, to gra rozmyta jesli nie to druga brzydka :P
@@ -73,8 +73,8 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
-				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
+//		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
+//				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
 	}
 
     public Stage getPrimaryStage() {
@@ -202,10 +202,10 @@ public class SISEGame extends Application {
     		
     		if(autoPlay) //wywolanie gracza testowego 
     		{
-    			if(fuzzyOrFOL)
-    				fuzzyLogicAutoPlay.gameMainLoop();
-    			else
-    				testController.gameMainLoop(); 
+//    			if(fuzzyOrFOL)
+//    				fuzzyLogicAutoPlay.gameMainLoop();
+//    			else
+//    				testController.gameMainLoop(); 
     		}
     			
     	} catch(IOException e) {

@@ -1,5 +1,6 @@
 package firstOrderLogic;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import com.sun.prism.image.Coords;
@@ -18,74 +19,70 @@ public class FOLController {
 	private MoveDataStructure moveAI;
 	
 	public void runAI(ArrayList<FieldUnit> gameField){
-		int x, y, soldiers;
+		int castleX, castleY, x, y, soldiers, index, playerType;
 		Boolean enemy;
 		
 		moveAI = new MoveDataStructure();
 		clips = new Environment();
 		
-		/* Najpierw ³adujemy odpowiednie wzorce, wg których bêdziemy zapisywaæ fakty
-		 * Te wzorce musz¹ byæ skonstruowane "slotowo", bo inaczej nic cholery nie 
-		 * wyci¹gniesz danych, o czym ni¿ej
-		 */
+		clips.load("templates.clp");
+		//£adowanie ca³ej planszy
 		for(int i=0; i<gameField.size(); i++){
-			x = gameField.get(i).getCoordinates().x;
-			y = gameField.get(i).getCoordinates().y;
+			String isCastleEnemy = ((gameField.get(i).getCoordinates() == new Point(0, 0)) ? "Yes" : "No" );
+			String isMyCastle = (gameField.get(i).getCoordinates() == new Point(4, 4) ? "Yes" : "No" );
+			String isEnemy =((gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "Yes" : "No" );
+			//Je¿eli AI, to zapisujemy swoich
+			String assertion = "(assert(boardInfo(coordX "+gameField.get(i).getCoordinates().x+")("+
+						"coordY "+gameField.get(i).getCoordinates().y+")("+
+						"index "+gameField.get(i).getCoordinates().x*gameField.get(i).getCoordinates().y+")("+
+						"(isCastleEnemy " + isCastleEnemy + ")("+
+						"(isMyCastle " + isMyCastle + ")("+
+						"(isEnemy " + isEnemy + ")("+
+						"(iloscWoja "+gameField.get(i).getSoldiers()+")))";
+			clips.eval(assertion);
+			System.out.println(assertion);
+		}
+
+		//£adowanie s¹siadów sztucznej inteligencji
+		for(int i=0; i<gameField.size(); i++){
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB){
-				enemy = true;
-			}
-			else{
-				enemy = false;
+				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
+				for(int j=0; j<neighbour.size(); j++){
+					String isEnemy =((gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "Yes" : "No" );
+					String assertion = "(assert(neighbour(coordX "+gameField.get(i).getCoordinates().x + ")("+
+							"coordY "+gameField.get(i).getCoordinates().y + ")(" +
+							"index "+gameField.get(i).getCoordinates().x*gameField.get(i).getCoordinates().y+")("+
+							"(isEnemy " + isEnemy + ")("+
+							"(iloscWoja "+gameField.get(i).getSoldiers()+")))";
+					clips.eval(assertion);
+					System.out.println(assertion);
+				}
 			}
 		}
-		
-		clips.load("templates.clp");
-		/*
-		 * Tutaj podajemy przyk³adowe fakty. Niby mo¿na przez deffacts, ale to jest wiedza pocz¹tkowa, niezmienna.
-		 * Nasza baza wiedzy zmienia siê co rundê, wiêc trzeba j¹ resetowaæ, odœwie¿aæ itp,
-		 * co ³atwiej zrobiæ przez sparametryzowanie stringów poni¿ej i w loopie. To ni¿ej jest tylko przyk³adem
-		 */
-		clips.eval("(assert (graczInfo(coordX 5)(coordY 7)(czyAI no)(iloscWoja 500)))");
-		clips.eval("(assert (graczInfo(coordX 4)(coordY 8)(czyAI no)(iloscWoja 300)))");
-		clips.eval("(assert (graczInfo(coordX 2)(coordY 2)(czyAI no)(iloscWoja 400)))");
-		clips.eval("(assert (graczInfo(coordX 8)(coordY 4)(czyAI no)(iloscWoja 800)))");
-		/*
-		 * Tuaj w tym ai ³adujemy nasze wszystkie defrule - czyli zasady wg których ai ma podejmowaæ decyzje
-		 * One id¹ w sposób programistyczny, czyli jedna za drugim, chyba, ¿e siê odwo³asz w CLIPSie do poprzedniej regu³y
-		 * i znowu leci po kolei. Coœ jak w assemblerze, ¿e przeskakujecie miêdzy odpowiednimi zasadami.
-		 */
 		clips.load("ai.clp");
-		//No i odpalamy ten szajs.
 		clips.run();
 		
-		/* Jak ju¿ odpalimy, CLIPS sobie pokalkuluje co potrzeba i...
-		 * Tutaj ¿¹damy od CLIPSa by zwróci³ wszystkie fakty zwi¹zane z nag³ówkiem "kogoZaatakowaæ"
-		 * i jest to zwracane w formie listy. MultifieldValue oznacza, ¿e fakt "kogoZaatakowaæ" ma wiêcej
-		 * ni¿ jedno pole/zmienn¹ do oddania, ¿e tak powiem.
-		*/
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
-		int coordX = 1, coordY = 1;
 		if(attack.listValue().size() != 0){
-			for(int i=0; i< attack.listValue().size(); i++){
+			int coordXAI = 0, coordXEnemy = 0, coordYAI = 0, coordYEnemy = 0, iloscWoja = 0;
+			//Ma zwróciæ tylko jedn¹ opcjê
+			for(int i=0; i< 1; i++){
 				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
-				/* Tutaj wyci¹gamy z listy odpowiednie sloty zdefiniowane w templates dla nag³ówka
-				 * "kogoZaatakowaæ"
-				 */
-				coordX = Integer.parseInt(attackFacts.getFactSlot("coordY").toString());
-				coordY = Integer.parseInt(attackFacts.getFactSlot("coordY").toString());
-				System.out.println("gracz spe³niaj¹cy warunek jest na polu X: "+coordX+" Y: "+coordY);
+				coordXAI = Integer.parseInt(attackFacts.getFactSlot("coordXAI").toString());
+				coordYAI = Integer.parseInt(attackFacts.getFactSlot("coordYAI").toString());
+				coordXEnemy = Integer.parseInt(attackFacts.getFactSlot("coordXEnemy").toString());
+				coordYEnemy = Integer.parseInt(attackFacts.getFactSlot("coordYEnemy").toString());
+				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
 			}
 			
-			//Zadanie Dopek dla Ciebie by sprawdziæ czy to wszystko jest ok
-			moveAI.sourceIndex = coordX + coordY; //Suma daje numer indeksu pola
-			moveAI.targetIndex = coordX + coordY+1; //Testowo wybieramy nastêpne pole
-			moveAI.howMany = 1; //te¿ testowo, potem do podstawienia
-			//nie wiem tylko jak to siê rusza, wiêc te¿ do sprawdzenia w 
+//			moveAI.sourceIndex = coordXAI*coordYAI+1;
+//			moveAI.targetIndex = coordXEnemy*coordYEnemy+1; //Testowo wybieramy nastêpne pole
+//			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
 		}
 		else{
 			System.out.println("Brak faktów do zwrócenia");
 		}
-		//Reszta komentarzy w wy¿ej wymienionych plikach ai.clp oraz templates.clp
+		
 	}
 
 }

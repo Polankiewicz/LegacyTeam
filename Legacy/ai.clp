@@ -1,10 +1,3 @@
-; je¿eli w gracz info znajdziemy gracza po asercji, co ma wincyj ni¿ pincet woja to daje znaæ o tym
-; ale musimy te¿ utworzyæ fakt! Wiêc jak rozumujemy na podstawie faktów przyk³adowo:
-; Fakt 1 - masz 100z³
-; Fakt 2 - dziewoja pod latarni¹ czeka na Ciebie byœ jej zap³aci³ za seks
-; Fakt 3 wynikajcy z rozumowania - ta dziewczyna jest dziwk¹.
-; tak samo tutaj - musimy zamieœciæ wynik naszego rozumowania
-
 (defrule hasMore
 	(graczInfo (coordX ?coordX)(coordY ?coordY)(iloscWoja ?iloscwoja))
 	(test (< ?iloscwoja 500))
