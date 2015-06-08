@@ -314,16 +314,16 @@ public class gameController {
 
 				if(this.isSourceSelected==true)
 				{
-					if(playerA.isFieldNeighbour(moveDataStructure.sourceIndex, i))
+//					if(playerA.isFieldNeighbour(moveDataStructure.sourceIndex, i))
 						moveDataStructure.targetIndex=i;
-					else
-					{
-						// <-- DIALOG BOX informujï¿½cy gracza o niemoï¿½liwym do wykonania ruchu -->
-						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
-						mb.showAndWait();
-						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
-							System.out.println("OK");
-					}
+//					else
+//					{
+//						// <-- DIALOG BOX informujï¿½cy gracza o niemoï¿½liwym do wykonania ruchu -->
+//						MessageBox mb = new MessageBox("Mo¿liwy jest tylko wybór s¹siaduj¹cego pola", MessageBoxType.OK_ONLY);
+//						mb.showAndWait();
+//						if (mb.getMessageBoxResult() == MessageBoxResult.OK)
+//							System.out.println("OK");
+//					}
 				}
 			}
 			

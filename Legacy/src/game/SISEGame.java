@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import firstOrderLogic.FOLController;
+
+//Zakomentowane bo nie istnieje w projekcie, wiêc nie dzia³a.
 //import FuzzyLogic.FuzzyLogicAutoPlay;
 import FuzzyLogic.FuzzyLogicControl;
+//import FuzzyLogic.FuzzyLogicAutoPlay;
 import view.gameController;
 import view.menuController;
 import javafx.application.Application;
@@ -15,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -49,21 +51,7 @@ public class SISEGame extends Application {
 	{
 		this.gameField = new ArrayList<FieldUnit>();
 		createGameField();
-		//tutaj zestaw fcl-ek niebieskiego gracza
-		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
-				"src/FuzzyLogic/fightChances.fcl", 
-				"src/FuzzyLogic/fieldsControled.fcl", 
-				"src/FuzzyLogic/unitsPerField.fcl", 
-				"src/FuzzyLogic/unitsRatioToBase.fcl");
-		//tutaj zestaw fcl-ek czerwonego gracza
-		this.fuzzyLogicControlForRedPlayer = new FuzzyLogicControl(
-				"src/FuzzyLogic/fightChances.fcl", 
-				"src/FuzzyLogic/fieldsControled.fcl", 
-				"src/FuzzyLogic/unitsPerField.fcl", 
-				"src/FuzzyLogic/unitsRatioToBase.fcl");
-		
 		moveDataStructure = new MoveDataStructure();
-		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HEXABATTLE");
 		actualPlayer = bluePlayer;
@@ -73,8 +61,7 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-//		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(bluePlayer, redPlayer,actualPlayer, moveDataStructure,this,
-//				fuzzyLogicControlForBluePlayer, fuzzyLogicControlForRedPlayer);
+//		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 	}
 
     public Stage getPrimaryStage() {

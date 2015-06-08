@@ -15,8 +15,8 @@ public class FuzzyLogicControl {
 	
 	
 	public FuzzyLogicControl(String fightChancesFCL, String fieldsControledFCL,
-			String unitsPerFieldFCL, String unitsRatioToBaseFCL) {
-		super();
+			String unitsPerFieldFCL, String unitsRatioToBaseFCL) 
+	{
 		loadFclFiles(fightChancesFCL, fieldsControledFCL, unitsPerFieldFCL, unitsRatioToBaseFCL);
 	}
 	
