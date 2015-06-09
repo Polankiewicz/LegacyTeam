@@ -33,6 +33,17 @@
 	(slot iloscWoja (type INTEGER))
 )
 
+(deftemplate neighbour2lvl
+	(slot coordX (type INTEGER))
+	(slot coordY (type INTEGER))
+	(slot index (type INTEGER))
+	(slot isEnemy
+		(type SYMBOL)
+    	(allowed-symbols yes no)
+	)
+	(slot iloscWoja (type INTEGER))
+)
+
 (deftemplate foundEnemy
 	(slot coordX (type INTEGER))
 	(slot coordY (type INTEGER))

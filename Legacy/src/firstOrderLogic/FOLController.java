@@ -40,8 +40,11 @@ public class FOLController {
 						"isEnemy " + isEnemy + ")("+
 						"iloscWoja "+gameField.get(i).getSoldiers()+")))";
 			clips.eval(assertion);
-			System.out.println(assertion);
+//			System.out.println(assertion);
 		}
+		
+		//Player B - AI
+		//Player A - normalny gracz
 		
 		//£adowanie pól AI
 		for(int i=0; i<gameField.size(); i++){
@@ -51,22 +54,37 @@ public class FOLController {
 						"index "+gameField.get(i).getIndex()+")("+
 						"iloscWoja "+gameField.get(i).getSoldiers()+")))";
 				clips.eval(assertion);
-				System.out.println(assertion);
+				System.out.println("Dodawanie pól AI: "+assertion);
 			}
 		}
-		//£adowanie s¹siadów sztucznej inteligencji
+		
+		//£adowanie s¹siadów sztucznej inteligencji 
 		for(int i=0; i<gameField.size(); i++){
 			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB){
+				System.out.println("Szukanie s¹siadów pierwszego stopnia");
 				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
 				for(int j=0; j<neighbour.size(); j++){
-					String isEnemy =((gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "yes" : "no" );
-					String assertion = "(assert(neighbour(coordX "+gameField.get(i).getCoordinates().x + ")("+
-							"coordY "+gameField.get(i).getCoordinates().y + ")(" +
-							"index "+gameField.get(i).getIndex()+")("+
-							"isEnemy " + isEnemy + ")("+
-							"iloscWoja "+gameField.get(i).getSoldiers()+")))";
-					clips.eval(assertion);
-					System.out.println(assertion);
+					for(int k=0; k<gameField.size(); k++){
+						if(neighbour.get(j).x == gameField.get(k).getCoordinates().x &&
+							neighbour.get(j).y == gameField.get(k).getCoordinates().y){
+							//Tutaj ustawiæ zapis s¹siada pierwszego poziomu
+							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
+									" y "+gameField.get(k).getCoordinates().y+ 
+									" indeks "+ gameField.get(k).getIndex());
+//							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
+							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
+							for(int l=0; l<secondNeighbour.size(); l++){
+								for(int m=0; m<gameField.size(); m++){
+									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
+											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
+										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
+												" y "+gameField.get(m).getCoordinates().y+ 
+												" indeks "+ gameField.get(m).getIndex());
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -94,4 +112,19 @@ public class FOLController {
 		
 	}
 
+	
+	public int returnIndex(Point coords){
+		return coords.x+coords.y*5;
+	}
+	
+	public int returnIndexXY(int x, int y){
+		return x+y*5;
+	}
+
 }
+//	loadNeighbour(gameField, neighbour);
+//	for(int j=0; j<neighbour.size(); j++){
+//		System.out.println("Szukanie s¹siadów drugiego stopnia dla pola: "+neighbour.get(j).x+ " "+neighbour.get(j).y);
+//		ArrayList<Point> secondNeighbours = gameField.get(returnIndexXY(neighbour.get(j).x, neighbour.get(j).y)).getNeighbours();
+//		loadNeighbour(gameField, secondNeighbours);
+//	}
