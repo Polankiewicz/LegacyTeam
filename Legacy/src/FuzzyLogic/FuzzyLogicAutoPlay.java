@@ -118,7 +118,9 @@ public class FuzzyLogicAutoPlay {
 						// Punkt na id pola
 						int fieldNumber = translateCoordinates(actualPlayer.getGameField().get(i).getNeighbours().get(j));
 						
-						System.out.println("Id sasiada: " + fieldNumber);
+						System.out.println("Id sasiada: " + fieldNumber 
+								+ " X: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).x
+								+ " Y: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).y);
 						
 						// dodawanie do specjalnych list numery pola sasiadow w zaleznosci od typu ich pola
 						if(gameField.get(fieldNumber).getSoldiersType() == PlayerType.NoOne)
@@ -303,7 +305,7 @@ public class FuzzyLogicAutoPlay {
 	
 	public int translateCoordinates(Point point)
 	{
-		return (point.y*5) + point.x;
+		return (point.x*5) + point.y;
 	}
 	
 	public List<FuzzyLogicFieldData> copyList(List<FuzzyLogicFieldData> base)
