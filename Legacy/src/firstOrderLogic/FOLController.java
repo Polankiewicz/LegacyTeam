@@ -34,7 +34,7 @@ public class FOLController {
 			//Je¿eli AI, to zapisujemy swoich
 			String assertion = "(assert(boardInfo(coordX "+gameField.get(i).getCoordinates().x+")("+
 						"coordY "+gameField.get(i).getCoordinates().y+")("+
-						"index "+gameField.get(i).getCoordinates().x*gameField.get(i).getCoordinates().y+")("+
+						"index "+gameField.get(i).getIndex()+")("+
 						"(isCastleEnemy " + isCastleEnemy + ")("+
 						"(isMyCastle " + isMyCastle + ")("+
 						"(isEnemy " + isEnemy + ")("+
@@ -51,7 +51,7 @@ public class FOLController {
 					String isEnemy =((gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "Yes" : "No" );
 					String assertion = "(assert(neighbour(coordX "+gameField.get(i).getCoordinates().x + ")("+
 							"coordY "+gameField.get(i).getCoordinates().y + ")(" +
-							"index "+gameField.get(i).getCoordinates().x*gameField.get(i).getCoordinates().y+")("+
+							"index "+gameField.get(i).getIndex()+")("+
 							"(isEnemy " + isEnemy + ")("+
 							"(iloscWoja "+gameField.get(i).getSoldiers()+")))";
 					clips.eval(assertion);
@@ -64,20 +64,18 @@ public class FOLController {
 		
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		if(attack.listValue().size() != 0){
-			int coordXAI = 0, coordXEnemy = 0, coordYAI = 0, coordYEnemy = 0, iloscWoja = 0;
+			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
 			//Ma zwróciæ tylko jedn¹ opcjê
 			for(int i=0; i< 1; i++){
 				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
-				coordXAI = Integer.parseInt(attackFacts.getFactSlot("coordXAI").toString());
-				coordYAI = Integer.parseInt(attackFacts.getFactSlot("coordYAI").toString());
-				coordXEnemy = Integer.parseInt(attackFacts.getFactSlot("coordXEnemy").toString());
-				coordYEnemy = Integer.parseInt(attackFacts.getFactSlot("coordYEnemy").toString());
+				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
+				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());
 				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
 			}
 			
-//			moveAI.sourceIndex = coordXAI*coordYAI+1;
-//			moveAI.targetIndex = coordXEnemy*coordYEnemy+1; //Testowo wybieramy nastêpne pole
-//			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
+			moveAI.sourceIndex = indexAI;
+			moveAI.targetIndex = indexEnemy; //Testowo wybieramy nastêpne pole
+			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
 		}
 		else{
 			System.out.println("Brak faktów do zwrócenia");

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import firstOrderLogic.FOLController;
 
 //Zakomentowane bo nie istnieje w projekcie, wiêc nie dzia³a.
-//import FuzzyLogic.FuzzyLogicAutoPlay;
+import FuzzyLogic.FuzzyLogicAutoPlay;
 import FuzzyLogic.FuzzyLogicControl;
-//import FuzzyLogic.FuzzyLogicAutoPlay;
+import FuzzyLogic.FuzzyLogicAutoPlay;
 import view.gameController;
 import view.menuController;
 import javafx.application.Application;
@@ -33,7 +33,7 @@ public class SISEGame extends Application {
     private Player actualPlayer;
     public FuzzyLogicControl fuzzyLogicControlForBluePlayer;
     public FuzzyLogicControl fuzzyLogicControlForRedPlayer;
-//    private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
+    private FuzzyLogicAutoPlay fuzzyLogicAutoPlay;
        
     boolean autoPlay; // jesli prawda, to gra komputer
     boolean fuzzyOrFOL; // jessli prawda, to gra rozmyta jesli nie to druga brzydka :P
@@ -61,7 +61,7 @@ public class SISEGame extends Application {
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
-//		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
+		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 	}
 
     public Stage getPrimaryStage() {
@@ -75,21 +75,27 @@ public class SISEGame extends Application {
 		{
 			for (int j = 0; j <= GAME_FIELD_WIDTH_HEIGHT_SIZE; j++) 
 			{
+				//Indeks zerowy dla pierwszego zamku
 				if (i == 0 && j == 0) 
 				{
-					Base baseA = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE);
+					Base baseA = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerA, BonusType.NONE, (i+5*j));
+//					System.out.println("Baza dla ("+i+", "+j+") to index: "+(i+5*j));
 					this.gameField.add(baseA);
 					this.bluePlayer = new Player(baseA,gameField,PlayerType.PlayerA,"Gracz Niebieski","#523bff");
 				}
+				//Indeks ostatni dla ostatniego zamku
 				else if (i == GAME_FIELD_WIDTH_HEIGHT_SIZE && j == GAME_FIELD_WIDTH_HEIGHT_SIZE) 
 				{
-					Base baseB = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE);
+					Base baseB = new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE, (i+5*j));
+//					System.out.println("Baza dla ("+i+", "+j+") to index: "+(i+5*j));
 					this.gameField.add(baseB);
 					//this.gameField.add(new Base(new Point(i, j), INITIAL_SOLDIERS_QUANTITY , PlayerType.PlayerB, BonusType.NONE));
 					this.redPlayer = new Player(baseB,gameField,PlayerType.PlayerB,"Gracz Czerwony", "#f84f45");
 				}
-				else 
-					this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE));
+				else {
+//					System.out.println("Baza dla ("+i+", "+j+") to index: "+(i+5*j));
+					this.gameField.add(new FieldUnit(new Point(i, j), 0, PlayerType.NoOne, BonusType.NONE, (i+5*j)));
+				}
 			}
 		}
 	}
@@ -189,10 +195,10 @@ public class SISEGame extends Application {
     		
     		if(autoPlay) //wywolanie gracza testowego 
     		{
-//    			if(fuzzyOrFOL)
-//    				fuzzyLogicAutoPlay.gameMainLoop();
-//    			else
-//    				testController.gameMainLoop(); 
+    			if(fuzzyOrFOL)
+    				fuzzyLogicAutoPlay.gameMainLoop();
+    			else
+    				testController.gameMainLoop(); 
     		}
     			
     	} catch(IOException e) {

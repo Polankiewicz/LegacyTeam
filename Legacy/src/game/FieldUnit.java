@@ -14,9 +14,9 @@ public class FieldUnit {
 	private int soldiers;
 	private PlayerType soldiersType;
 	private BonusType bonusType;
-	
+	private int index;
 
-	public FieldUnit(Point coordinates, int soldiers, PlayerType soldiersType, BonusType bonusType) 
+	public FieldUnit(Point coordinates, int soldiers, PlayerType soldiersType, BonusType bonusType, int index) 
 	{
 		this.coordinates = coordinates;
 		this.soldiers = soldiers;
@@ -24,6 +24,7 @@ public class FieldUnit {
 		this.bonusType = bonusType;
 		this.neighbours = new ArrayList<Point>();
 		this.calculateNeighbours();
+		this.index = index;
 	}
 	
 	private void calculateNeighbours() 
@@ -143,6 +144,10 @@ public class FieldUnit {
 	
 	public ArrayList<Point> getNeighbours() {
 		return new ArrayList<Point>(neighbours);
+	}
+	
+	public int getIndex(){
+		return index;
 	}
 
 	@Override

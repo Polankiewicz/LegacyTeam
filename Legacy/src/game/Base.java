@@ -7,9 +7,9 @@ public class Base extends FieldUnit {
 
 	private float multiplier;
 		
-	public Base(Point coordinates, int soldiers, PlayerType soldiersType, BonusType bonusType) 
+	public Base(Point coordinates, int soldiers, PlayerType soldiersType, BonusType bonusType, int index) 
 	{
-		super(coordinates, soldiers, soldiersType, bonusType);
+		super(coordinates, soldiers, soldiersType, bonusType, index);
 		// TODO Auto-generated constructor stub
 	}
 
