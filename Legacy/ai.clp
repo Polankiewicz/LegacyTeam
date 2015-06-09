@@ -1,7 +1,7 @@
 (defrule hasMore
-	(graczInfo (coordX ?coordX)(coordY ?coordY)(iloscWoja ?iloscwoja))
-	(test (< ?iloscwoja 500))
+	(boardInfo (coordX ?coordX)(coordY ?coordY)(index ?index)(iloscWoja ?iloscWoja))
+	(test (< ?iloscWoja 50))
 =>
-	(printout t "Wspolrzedne gracza majacego mniej niz 500 to " ?coordX " oraz " ?coordY crlf)
-	(assert (kogoZaatakowac(coordX ?coordX)(coordY ?coordY)))
+	(printout t "Wspolrzedne gracza majacego mniej niz 50 to " ?coordX " oraz " ?coordY crlf)
+;	(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index)(iloscWoja ?iloscWoja)))
 )
