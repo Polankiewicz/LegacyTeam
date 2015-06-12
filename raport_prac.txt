@@ -1,3 +1,13 @@
+Stan na 12.06.2015
+1. Jakub Dziedzic - pomoc
+2. Bartłomiej Dąbek -  pomoc przy logice ostatniego rzedu
+3. Bartłomiej Dobrowolski - logika ostatniego rzedu - wstepna implementacja agenta
+4. Mariusz Polka - pomoc przy logice rozmytej
+5. Filip Wrzesiński - pomoc przy logice rozmytej
+6. Damian Polankiewicz - Logika rozmyta - napisana logika, ktora juz sama steruje graczami (wersja prawie ostateczna)
+
+-----------------
+
 Stan na 03.06.2015
 1. Jakub Dziedzic - pomoc
 2. Bartłomiej Dąbek -  pomoc przy logice pierwszego rzedu
