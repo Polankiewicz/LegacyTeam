@@ -31,6 +31,8 @@ public class FuzzyLogicAutoPlay {
 	private String autoBluePlayer;
 	private String autoRedPlayer;
 	
+	private int actualPlayerIteration, otherPlayerIteration;
+	
 	private double fuzzyFieldControlled, fuzzyFightChances, fuzzyUnitsPerField, fuzzyUnitsRatioToBase;
 		
 	
@@ -68,8 +70,11 @@ public class FuzzyLogicAutoPlay {
 		
 		// BARDZO TYMCZASOWA WERSJA DLATEGO JEST TU BURDEL JESZCZE :P
 		
+		actualPlayerIteration = 0;
+		otherPlayerIteration = 0;
+		
 		//for(;;)
-		for(int iteration=0; iteration<20; iteration++)
+		for(int iteration=0; iteration<100; iteration++)
 		{
 			if(actualPlayer.getPlayerType() == PlayerType.PlayerA) {
 				otherPlayer = redPlayer;
@@ -107,7 +112,7 @@ public class FuzzyLogicAutoPlay {
 				// znalezienie pol z jednostkami gracza
 				if(actualPlayer.getGameField().get(i).getSoldiersType() == actualPlayer.getPlayerType())
 				{
-					System.out.println("Gracz ma jednostki na obecnym polu: " + i + " ---------------");
+//					System.out.println("Gracz ma jednostki na obecnym polu: " + i + " ---------------");
 					
 					// nowy element listy dla naszego aktualnego pola 
 					fieldsData.add(new FuzzyLogicFieldData(i));
@@ -118,9 +123,9 @@ public class FuzzyLogicAutoPlay {
 						// Punkt na id pola
 						int fieldNumber = translateCoordinates(actualPlayer.getGameField().get(i).getNeighbours().get(j));
 						
-						System.out.println("Id sasiada: " + fieldNumber 
-								+ " X: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).x
-								+ " Y: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).y);
+//						System.out.println("Id sasiada: " + fieldNumber 
+//								+ " X: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).x
+//								+ " Y: " + actualPlayer.getGameField().get(i).getNeighbours().get(j).y);
 						
 						// dodawanie do specjalnych list numery pola sasiadow w zaleznosci od typu ich pola
 						if(gameField.get(fieldNumber).getSoldiersType() == PlayerType.NoOne)
@@ -143,23 +148,26 @@ public class FuzzyLogicAutoPlay {
 			}
 			
 			
-			// algorytm bedzie decydowal kiedy ekspansja/przekazanie jednostek a kiedy atak
 			
-			int zmiennaKtoraBedzieZFcla = 8;
-			int licznikDlaTejZmiennej = 0; // dwa zrobic osobno dla graczy
+			
+			
+			// check ours controlled fields  
+				fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
+						actualPlayer.getControlledFields());
+				fuzzyFieldControlled = 2; // tymczasowo wstawiam sta³¹ wartoœæ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
 			boolean czyBylaEkspansja = false;
-			
 			
 			List<FuzzyLogicFieldData> fieldsData2 = copyList(fieldsData);
 			
 			System.out.println("-------------------------- RUCH - START ---------------------------------");
-			////////////////////////////////////Ekspansja //////////////////////////////////
 			// FCL - jesli jakas zmienna mniejsza od X to ekspansja
-			if(licznikDlaTejZmiennej < zmiennaKtoraBedzieZFcla)
-			{
-				// ekspansja
-				
-				while(true) // po polach
+			// okreslamy jak czesto mamy zdobywac nowe pola, a jak czesto uzupelniac obecne
+			
+			//////////////////////////////////// Zdobycie nowego pola lub walka //////////////////////////////////
+			if(actualPlayerIteration < fuzzyFieldControlled)
+			{				
+				while(true)
 				{
 					if(fieldsData.isEmpty())
 						break;
@@ -169,25 +177,34 @@ public class FuzzyLogicAutoPlay {
 					// id pola dla losowego elementu
 					int idLosowegoElementu = fieldsData.get( losowyElementZFieldsData ).id;
 					
+					// musza byc przynajmniej 2 jednostki na polu zeby mozna bylo przeniesc przynajmniej jedna
+					if(gameField.get(idLosowegoElementu).getSoldiers() <= 1) {
+						fieldsData.remove(losowyElementZFieldsData);
+						continue;
+					}
+						
 					
-					
-					// po sasiadach pola
-					if(fieldsData.get(losowyElementZFieldsData).ListEmptyFields.size()!=0)
+					// po sasiadach pola - jeœli nie ma pustych s¹siadów to walka albo uzupelnienie
+					// wybor miedzy pustymi jednostkami a walka !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					if(!fieldsData.get(losowyElementZFieldsData).ListEmptyFields.isEmpty())
 					{
 						int iloscPustychSasiadow = fieldsData.get(losowyElementZFieldsData).ListEmptyFields.size();
 						
 						int idLosowegoSasiada = (1+ (int)(Math.random()*iloscPustychSasiadow)) -1;
 						int idPolaLosowegoSasiada = fieldsData.get(losowyElementZFieldsData).ListEmptyFields.get(idLosowegoSasiada);
 						
+						// przenosimy dalej losowa ilosc jednostek !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						int howManySoldiers = (1+ (int)(Math.random()*(gameField.get(idLosowegoElementu).getSoldiers()-1)) );
+						
 						moveDataStructure.sourceIndex = idLosowegoElementu;
 						moveDataStructure.targetIndex = idPolaLosowegoSasiada;
-						moveDataStructure.howMany = (gameField.get(idLosowegoElementu).getSoldiers()-1);
+						moveDataStructure.howMany = howManySoldiers;
 						game.makeMove();
 						
 						czyBylaEkspansja = true;
 						
 						System.out.println("Ruch na puste pole! Z: " + idLosowegoElementu + " Na: " + idPolaLosowegoSasiada
-								+ " Ile: " + (actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1));
+								+ " Ile: " + moveDataStructure.howMany);
 						
 						break;
 					}
@@ -195,69 +212,109 @@ public class FuzzyLogicAutoPlay {
 					{
 						// walka :)
 						
-						// jesli nikt nie mial szansy na wygrana to wywalic element tez
+						// wywalenie wrogow z ktorymi nie mamy szansy na wygrana
+						for(int i=0; i < fieldsData.get(losowyElementZFieldsData).ListEnemyFields.size(); i++)
+						{
+							int idPolaWroga = fieldsData.get(losowyElementZFieldsData).ListEnemyFields.get(i);
+							
+							if( actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers() <= 
+									gameField.get(idPolaWroga).getSoldiers()) {
+								fieldsData.get(losowyElementZFieldsData).ListEnemyFields.remove(i);
+								i--;
+								
+								if(fieldsData.get(losowyElementZFieldsData).ListEnemyFields.isEmpty())
+									break;
+							}
+						}
 						
-						int iloscPustychSasiadow = fieldsData.get(losowyElementZFieldsData).ListEnemyFields.size();
 						
-						int idLosowegoSasiada = ((int)(Math.random()*iloscPustychSasiadow));
-						int idPolaLosowegoSasiada = fieldsData.get(losowyElementZFieldsData).ListEnemyFields.get(idLosowegoSasiada);
+						// wywalenie obiektu bo i tak z nikim nie wygra
+						if(fieldsData.get(losowyElementZFieldsData).ListEnemyFields.isEmpty())
+						{
+							fieldsData.remove(losowyElementZFieldsData);
+							continue;
+						}
+						
+						
+						int iloscWrogichSasiadow = fieldsData.get(losowyElementZFieldsData).ListEnemyFields.size();
+						
+						int losowyWrog = ((int)(Math.random()*iloscWrogichSasiadow));
+						int idPolaLosowegoWroga = fieldsData.get(losowyElementZFieldsData).ListEnemyFields.get(losowyWrog);
+						
+						// wyliczenie ile jednostek przeniesc na pole wroga zeby go pokonac !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						int roznicaJednostek = gameField.get(idLosowegoElementu).getSoldiers() 
+								- gameField.get(idPolaLosowegoWroga).getSoldiers();
+						int howManyUnitsToMove = (1+(int)(Math.random()*roznicaJednostek-1))
+								+ gameField.get(idPolaLosowegoWroga).getSoldiers();
 						
 						moveDataStructure.sourceIndex = idLosowegoElementu;
-						moveDataStructure.targetIndex = idPolaLosowegoSasiada;
-						moveDataStructure.howMany = actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1;
+						moveDataStructure.targetIndex = idPolaLosowegoWroga; 
+						moveDataStructure.howMany = howManyUnitsToMove;
+						
+						System.out.println("Ruch na wrogie pole! Z: " + idLosowegoElementu + " Na: " + idPolaLosowegoWroga
+								+ " Ile: " + moveDataStructure.howMany 
+								+ " Moje jednostki: " + gameField.get(idLosowegoElementu).getSoldiers()
+								+ " Jednostki wroga: " + gameField.get(idPolaLosowegoWroga).getSoldiers());
+						
 						game.makeMove();
 						
 						czyBylaEkspansja = true;
-						
-						System.out.println("Ruch na wrogie pole! Z: " + idLosowegoElementu + " Na: " + idPolaLosowegoSasiada
-								+ " Ile: " + (actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1));
 						
 						break;
 					}
 					else
 					{
+						// jesli nie ma sasiadow z pustymi polami albo z przeciwnikami
 						fieldsData.remove(losowyElementZFieldsData);
 					}
 					
-					
 				}
 				
-				
-				licznikDlaTejZmiennej++;
+				if(czyBylaEkspansja)
+					actualPlayerIteration++;
 			}
 			
 			//////////////////////////////////// Do³adowanie jednostek //////////////////////////////////
-			if(licznikDlaTejZmiennej >= zmiennaKtoraBedzieZFcla || !czyBylaEkspansja)
+			if (!czyBylaEkspansja)
 			{
-				// do³adowanie jednostek
-				
 				
 				while(true)
 				{
+					if(fieldsData2.isEmpty())
+						break;
+					
+					
+					
 					// losujemy element z listy fieldsData, ktora zawiera nasze pola
 					int losowyElementZFieldsData = ((int)(Math.random()*fieldsData2.size()));
 					// id pola dla losowego elementu
 					int idLosowegoElementu = fieldsData2.get( losowyElementZFieldsData ).id;
 					
+					// musza byc przynajmniej 2 jednostki na polu zeby mozna bylo przeniesc przynajmniej jedna
+					if(gameField.get(idLosowegoElementu).getSoldiers() <= 1) {
+						fieldsData2.remove(losowyElementZFieldsData);
+						continue;
+					}
 					
-					// na razie zakladam ze ma sasiadow jako puste pola
 					
+					// szukamy sasiadow z naszymi jednostkami zeby moc im przekazac wsparcie :)
 					if(!fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.isEmpty())
 					{
-						int iloscPustychSasiadow = fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.size();
+						int iloscNaszychSasiadow = fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.size();
 						
-						int idLosowegoSasiada = ((int)(Math.random()*iloscPustychSasiadow));
+						int idLosowegoSasiada = ((int)(Math.random()*iloscNaszychSasiadow));
 						int idPolaLosowegoSasiada = fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(idLosowegoSasiada);
+						int howManySoldiers = (1+(int)(Math.random()*actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1));
 						
 						moveDataStructure.sourceIndex = idLosowegoElementu;
 						moveDataStructure.targetIndex = idPolaLosowegoSasiada;
-						moveDataStructure.howMany = actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1;
+						moveDataStructure.howMany = howManySoldiers;
 						game.makeMove();
 						
 						czyBylaEkspansja = true;
 						
 						System.out.println("Ruch na nasze pole! Z: " + idLosowegoElementu + " Na: " + idPolaLosowegoSasiada
-								+ " Ile: " + (actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1));
+								+ " Ile: " + moveDataStructure.howMany);
 						
 						break;
 						
@@ -269,20 +326,33 @@ public class FuzzyLogicAutoPlay {
 					
 					
 				}
-				licznikDlaTejZmiennej = 0;
+				actualPlayerIteration = 0;
 			}
-			System.out.println("-------------------------- RUCH - KONIEC ---------------------------------");
 			
 			
-			System.out.println("--------------- ROZMYTA - KONIEC -------------------------------------------------------");
+			// domyslny ruch jesli nie zostanie wykonany ruch
+			if(!czyBylaEkspansja)
+			{
+				if(actualPlayer.getPlayerType() == PlayerType.PlayerA) {
+					moveDataStructure.sourceIndex = 0;
+					moveDataStructure.targetIndex = 1;
+					moveDataStructure.howMany = 1;
+					game.makeMove();
+				}
+				else {
+					moveDataStructure.sourceIndex = 24;
+					moveDataStructure.targetIndex = 24;
+					moveDataStructure.howMany = 1;
+					game.makeMove();
+				}
+			}
 			
+
 			
-			// example move
-			//moveDataStructure.sourceIndex = 0;
-			//moveDataStructure.targetIndex = 1;
-			//moveDataStructure.howMany = 20;
-			//game.makeMove();
-			
+			// zamiana aktualnej iteracji dla stosunku zajetych pol i taktyki od tego
+			int temp = actualPlayerIteration;
+			actualPlayerIteration = otherPlayerIteration;
+			otherPlayerIteration = temp;
 			
 			
 			// update player
@@ -294,11 +364,14 @@ public class FuzzyLogicAutoPlay {
 			}
 			
 			// clear list for next player
-			fieldsData.removeAll(fieldsData);
-			
+			fieldsData.clear();
+			fieldsData2.clear();
 			
 			//if( WYGRANA )
 			//	break;
+			
+			System.out.println("-------------------------- RUCH - KONIEC ---------------------------------");
+			System.out.println("--------------- ROZMYTA - KONIEC -------------------------------------------------------");
 		}
 		
 	}
