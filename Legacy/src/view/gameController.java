@@ -391,4 +391,11 @@ public class gameController {
 			}
 		}
 	}
+	
+	public void winnerFuzzyLogic(String playerName)
+	{
+		playerName = new StringBuilder("Wygra³ gracz ").append(playerName).append("!").toString();
+		MessageBox mb = new MessageBox(playerName, MessageBoxType.OK_ONLY);
+		mb.showAndWait();
+	}
 }

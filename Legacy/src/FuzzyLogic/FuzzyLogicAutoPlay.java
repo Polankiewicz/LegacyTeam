@@ -21,7 +21,7 @@ public class FuzzyLogicAutoPlay {
    
 	private MoveDataStructure moveDataStructure;
 	private ArrayList<FieldUnit> gameField;
-	//private gameController gc;
+	private gameController gc;
 	private SISEGame game;
 	
 	private FuzzyLogicControl fuzzyLogicControlForBluePlayer; 
@@ -62,6 +62,8 @@ public class FuzzyLogicAutoPlay {
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fieldsControled.fcl").toString(),
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsPerField.fcl").toString(),
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsRatioToBase.fcl").toString());
+		
+		fuzzyFieldControlled = 2;
 	}
 
 	public void gameMainLoop()
@@ -74,7 +76,7 @@ public class FuzzyLogicAutoPlay {
 		otherPlayerIteration = 0;
 		
 		//for(;;)
-		for(int iteration=0; iteration<100; iteration++)
+		for(int iteration=0; iteration<600; iteration++)
 		{
 			if(actualPlayer.getPlayerType() == PlayerType.PlayerA) {
 				otherPlayer = redPlayer;
@@ -86,9 +88,9 @@ public class FuzzyLogicAutoPlay {
 			}
 			
 			
-			// check ours controlled fields  
-			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
-					actualPlayer.getControlledFields());
+//			// check ours controlled fields  
+//			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
+//					actualPlayer.getControlledFields());
 			// check if we can fight and chances to win in each situation
 			fuzzyFightChances = actualFuzzyLogicControl.getFuzzyFightChances(
 					actualPlayer.getGameField().get(0).getSoldiers(), 
@@ -151,10 +153,10 @@ public class FuzzyLogicAutoPlay {
 			
 			
 			
-			// check ours controlled fields  
-				fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
-						actualPlayer.getControlledFields());
-				fuzzyFieldControlled = 2; // tymczasowo wstawiam sta³¹ wartoœæ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//			// check ours controlled fields  
+//			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
+//					actualPlayer.getControlledFields());
+//			fuzzyFieldControlled = 2; // tymczasowo wstawiam sta³¹ wartoœæ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
 			boolean czyBylaEkspansja = false;
 			
@@ -183,6 +185,19 @@ public class FuzzyLogicAutoPlay {
 						continue;
 					}
 						
+					
+//					// test
+//					if(actualPlayer.getPlayerType() == PlayerType.PlayerB)
+//					{
+//						moveDataStructure.sourceIndex = 24;
+//						moveDataStructure.targetIndex = 23;
+//						moveDataStructure.howMany = gameField.get(24).getSoldiers()-1;
+//						game.makeMove();
+//						
+//						break;
+//					}
+					
+					
 					
 					// po sasiadach pola - jeœli nie ma pustych s¹siadów to walka albo uzupelnienie
 					// wybor miedzy pustymi jednostkami a walka !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -285,6 +300,9 @@ public class FuzzyLogicAutoPlay {
 					
 					
 					
+					
+					
+					
 					// losujemy element z listy fieldsData, ktora zawiera nasze pola
 					int losowyElementZFieldsData = ((int)(Math.random()*fieldsData2.size()));
 					// id pola dla losowego elementu
@@ -295,6 +313,31 @@ public class FuzzyLogicAutoPlay {
 						fieldsData2.remove(losowyElementZFieldsData);
 						continue;
 					}
+					
+					int soldiers = 0;
+					
+					// przenosze najwieksze pole
+					for(int i=0; i<fieldsData2.size(); i++)
+					{
+						
+						if(gameField.get(fieldsData2.get(i).id).getSoldiers() > soldiers) {
+							losowyElementZFieldsData = i;
+							idLosowegoElementu = fieldsData2.get(i).id;
+							soldiers = gameField.get(fieldsData2.get(i).id).getSoldiers();
+						}
+							
+					}
+					
+//					// test
+//					if(actualPlayer.getPlayerType() == PlayerType.PlayerB)
+//					{
+//						moveDataStructure.sourceIndex = 24;
+//						moveDataStructure.targetIndex = 23;
+//						moveDataStructure.howMany = gameField.get(24).getSoldiers()-1;
+//						game.makeMove();
+//						
+//						break;
+//					}
 					
 					
 					// szukamy sasiadow z naszymi jednostkami zeby moc im przekazac wsparcie :)
@@ -367,8 +410,20 @@ public class FuzzyLogicAutoPlay {
 			fieldsData.clear();
 			fieldsData2.clear();
 			
-			//if( WYGRANA )
-			//	break;
+			
+			// check the winner
+			if(gameField.get(24).getSoldiersType() == PlayerType.PlayerA) {
+				gc = new gameController(gameField, bluePlayer, redPlayer, actualPlayer, moveDataStructure, game);
+				gc.winnerFuzzyLogic("Niebieski");
+				break;
+			}
+			else if (gameField.get(0).getSoldiersType() == PlayerType.PlayerB)
+			{
+				gc = new gameController(gameField, bluePlayer, redPlayer, actualPlayer, moveDataStructure, game);
+				gc.winnerFuzzyLogic("Czerwony");
+				break;
+			}
+
 			
 			System.out.println("-------------------------- RUCH - KONIEC ---------------------------------");
 			System.out.println("--------------- ROZMYTA - KONIEC -------------------------------------------------------");
