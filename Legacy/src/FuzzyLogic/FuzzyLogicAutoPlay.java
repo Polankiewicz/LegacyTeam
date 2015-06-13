@@ -62,8 +62,6 @@ public class FuzzyLogicAutoPlay {
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fieldsControled.fcl").toString(),
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsPerField.fcl").toString(),
 				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsRatioToBase.fcl").toString());
-		
-		fuzzyFieldControlled = 2;
 	}
 
 	public void gameMainLoop()
@@ -74,6 +72,7 @@ public class FuzzyLogicAutoPlay {
 		
 		actualPlayerIteration = 0;
 		otherPlayerIteration = 0;
+		fuzzyFieldControlled = 2;
 		
 		//for(;;)
 		for(int iteration=0; iteration<600; iteration++)
@@ -316,17 +315,21 @@ public class FuzzyLogicAutoPlay {
 					
 					int soldiers = 0;
 					
-					// przenosze najwieksze pole
+					// szukam pola z najwieksza iloscia jednostek
 					for(int i=0; i<fieldsData2.size(); i++)
 					{
+						System.out.println("Ilosc jednostek na  polu: " + fieldsData2.get(i).id + " wynosi:" 
+								+ gameField.get(fieldsData2.get(i).id).getSoldiers());
 						
 						if(gameField.get(fieldsData2.get(i).id).getSoldiers() > soldiers) {
 							losowyElementZFieldsData = i;
 							idLosowegoElementu = fieldsData2.get(i).id;
 							soldiers = gameField.get(fieldsData2.get(i).id).getSoldiers();
-						}
-							
+						}	
 					}
+					
+					System.out.println();
+					System.out.println("Ilosc jednostek na  najlepszym polu gracza:" + soldiers);
 					
 //					// test
 //					if(actualPlayer.getPlayerType() == PlayerType.PlayerB)
@@ -345,8 +348,31 @@ public class FuzzyLogicAutoPlay {
 					{
 						int iloscNaszychSasiadow = fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.size();
 						
-						int idLosowegoSasiada = ((int)(Math.random()*iloscNaszychSasiadow));
-						int idPolaLosowegoSasiada = fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(idLosowegoSasiada);
+						
+						List<Integer> idKolejnychSasiadow = new ArrayList<Integer>();
+						
+						// zbieram sasiadow na kolejnych polach, ktorym moge przekazac jednostki
+						for(int i=0; i<iloscNaszychSasiadow; i++)
+						{
+							if(actualPlayer.getPlayerType() == PlayerType.PlayerA) {
+								if(fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(i) > fieldsData2.get(losowyElementZFieldsData).id)
+									idKolejnychSasiadow.add(fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(i));
+							}
+							else {
+								if(fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(i) < fieldsData2.get(losowyElementZFieldsData).id)
+									idKolejnychSasiadow.add(fieldsData2.get(losowyElementZFieldsData).ListPlayerFields.get(i));
+							}
+						}
+						
+						// jesli nie ma komu przekazac to nie atakuje tylko szukamy kolejnego pola, ktore moze sie podzielic
+						if(idKolejnychSasiadow.isEmpty()) {
+							fieldsData2.remove(losowyElementZFieldsData);
+							continue;
+						}
+							
+						
+						int idLosowegoSasiada = ((int)(Math.random()*idKolejnychSasiadow.size()));
+						int idPolaLosowegoSasiada = idKolejnychSasiadow.get(idLosowegoSasiada);
 						int howManySoldiers = (1+(int)(Math.random()*actualPlayer.getGameField().get(idLosowegoElementu).getSoldiers()-1));
 						
 						moveDataStructure.sourceIndex = idLosowegoElementu;
