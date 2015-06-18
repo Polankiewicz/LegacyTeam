@@ -28,7 +28,8 @@ public class FOLController {
 	private Player bluePlayer;
     private Player redPlayer;
     private Player actualPlayer;
-   
+    PlayerType opponent;
+    PlayerType type ;
 	private ArrayList<FieldUnit> gameField;
 	private gameController gc;
 	SISEGame game;
@@ -49,7 +50,8 @@ public class FOLController {
 		int castleX, castleY, x, y, soldiers, index, playerType;
 		Boolean enemy;
 		
-		PlayerType type = actualPlayer.getPlayerType();
+		type = actualPlayer.getPlayerType();
+	
 		clips = new Environment();
 		
 		clips.load("templates.clp");
@@ -107,7 +109,7 @@ public class FOLController {
 							neighbour.get(j).y == gameField.get(k).getCoordinates().y)
 						{
 							//Tutaj ustawiæ zapis s¹siada pierwszego poziomu
-							String isEnemy = (gameField.get(k).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
+							String isEnemy = (gameField.get(k).getSoldiersType() == opponent)? "yes" : "no";
 							
 							String assertion = "(assert(neighbour(coordX "+gameField.get(k).getCoordinates().x+")("+
 							"coordY "+gameField.get(k).getCoordinates().y+")("+
@@ -130,7 +132,7 @@ public class FOLController {
 
 											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
 										
-										String isEnemy2 = (gameField.get(m).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
+										String isEnemy2 = (gameField.get(m).getSoldiersType() == opponent)? "yes" : "no";
 										
 										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
 										"coordY "+gameField.get(m).getCoordinates().y+")("+
@@ -188,11 +190,13 @@ public class FOLController {
 		{
 			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
+			opponent = redPlayer.getPlayerType();
 			runAI("ai.clp");
 			game.makeMove();
 			if (game.isGameFinished())
 				break;
 			actualPlayer = redPlayer;
+			opponent = bluePlayer.getPlayerType();
 			runAI("ai.clp");
 			game.makeMove();
 			if (game.isGameFinished())
