@@ -68,15 +68,31 @@ public class FOLController {
 						if(neighbour.get(j).x == gameField.get(k).getCoordinates().x &&
 							neighbour.get(j).y == gameField.get(k).getCoordinates().y){
 							//Tutaj ustawiæ zapis s¹siada pierwszego poziomu
+							String isEnemy = (gameField.get(k).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
+							
+							String assertion = "(assert(neighbour(coordX "+gameField.get(k).getCoordinates().x+")("+
+							"coordY "+gameField.get(k).getCoordinates().y+")("+
+							"index "+gameField.get(k).getIndex()+
+							"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()+")))";
 							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
-									" y "+gameField.get(k).getCoordinates().y+ 
-									" indeks "+ gameField.get(k).getIndex());
+									"y "+gameField.get(k).getCoordinates().y+")("+
+									"indeks "+ gameField.get(k).getIndex()+")("+
+									"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
+							);
+							clips.eval(assertion);
 //							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
 							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
 							for(int l=0; l<secondNeighbour.size(); l++){
 								for(int m=0; m<gameField.size(); m++){
 									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
 											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
+										
+										String isEnemy2 = (gameField.get(m).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
+										
+										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
+										"coordY "+gameField.get(m).getCoordinates().y+")("+
+										"index "+gameField.get(m).getIndex()+
+										"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
 										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
 												" y "+gameField.get(m).getCoordinates().y+ 
 												" indeks "+ gameField.get(m).getIndex());
@@ -88,6 +104,7 @@ public class FOLController {
 				}
 			}
 		}
+		
 		clips.load("ai.clp");
 		clips.run();
 		
