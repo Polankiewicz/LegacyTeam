@@ -111,13 +111,14 @@ public class FOLController {
 							
 							String assertion = "(assert(neighbour(coordX "+gameField.get(k).getCoordinates().x+")("+
 							"coordY "+gameField.get(k).getCoordinates().y+")("+
-							"index "+gameField.get(k).getIndex()+
-							"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()+")))";
-							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
-									"y "+gameField.get(k).getCoordinates().y+")("+
-									"indeks "+ gameField.get(k).getIndex()+")("+
-									"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
-							);
+							"index "+gameField.get(k).getIndex()+")("+
+							"isEnemy "+isEnemy+")("+
+							"iloscWoja "+gameField.get(k).getSoldiers()+")))";
+//							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
+//									"y "+gameField.get(k).getCoordinates().y+")("+
+//									"indeks "+ gameField.get(k).getIndex()+")("+
+//									"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
+//							);
 							clips.eval(assertion);
 //							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
 							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
@@ -127,19 +128,17 @@ public class FOLController {
 								for(int m=0; m<gameField.size(); m++)
 								{
 									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
-
-											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
+										secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
 										
 										String isEnemy2 = (gameField.get(m).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
-										
 										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
 										"coordY "+gameField.get(m).getCoordinates().y+")("+
-										"index "+gameField.get(m).getIndex()+
+										"index "+gameField.get(m).getIndex()+")("+
 										"isEnemy "+isEnemy2+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
 										clips.eval(assertion2);
-										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
-												" y "+gameField.get(m).getCoordinates().y+ 
-												" indeks "+ gameField.get(m).getIndex());
+//										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
+//												" y "+gameField.get(m).getCoordinates().y+ 
+//												" indeks "+ gameField.get(m).getIndex());
 									}
 								}
 							}

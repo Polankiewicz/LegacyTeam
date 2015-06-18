@@ -13,7 +13,7 @@
 	(neighbour (coordX ?coordX)(coordY ?coordY)(index ?index)(isEnemy ?isEnemy)(iloscWoja ?iloscwoja))
 	(test (eq ?isEnemy yes))
 	=>
-	(printout t "Indeks: " ?index " wspó³rzêdne (" ?coordX ", " ?coordY ") ZNALEZIONO WROGA ")
+	(printout t "Indeks: " ?index " wspó³rzêdne (" ?coordX ", " ?coordY ") ZNALEZIONO WROGA " crlf)
 	(assert (foundEnemy(coordX ?coordX)(coordY ?coordY)))
 )
 
@@ -21,12 +21,12 @@
 	(neighbour (coordX ?coordX)(coordY ?coordY)(index ?index)(isEnemy ?isEnemy)(iloscWoja ?iloscwoja))
 	(test (eq ?isEnemy no))
 	=>
-	(printout t "Indeks: " ?index " wspó³rzêdne (" ?coordX ", " ?coordY ") ZNALEZIONO WROGA ")
+	(printout t "Indeks: " ?index " wspó³rzêdne (" ?coordX ", " ?coordY ") POLE WOLNE " crlf)
 	(assert (EmptyField(coordX ?coordX)(coordY ?coordY)(index ?index)))
 )
 
 ;============================================================
 ;=================== PROCESS DATA ===========================
-(defrule findMaxWarriors
-	(AIFields(coordX ?coordX)(coordY ?coordY)(index ?index)(iloscWoja ?iloscWoja)
+;(defrule findMaxWarriors
+;	(AIFields(coordX ?coordX)(coordY ?coordY)(index ?index)(iloscWoja ?iloscWoja)
 	
