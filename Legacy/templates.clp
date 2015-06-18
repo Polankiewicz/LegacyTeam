@@ -51,6 +51,11 @@
 	(slot iloscWoja (type INTEGER))
 )
 
+(deftemplate EmptyField
+	(slot coordX (type INTEGER))
+	(slot coordY (type INTEGER))
+	(slot index(type INTEGER))
+)
 
 (deftemplate kogoZaatakowac
 	(slot indexAI(type INTEGER))

@@ -135,11 +135,12 @@ public class FOLController {
 										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
 										"coordY "+gameField.get(m).getCoordinates().y+")("+
 										"index "+gameField.get(m).getIndex()+")("+
-										"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
+										"isEnemy "+isEnemy2+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
 
 										//System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
 		//										" y "+gameField.get(m).getCoordinates().y+ 
 		//										" indeks "+ gameField.get(m).getIndex());
+
 									}
 								}
 							}
@@ -148,7 +149,7 @@ public class FOLController {
 				}
 			}
 		}
-
+		
 		clips.load(ai);
 
 		clips.run();
