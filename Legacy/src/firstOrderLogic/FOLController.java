@@ -87,7 +87,7 @@ public class FOLController {
 						"index "+gameField.get(i).getIndex()+")("+
 						"iloscWoja "+gameField.get(i).getSoldiers()+")))";
 				clips.eval(assertion);
-				System.out.println("Dodawanie pól AI: "+assertion);
+				//System.out.println("Dodawanie pól AI: "+assertion);
 			}
 		}
 		
@@ -96,7 +96,7 @@ public class FOLController {
 		{
 			
 			if(gameField.get(i).getSoldiersType() == type){
-				System.out.println("Szukanie s¹siadów pierwszego stopnia");
+				//System.out.println("Szukanie s¹siadów pierwszego stopnia");
 				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
 				
 				for(int j=0; j<neighbour.size(); j++)
@@ -112,13 +112,12 @@ public class FOLController {
 							String assertion = "(assert(neighbour(coordX "+gameField.get(k).getCoordinates().x+")("+
 							"coordY "+gameField.get(k).getCoordinates().y+")("+
 							"index "+gameField.get(k).getIndex()+")("+
-							"isEnemy "+isEnemy+")("+
-							"iloscWoja "+gameField.get(k).getSoldiers()+")))";
-//							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
-//									"y "+gameField.get(k).getCoordinates().y+")("+
-//									"indeks "+ gameField.get(k).getIndex()+")("+
-//									"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
-//							);
+							"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()+")))";
+							//System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
+							//		"y "+gameField.get(k).getCoordinates().y+")("+
+								//	"indeks "+ gameField.get(k).getIndex()+")("+
+								//	"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
+						//	);
 							clips.eval(assertion);
 //							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
 							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
@@ -128,17 +127,20 @@ public class FOLController {
 								for(int m=0; m<gameField.size(); m++)
 								{
 									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
-										secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
+
+											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
 										
 										String isEnemy2 = (gameField.get(m).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
+										
 										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
 										"coordY "+gameField.get(m).getCoordinates().y+")("+
 										"index "+gameField.get(m).getIndex()+")("+
 										"isEnemy "+isEnemy2+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
-										clips.eval(assertion2);
-//										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
-//												" y "+gameField.get(m).getCoordinates().y+ 
-//												" indeks "+ gameField.get(m).getIndex());
+
+										//System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
+		//										" y "+gameField.get(m).getCoordinates().y+ 
+		//										" indeks "+ gameField.get(m).getIndex());
+
 									}
 								}
 							}
@@ -168,7 +170,7 @@ public class FOLController {
 			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
 		}
 		else{
-			System.out.println("Brak faktów do zwrócenia");
+			//System.out.println("Brak faktów do zwrócenia");
 		}
 		
 	}
@@ -185,7 +187,7 @@ public class FOLController {
 	{
 		for (int i=0;i<100;i++)
 		{
-			System.out.println("tura "+i);
+			//System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
 			runAI("ai.clp");
 			game.makeMove();

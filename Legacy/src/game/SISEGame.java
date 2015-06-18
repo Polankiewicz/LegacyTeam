@@ -134,12 +134,12 @@ public class SISEGame extends Application {
 		actualPlayer.increaseUnitsAmount();
 		if(actualPlayer.getPlayerType()==PlayerType.PlayerA)
 		{
-			System.out.println("gracz a zmienia sie na gracza b");
+			//System.out.println("gracz a zmienia sie na gracza b");
 			actualPlayer=redPlayer;
 		}
 		else if(actualPlayer.getPlayerType()==PlayerType.PlayerB) 
 		{
-			System.out.println("gracz b zmienia sie na gracza a");
+			//System.out.println("gracz b zmienia sie na gracza a");
 			actualPlayer=bluePlayer;
 		}
 	}
@@ -148,7 +148,7 @@ public class SISEGame extends Application {
 	{	
 		if(actualPlayer.move(moveDataStructure.howMany,moveDataStructure.targetIndex,moveDataStructure.sourceIndex))
     	{
-    		System.out.println(moveDataStructure.sourceIndex + " sie ruszyl na " + moveDataStructure.targetIndex);
+    		//System.out.println(moveDataStructure.sourceIndex + " sie ruszyl na " + moveDataStructure.targetIndex);
     		actualPlayer.increaseUnitsAmount();
     		updatePlayer();
     		turn++;
