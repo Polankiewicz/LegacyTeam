@@ -41,6 +41,7 @@ public class SISEGame extends Application {
 	private ArrayList<FieldUnit> gameField;
 	private gameController gc;
 	private TestController testController;
+	private FOLController folController;
 	private int turn;
 	
 	public int getTurn() 			{ return turn; }
@@ -57,11 +58,12 @@ public class SISEGame extends Application {
 		actualPlayer = bluePlayer;
 		turn = 1;
 		autoPlay = true;
-		fuzzyOrFOL = true;
+		fuzzyOrFOL = false;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 		fuzzyLogicAutoPlay = new FuzzyLogicAutoPlay(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
+		folController = new FOLController(gameField,bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);
 	}
 
     public Stage getPrimaryStage() {
@@ -198,7 +200,7 @@ public class SISEGame extends Application {
     			if(fuzzyOrFOL)
     				fuzzyLogicAutoPlay.gameMainLoop();
     			else
-    				testController.gameMainLoop(); 
+    				folController.gameMainLoop(); 
     		}
     			
     	} catch(IOException e) {

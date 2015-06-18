@@ -209,7 +209,7 @@ public class gameController {
 	@FXML
 	private void initialize() 
 	{
-		folcontroller = new FOLController();
+		//folcontroller = new FOLController();
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
 		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zako�czy� tur�");
@@ -383,12 +383,7 @@ public class gameController {
 			}
 		}
 		else{
-			game.makeMove(); //najpierw ruch wykonuje gracz
-			if(ai){
-				game.setTurn(game.getTurn()+1);	//update rundy
-				refreshView(playerB, game.getTurn()); //pokazujemy
-				folcontroller.runAI(gameField); //potem ruch wykonuje AI
-			}
+		
 		}
 	}
 	

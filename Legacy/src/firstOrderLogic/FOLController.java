@@ -3,10 +3,13 @@ package firstOrderLogic;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import view.gameController;
+
 import com.sun.prism.image.Coords;
 
 import game.FieldUnit;
 import game.MoveDataStructure;
+import game.Player;
 import game.PlayerType;
 import game.SISEGame;
 import CLIPSJNI.Environment;
@@ -15,23 +18,56 @@ import CLIPSJNI.MultifieldValue;
 
 public class FOLController {
 	private Environment clips;
-	private Boolean useClips;
-	private MoveDataStructure moveAI;
 	
-	public void runAI(ArrayList<FieldUnit> gameField){
+	private MoveDataStructure moveAI;
+	String isMyCastle;
+	String isCastleEnemy;
+	String isEnemy;
+	
+	
+	private Player bluePlayer;
+    private Player redPlayer;
+    private Player actualPlayer;
+   
+	private ArrayList<FieldUnit> gameField;
+	private gameController gc;
+	SISEGame game;
+	
+	public FOLController(ArrayList<FieldUnit> gameField, Player bluePlayer,
+			Player redPlayer, Player actualPlayer,
+			MoveDataStructure moveDataStructure, SISEGame siseGame) 
+	{
+		this.gameField = gameField;
+		this.redPlayer = redPlayer;
+		this.bluePlayer = bluePlayer;
+		this.moveAI = moveDataStructure;
+		this.actualPlayer = actualPlayer;
+		this.game = siseGame;
+	}
+	
+	public void runAI(String ai){
 		int castleX, castleY, x, y, soldiers, index, playerType;
 		Boolean enemy;
 		
-		moveAI = new MoveDataStructure();
+		PlayerType type = actualPlayer.getPlayerType();
 		clips = new Environment();
 		
 		clips.load("templates.clp");
 		//£adowanie ca³ej planszy
 		for(int i=0; i<gameField.size(); i++){
-			String isMyCastle = gameField.get(i).getIndex() == 24  ? "yes" : "no";
-			String isCastleEnemy = gameField.get(i).getIndex() == 0 ? "yes" : "no";
-			String isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerA) ? "yes" : "no";
-			//Je¿eli AI, to zapisujemy swoich
+			if (type == PlayerType.PlayerB)
+			{
+				isMyCastle = gameField.get(i).getIndex() == 0  ? "yes" : "no";
+				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
+				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerA) ? "yes" : "no";
+			}
+			else
+			{
+				isMyCastle = gameField.get(i).getIndex() == 0  ? "yes" : "no";
+				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
+				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "yes" : "no";
+			}
+			
 			String assertion = "(assert(boardInfo(coordX "+gameField.get(i).getCoordinates().x+")("+
 						"coordY "+gameField.get(i).getCoordinates().y+")("+
 						"index "+gameField.get(i).getIndex()+")("+
@@ -43,12 +79,9 @@ public class FOLController {
 //			System.out.println(assertion);
 		}
 		
-		//Player B - AI
-		//Player A - normalny gracz
-		
-		//£adowanie pól AI
+	
 		for(int i=0; i<gameField.size(); i++){
-			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB){
+			if(gameField.get(i).getSoldiersType() == type){
 				String assertion = "(assert(AIFields(coordX "+gameField.get(i).getCoordinates().x + ")("+
 						"coordY "+gameField.get(i).getCoordinates().y + ")(" +
 						"index "+gameField.get(i).getIndex()+")("+
@@ -59,24 +92,34 @@ public class FOLController {
 		}
 		
 		//£adowanie s¹siadów sztucznej inteligencji 
-		for(int i=0; i<gameField.size(); i++){
-			if(gameField.get(i).getSoldiersType() == PlayerType.PlayerB){
+		for(int i=0; i<gameField.size(); i++)
+		{
+			
+			if(gameField.get(i).getSoldiersType() == type){
 				System.out.println("Szukanie s¹siadów pierwszego stopnia");
 				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
-				for(int j=0; j<neighbour.size(); j++){
-					for(int k=0; k<gameField.size(); k++){
+				
+				for(int j=0; j<neighbour.size(); j++)
+				{
+					for(int k=0; k<gameField.size(); k++)
+					{
 						if(neighbour.get(j).x == gameField.get(k).getCoordinates().x &&
-							neighbour.get(j).y == gameField.get(k).getCoordinates().y){
+							neighbour.get(j).y == gameField.get(k).getCoordinates().y)
+						{
 							//Tutaj ustawiæ zapis s¹siada pierwszego poziomu
 							System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
 									" y "+gameField.get(k).getCoordinates().y+ 
 									" indeks "+ gameField.get(k).getIndex());
 //							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
 							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
-							for(int l=0; l<secondNeighbour.size(); l++){
-								for(int m=0; m<gameField.size(); m++){
+							
+							for(int l=0; l<secondNeighbour.size(); l++)
+							{
+								for(int m=0; m<gameField.size(); m++)
+								{
 									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
-											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
+											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y)
+									{
 										System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
 												" y "+gameField.get(m).getCoordinates().y+ 
 												" indeks "+ gameField.get(m).getIndex());
@@ -88,7 +131,7 @@ public class FOLController {
 				}
 			}
 		}
-		clips.load("ai.clp");
+		clips.load(ai);
 		clips.run();
 		
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
@@ -120,11 +163,23 @@ public class FOLController {
 	public int returnIndexXY(int x, int y){
 		return x+y*5;
 	}
-
+	public void gameMainLoop()
+	{
+		for (int i=0;i<100;i++)
+		{
+			System.out.println("tura "+i);
+			actualPlayer = bluePlayer;
+			runAI("ai.clp");
+			game.makeMove();
+			if (game.isGameFinished())
+				break;
+			actualPlayer = redPlayer;
+			runAI("ai.clp");
+			game.makeMove();
+			if (game.isGameFinished())
+				break;
+		}
+		
+	}
 }
-//	loadNeighbour(gameField, neighbour);
-//	for(int j=0; j<neighbour.size(); j++){
-//		System.out.println("Szukanie s¹siadów drugiego stopnia dla pola: "+neighbour.get(j).x+ " "+neighbour.get(j).y);
-//		ArrayList<Point> secondNeighbours = gameField.get(returnIndexXY(neighbour.get(j).x, neighbour.get(j).y)).getNeighbours();
-//		loadNeighbour(gameField, secondNeighbours);
-//	}
+
