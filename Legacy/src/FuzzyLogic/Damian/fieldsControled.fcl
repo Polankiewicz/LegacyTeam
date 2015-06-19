@@ -11,21 +11,22 @@ END_VAR
 
 FUZZIFY myFields
     TERM begining := (1, 1) (2, 0); 
-    TERM small := (1, 1) (4, 0); 
-    TERM avarge := (3, 1) (9, 0); 
-    TERM normal := (8, 1) (13, 0); 
-    TERM more := (12, 1) (18, 0);
-    TERM big := (17, 1) (24, 0);
-    TERM end := (23, 1) (25, 0);	// 25 - number of all fields
+    TERM small := (2, 1) (4, 0); // ladowanie juz
+    TERM avarge := (4, 1) (7, 0); 
+    TERM normal := (7, 1) (10, 0); 
+    TERM more := (10, 1) (15, 0);
+    TERM big := (15, 1) (20, 0);
+    TERM end := (20, 1) (25, 0);	// 25 - number of all fields
 END_FUZZIFY
 
 DEFUZZIFY fieldsRatio
-    TERM value1 := (0,0) (5,1) (10,0);
-    TERM value2 := (10,0) (15,1) (20,0);
-    TERM value3 := (20,0) (25,1) (30,0);
+	TERM value0 := (-3,0) (-2,1) (-1,0);
+	TERM value1 := (-1,0) (0,1) (1,0);
+    TERM value2 := (1,0) (2,1) (3,0);
+    TERM value3 := (3,0) (4,1) (5,0);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
-    DEFAULT := 0; // if no rule activates defuzzifier
+    DEFAULT := 2; // if no rule activates defuzzifier
 END_DEFUZZIFY
 
 
@@ -34,13 +35,13 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-    RULE 1 : IF myFields IS begining THEN fieldsRatio IS value1;
-    RULE 2 : IF myFields IS small THEN fieldsRatio IS value1;
-    RULE 3 : IF myFields IS avarge THEN fieldsRatio IS value1;
-    RULE 4 : IF myFields IS normal THEN fieldsRatio IS value1;
-    RULE 5 : IF myFields IS more THEN fieldsRatio IS value2;
-    RULE 6 : IF myFields IS big THEN fieldsRatio IS value2;
-    RULE 7 : IF myFields IS end THEN fieldsRatio IS value3;
+//    RULE 1 : IF myFields IS begining THEN fieldsRatio IS value3;
+//    RULE 2 : IF myFields IS small THEN fieldsRatio IS value3;
+//    RULE 3 : IF myFields IS avarge THEN fieldsRatio IS value2;
+//    RULE 4 : IF myFields IS normal THEN fieldsRatio IS value1;
+//    RULE 5 : IF myFields IS more THEN fieldsRatio IS value0;
+//    RULE 6 : IF myFields IS big THEN fieldsRatio IS value0;
+//    RULE 7 : IF myFields IS end THEN fieldsRatio IS value1;
 END_RULEBLOCK
 
 
