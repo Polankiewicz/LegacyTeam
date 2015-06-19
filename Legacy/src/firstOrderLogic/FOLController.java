@@ -23,7 +23,8 @@ public class FOLController {
 	String isMyCastle;
 	String isCastleEnemy;
 	String isEnemy;
-	
+	String category;
+	String playerTypeString;
 	
 	private Player bluePlayer;
     private Player redPlayer;
@@ -60,13 +61,50 @@ public class FOLController {
 				isMyCastle = gameField.get(i).getIndex() == 0  ? "yes" : "no";
 				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
 				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerA) ? "yes" : "no";
+				//System.out.println("gracz to: " + type.toString() + " a typ pola to: " + gameField.get(i).getSoldiersType().toString());
+				
+				 
+				//System.out.println(category);
 			}
 			else
 			{
 				isMyCastle = gameField.get(i).getIndex() == 0  ? "yes" : "no";
 				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
 				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "yes" : "no";
+				
+				//System.out.println("gracz to: " + type.toString() + " a typ pola to: " + gameField.get(i).getSoldiersType().toString());
 			}
+			
+			if(gameField.get(i).getSoldiersType().toString() == "PlayerA")
+			{
+				category = "playera";
+			}
+			else if(gameField.get(i).getSoldiersType().toString() == "PlayerB")
+			{
+				category = "playerb";
+			}
+			else
+			{
+				category = "noone";
+			}
+			
+			if(type.toString() == "PlayerA")
+			{
+				playerTypeString = "playera";
+			}
+			else if(type.toString() == "PlayerB")
+			{
+				playerTypeString = "playerb";
+			}
+			
+			String assertField = "(assert(fieldType(coordX " + gameField.get(i).getCoordinates().x + ")(" +
+								 "coordY " + gameField.get(i).getCoordinates().y + ")(" +
+								 "index " + gameField.get(i).getIndex() + ")(" +
+								 "category " + category + ")(" +
+								 "playerType " + playerTypeString +")))";
+			
+			clips.eval(assertField);
+			
 			
 			String assertion = "(assert(boardInfo(coordX "+gameField.get(i).getCoordinates().x+")("+
 						"coordY "+gameField.get(i).getCoordinates().y+")("+

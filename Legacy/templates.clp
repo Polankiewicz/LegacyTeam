@@ -15,6 +15,14 @@
 	
 )
 
+(deftemplate fieldType
+	(slot coordX (type INTEGER))
+	(slot coordY (type INTEGER))
+	(slot index (type INTEGER))
+	(slot category (allowed-values playera playerb noone))
+	(slot playerType (allowed-values playera playerb))
+)
+
 (deftemplate AIFields
 	(slot coordX (type INTEGER))
 	(slot coordY (type INTEGER))
