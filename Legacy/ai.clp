@@ -12,16 +12,12 @@
 	(fieldType (coordX ?coordX)(coordY ?coordY)(index ?index)(category ?category)(playerType ?playerType))
 	(or(and(test (eq ?category playera))(test (eq ?playerType playera)))(and(test (eq ?category playerb))(test (eq ?playerType playerb))))
 =>
-	(if (eq ?playerType playera) then (bind ?pI ?index)(printout t "Player A - bind index" crlf))
-	(if (eq ?playerType playerb) then (bind ?pI ?index)(printout t "Player B - bind index" crlf))	
-	;(assert (pI ?pI))
+	(if (eq ?playerType playera) then (bind ?indexField ?index)(printout t "Player A - bind index" crlf))
+	(if (eq ?playerType playerb) then (bind ?indexField ?index)(printout t "Player B - bind index" crlf))	
+	(assert (pI(indexField ?indexField)))
 )	
 
-(defrule test1
-(pI ?pI)
-(test (= ?pI 0))
-=>
-(printout t "Suma jest rowna zero" crlf))
+
 
 ;=======
 ;============================================================

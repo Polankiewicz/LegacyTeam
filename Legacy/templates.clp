@@ -74,3 +74,7 @@
 (deftemplate konkluzja
 	(slot tekst (type STRING))
 )
+
+(deftemplate pI
+	(slot indexField(type INTEGER))
+)
