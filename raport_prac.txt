@@ -1,3 +1,13 @@
+Stan na 19.06.2015
+1. Jakub Dziedzic - obliczenie typu pola na podstawie przekazanych danych do agentu clipsa i przekazanie do logiki gry
+2. Bartłomiej Dąbek -  clips kontroler dla obu graczy i podpiecie pod logike
+3. Bartłomiej Dobrowolski - logika ostatniego rzedu - pomoc
+4. Mariusz Polka - pomoc przy logice rozmytej
+5. Filip Wrzesiński - pomoc przy logice rozmytej
+6. Damian Polankiewicz - Logika rozmyta skończona
+
+-----------------
+
 Stan na 12.06.2015
 1. Jakub Dziedzic - pomoc
 2. Bartłomiej Dąbek -  pomoc przy logice ostatniego rzedu

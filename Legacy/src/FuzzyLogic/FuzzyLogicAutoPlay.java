@@ -33,7 +33,7 @@ public class FuzzyLogicAutoPlay {
 	
 	private int actualPlayerIteration, otherPlayerIteration;
 	
-	private double fuzzyFieldControlled, fuzzyFightChances, fuzzyUnitsPerField, fuzzyUnitsRatioToBase;
+	private double fuzzyFieldControlled;
 		
 	
 	public FuzzyLogicAutoPlay(ArrayList<FieldUnit> gameField, Player bluePlayer, Player redPlayer, Player actualPlayer,
@@ -52,16 +52,10 @@ public class FuzzyLogicAutoPlay {
 		
 		// Blue Player FCL files
 		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
-				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/fightChances.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/fieldsControled.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/unitsPerField.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/unitsRatioToBase.fcl").toString());
+				new StringBuilder("src/FuzzyLogic/").append(autoBluePlayer).append("/fieldsControled.fcl").toString());
 		// Red Player FCL files
 		this.fuzzyLogicControlForRedPlayer = new FuzzyLogicControl(
-				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fightChances.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fieldsControled.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsPerField.fcl").toString(),
-				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/unitsRatioToBase.fcl").toString());
+				new StringBuilder("src/FuzzyLogic/").append(autoRedPlayer).append("/fieldsControled.fcl").toString());
 	}
 
 	public void gameMainLoop()
@@ -83,24 +77,6 @@ public class FuzzyLogicAutoPlay {
 				otherPlayer = bluePlayer;
 				actualFuzzyLogicControl = fuzzyLogicControlForRedPlayer;
 			}
-			
-			
-//			// check ours controlled fields  
-//			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
-//					actualPlayer.getControlledFields());
-			// check if we can fight and chances to win in each situation
-			fuzzyFightChances = actualFuzzyLogicControl.getFuzzyFightChances(
-					actualPlayer.getGameField().get(0).getSoldiers(), 
-					otherPlayer.getGameField().get(1).getSoldiers());
-			// check if we have huge amount of units in base so we can place them on next fields 
-			fuzzyUnitsRatioToBase = actualFuzzyLogicControl.getFuzzyUnitsRatioToBase(
-					actualPlayer.getBase().getSoldiers(), 
-					actualPlayer.countAllSoldiers());
-			// check amount of units in base to other our units and decide witch fields need help
-			fuzzyUnitsPerField = actualFuzzyLogicControl.getFuzzyUnitsPerField(
-					actualPlayer.countAllSoldiers(), 
-					actualPlayer.getGameField().get(0).getSoldiers()); 
-			// decide: move units
 			
 			
 			// zapisanie id naszych pol i informacji o ich sasiadach do specjalnego typu: FuzzyLogicFieldData
@@ -135,15 +111,10 @@ public class FuzzyLogicAutoPlay {
 				}
 			}
 			
-			
-			
-			
 			// okreslamy jak czesto mamy zdobywac nowe pola, a jak czesto uzupelniac obecne
-			// check ours controlled fields  
+			// FCL - check ours controlled fields  
 			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
-					actualPlayer.getControlledFields());
-			fuzzyFieldControlled = 2; // tymczasowo wstawiam sta³¹ wartoœæ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			
+					actualPlayer.getControlledFields());	
 			
 			boolean czyBylaEkspansja = false;
 			
@@ -386,6 +357,12 @@ public class FuzzyLogicAutoPlay {
 				break;
 			}
 		}
+		
+//		for(int i=1; i<25; i++)
+//		{
+//			System.out.println("Nr: " + i + " Value:" 
+//					+ fuzzyLogicControlForBluePlayer.getFuzzyFieldsControled(i));
+//		}
 	}
 	
 	public int translateCoordinates(Point point)
