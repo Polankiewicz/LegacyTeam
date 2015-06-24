@@ -63,6 +63,7 @@ public class FuzzyLogicAutoPlay {
 		List<FuzzyLogicFieldData> fieldsData = new ArrayList<FuzzyLogicFieldData>();
 		
 		// BARDZO TYMCZASOWA WERSJA DLATEGO JEST TU BURDEL JESZCZE :P
+		// udaje ze cos robie, ale kiedys zrobie :v
 		
 		actualPlayerIteration = 0;
 		otherPlayerIteration = 0;
