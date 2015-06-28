@@ -192,41 +192,41 @@ public class FOLController {
 
 		clips.run();
 		
-		MultifieldValue attac = (MultifieldValue) clips.eval("(find-all-facts ((?f pI)) TRUE)");
-		for(int i=0; i<attac.listValue().size(); i++){
-			FactAddressValue attackFact = (FactAddressValue) attac.listValue().get(i);
-			int indexToMove = Integer.parseInt(attackFact.getFactSlot("indexField").toString());
-			if(indexToMove == 0){
-				moveAI.sourceIndex = indexToMove;
-				moveAI.targetIndex = 1;
-				moveAI.howMany = 10;
-			}
-			else if(indexToMove == 24){
-				moveAI.sourceIndex = indexToMove;
-				moveAI.targetIndex = 23;
-				moveAI.howMany = 10;
-			}
-			System.out.println("Wartosc: " + (attackFact.getFactSlot("indexField").toString()));
-		}
-		
-//		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
-//		if(attack.listValue().size() != 0){
-//			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
-//			//Ma zwróciæ tylko jedn¹ opcjê
-//			for(int i=0; i< 1; i++){
-//				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
-//				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
-//				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());
-//				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
+//		MultifieldValue attac = (MultifieldValue) clips.eval("(find-all-facts ((?f pI)) TRUE)");
+//		for(int i=0; i<attac.listValue().size(); i++){
+//			FactAddressValue attackFact = (FactAddressValue) attac.listValue().get(i);
+//			int indexToMove = Integer.parseInt(attackFact.getFactSlot("indexField").toString());
+//			if(indexToMove == 0){
+//				moveAI.sourceIndex = indexToMove;
+//				moveAI.targetIndex = 1;
+//				moveAI.howMany = 10;
 //			}
-//			
-//			moveAI.sourceIndex = indexAI;
-//			moveAI.targetIndex = indexEnemy; //Testowo wybieramy nastêpne pole
-//			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
+//			else if(indexToMove == 24){
+//				moveAI.sourceIndex = indexToMove;
+//				moveAI.targetIndex = 23;
+//				moveAI.howMany = 10;
+//			}
+//			System.out.println("Wartosc: " + (attackFact.getFactSlot("indexField").toString()));
 //		}
-//		else{
-//			//System.out.println("Brak faktów do zwrócenia");
-//		}
+		
+		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
+		if(attack.listValue().size() != 0){
+			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
+			//Ma zwróciæ tylko jedn¹ opcjê
+			for(int i=0; i< 1; i++){
+				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
+				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
+				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());
+				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
+			}
+			
+			moveAI.sourceIndex = indexAI;
+			moveAI.targetIndex = indexEnemy; //Testowo wybieramy nastêpne pole
+			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
+		}
+		else{
+			System.out.println("Brak faktów do zwrócenia");
+		}
 		
 	}
 
