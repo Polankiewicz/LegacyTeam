@@ -32,6 +32,7 @@ public class FuzzyLogicAutoPlay {
 	private String autoRedPlayer;
 	
 	private int actualPlayerIteration, otherPlayerIteration;
+	private int actualPlayerMaxSoldiers, otherPlayerMaxSoldiers, maxSoldiersInCurrentRound;
 	
 	private double fuzzyFieldControlled;
 		
@@ -79,6 +80,9 @@ public class FuzzyLogicAutoPlay {
 				actualFuzzyLogicControl = fuzzyLogicControlForRedPlayer;
 			}
 			
+			actualPlayerMaxSoldiers = 0;
+			otherPlayerMaxSoldiers = 0;
+			maxSoldiersInCurrentRound = 0;
 			
 			// zapisanie id naszych pol i informacji o ich sasiadach do specjalnego typu: FuzzyLogicFieldData
 			for(int i=0; i< actualPlayer.getGameField().size(); i++)
@@ -112,10 +116,28 @@ public class FuzzyLogicAutoPlay {
 				}
 			}
 			
+			// get max soldiers for players in current round
+			for(int s=0; s < gameField.size(); s++)
+			{
+				if(gameField.get(s).getSoldiersType() == actualPlayer.getPlayerType())
+					actualPlayerMaxSoldiers += gameField.get(s).getSoldiers();
+				else if(gameField.get(s).getSoldiersType() == otherPlayer.getPlayerType())
+					otherPlayerMaxSoldiers += gameField.get(s).getSoldiers();
+			}
+			maxSoldiersInCurrentRound = actualPlayerMaxSoldiers + otherPlayerMaxSoldiers;
+			
+			////////////////////////////////////// FCL  //////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// okreslamy jak czesto mamy zdobywac nowe pola, a jak czesto uzupelniac obecne
-			// FCL - check ours controlled fields  
 			fuzzyFieldControlled = actualFuzzyLogicControl.getFuzzyFieldsControled(
-					actualPlayer.getControlledFields());	
+					actualPlayer.getControlledFields(),		// my Fields
+					(25 - (actualPlayer.getControlledFields() + otherPlayer.getControlledFields())),	// empty fields
+					otherPlayer.getControlledFields(),	// enemy fields
+					((actualPlayerMaxSoldiers * 100)/maxSoldiersInCurrentRound), // my soldieres &
+					((otherPlayerMaxSoldiers * 100)/maxSoldiersInCurrentRound) // enemy soldiers %	
+			);	
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			boolean czyBylaEkspansja = false;
 			
@@ -305,7 +327,13 @@ public class FuzzyLogicAutoPlay {
 						fieldsData2.remove(losowyElementZFieldsData);
 					}
 				}
-				actualPlayerIteration = 0;
+				
+				if(fuzzyFieldControlled > 0)
+					actualPlayerIteration = 0;
+				else 
+				{
+					actualPlayerIteration--;
+				}
 			}
 			
 			// domyslny ruch jesli nie zostanie wykonany jakis konkretny wczesniej

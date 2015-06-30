@@ -1,22 +1,48 @@
-FUNCTION_BLOCK fieldsControled	// amount of our controlled fields to all fields 
+FUNCTION_BLOCK fieldsControled
 
 
 VAR_INPUT
     myFields : REAL;
+    emptyFields : REAL;
+    enemyFields : REAL;
+    mySoldiers : REAL;
+    enemySoldiers : REAL;
 END_VAR
 
 VAR_OUTPUT
-    fieldsRatio : REAL;
+    result : REAL;
 END_VAR
 
 FUZZIFY myFields
 	// TU PISZECIE
-    TERM val1 := (1, 0) (25, 1); 	// 25 - number of all fields
+    TERM val1 := (1, 0) (25, 1); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
 END_FUZZIFY
 
-DEFUZZIFY fieldsRatio
+FUZZIFY emptyFields
+	// TU PISZECIE
+    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+END_FUZZIFY
+
+FUZZIFY enemyFields
+	// TU PISZECIE
+    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+END_FUZZIFY
+
+FUZZIFY mySoldiers
+	// TU PISZECIE
+    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+END_FUZZIFY
+
+FUZZIFY enemySoldiers
+	// TU PISZECIE
+    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+END_FUZZIFY
+
+
+DEFUZZIFY result
     // TU TEZ
     TERM valueX := (1,0) (2,1);
+    
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
     DEFAULT := 2; // if no rule activates defuzzifier
 END_DEFUZZIFY
@@ -28,7 +54,7 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-	//RULE 1 : IF myFields IS val1 THEN fieldsRatio IS valueX;
+	//RULE 1 : IF myFields IS val1 THEN result IS valueX;
 END_RULEBLOCK
 
 

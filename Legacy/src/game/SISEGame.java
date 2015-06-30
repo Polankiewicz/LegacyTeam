@@ -58,7 +58,7 @@ public class SISEGame extends Application {
 		actualPlayer = bluePlayer;
 		turn = 1;
 		autoPlay = true;
-		fuzzyOrFOL = false;
+		fuzzyOrFOL = true;
 		initRoot();
 		showMenu();
 		testController = new TestController(gameField, bluePlayer, redPlayer,actualPlayer, moveDataStructure,this);

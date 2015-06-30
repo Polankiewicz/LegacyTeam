@@ -3,23 +3,44 @@ FUNCTION_BLOCK fieldsControled	// amount of our controlled fields to all fields
 
 VAR_INPUT
     myFields : REAL;
+    emptyFields : REAL;
+    enemyFields : REAL;
+    mySoldiers : REAL;
+    enemySoldiers : REAL;
 END_VAR
 
 VAR_OUTPUT
-    fieldsRatio : REAL;
+    result : REAL;
 END_VAR
 
 FUZZIFY myFields
     TERM begining := (1, 1) (2, 0); 
-    TERM small := (2, 1) (4, 0); // ladowanie juz
+    TERM small := (2, 1) (4, 0);
     TERM avarge := (4, 1) (7, 0); 
     TERM normal := (7, 1) (10, 0); 
     TERM more := (10, 1) (15, 0);
     TERM big := (15, 1) (20, 0);
-    TERM end := (20, 1) (25, 0);	// 25 - number of all fields
+    TERM end := (20, 1) (25, 0);	// 0-25 ; myFields + emptyFields + enemyFields = 25
 END_FUZZIFY
 
-DEFUZZIFY fieldsRatio
+FUZZIFY emptyFields
+    TERM begining := (1, 1) (2, 0); // 0-25 ; myFields + emptyFields + enemyFields = 25
+END_FUZZIFY
+
+FUZZIFY enemyFields
+    TERM begining := (1, 1) (2, 0); // 0-25 ; myFields + emptyFields + enemyFields = 25
+END_FUZZIFY
+
+FUZZIFY mySoldiers
+    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+END_FUZZIFY
+
+FUZZIFY enemySoldiers
+    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+END_FUZZIFY
+
+
+DEFUZZIFY result
 	TERM value0 := (-3,0) (-2,1) (-1,0);
 	TERM value1 := (-1,0) (0,1) (1,0);
     TERM value2 := (1,0) (2,1) (3,0);
@@ -35,13 +56,13 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-//    RULE 1 : IF myFields IS begining THEN fieldsRatio IS value3;
-//    RULE 2 : IF myFields IS small THEN fieldsRatio IS value3;
-//    RULE 3 : IF myFields IS avarge THEN fieldsRatio IS value2;
-//    RULE 4 : IF myFields IS normal THEN fieldsRatio IS value1;
-//    RULE 5 : IF myFields IS more THEN fieldsRatio IS value0;
-//    RULE 6 : IF myFields IS big THEN fieldsRatio IS value0;
-//    RULE 7 : IF myFields IS end THEN fieldsRatio IS value1;
+//    RULE 1 : IF myFields IS begining THEN result IS value3;
+//    RULE 2 : IF myFields IS small THEN result IS value3;
+//    RULE 3 : IF myFields IS avarge THEN result IS value2;
+//    RULE 4 : IF myFields IS normal THEN result IS value1;
+//    RULE 5 : IF myFields IS more THEN result IS value0;
+//    RULE 6 : IF myFields IS big THEN result IS value0;
+//    RULE 7 : IF myFields IS end THEN result IS value1;
 END_RULEBLOCK
 
 
