@@ -49,7 +49,7 @@ public class FuzzyLogicAutoPlay {
 		
 		// Auto Players: Damian, Dopek, Polka, Grzesio, Dziedzic, Dobrotek
 		autoBluePlayer = new String("Damian");
-		autoRedPlayer = new String("Dopek");
+		autoRedPlayer = new String("Polka");
 		
 		// Blue Player FCL files
 		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
@@ -164,7 +164,7 @@ public class FuzzyLogicAutoPlay {
 						continue;
 					}
 						
-					// po sasiadach pola - jeœli nie ma pustych s¹siadów to walka albo uzupelnienie
+					// po sasiadach pola - jeï¿½li nie ma pustych sï¿½siadï¿½w to walka albo uzupelnienie
 					// wybor miedzy pustymi jednostkami a walka !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 					if(!fieldsData.get(losowyElementZFieldsData).ListEmptyFields.isEmpty())
 					{
@@ -247,7 +247,7 @@ public class FuzzyLogicAutoPlay {
 					actualPlayerIteration++;
 			}
 			
-			//////////////////////////////////// Do³adowanie jednostek //////////////////////////////////
+			//////////////////////////////////// Doï¿½adowanie jednostek //////////////////////////////////
 			if (!czyBylaEkspansja)
 			{
 				while(true)

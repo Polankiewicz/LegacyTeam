@@ -58,13 +58,13 @@ END_FUZZIFY
 DEFUZZIFY result
     // TU TEZ
     TERM ultra_pasywna := (-10, 0) (-8, 1) (-6, 0);
-    TERM pasywna := (-8, 0) (-4, 1) (2, 0);
-    TERM umiarkowana := (0, 0) (4, 1) (7, 0);
-    TERM ofensywna := (5, 0) (10, 1) (18, 0);
-    TERM ultra_ofensywna := (16, 0) (20, 1);
+    TERM pasywna := (-8, 0) (-4, 1) (-2, 0);
+    TERM umiarkowana := (-3, 0) (1, 1) (3, 0);
+    TERM ofensywna := (2, 0) (6, 1) (8, 0);
+    TERM ultra_ofensywna := (6, 0) (10, 1);
         
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
-    DEFAULT := 15; // if no rule activates defuzzifier
+    DEFAULT := 2; // if no rule activates defuzzifier
 END_DEFUZZIFY
 
 
@@ -89,6 +89,7 @@ RULEBLOCK No1
 	RULE 13 : IF emptyFields IS duzo AND mySoldiers IS grupa OR mySoldiers IS garstka THEN result IS ofensywna;
 	RULE 14 : IF emptyFields IS duzo AND mySoldiers IS garstka OR mySoldiers IS nieliczni THEN result IS ultra_ofensywna;
 	RULE 15 : IF myFields IS sporo AND mySoldiers IS grupa OR mySoldiers IS oddzial THEN result IS ofensywna;
+	RULE 16 : IF myFields IS sporo AND enemyFields IS malo THEN result IS ultra_ofensywna;
 
 END_RULEBLOCK
 
