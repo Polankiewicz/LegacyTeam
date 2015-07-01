@@ -184,7 +184,7 @@ public class SISEGame extends Application {
             e.printStackTrace();
         }
     }
-   
+
     public void showGame()
     {
     	try {
