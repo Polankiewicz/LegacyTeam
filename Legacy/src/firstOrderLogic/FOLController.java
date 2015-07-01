@@ -141,42 +141,38 @@ public class FOLController {
 					}
 			}
 		
+		clips.eval("(assert (randomizeSelection (random yes)))");
 		clips.load(ai);
-
 		clips.run();
 		
 		boolean randomizeSelection = false;
 		MultifieldValue random = (MultifieldValue) clips.eval("(find-all-facts ((?f randomizeSelection)) TRUE)");
 		if(random.listValue().size() != 0){
-			for(int i=0; i<1; i++){
-				FactAddressValue isRandomize = (FactAddressValue) random.listValue().get(i);
-				randomizeSelection = (isRandomize.toString() == "yes");
-				System.out.println("randomizeSelection" + randomizeSelection);
-			}
+			FactAddressValue isRandomize = (FactAddressValue) random.listValue().get(0);
+			if(isRandomize.getFactSlot("random").toString().equals("yes"))
+				randomizeSelection = true;
+			else
+				randomizeSelection = false;
 		}
 		
-		Random randomNumber = new Random();
 		int choosenOne = 0;
 		
-		if(randomizeSelection){
-			choosenOne = randomNumber.nextInt(random.listValue().size());
-		}
 		
-		if(type == PlayerType.PlayerA)
-			System.out.println("PLAYER A: przesuniêcia " + choosenOne);
-		else
-			System.out.println("PLAYER B: przesuniêcia " + choosenOne);
 
+		int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		if(attack.listValue().size() != 0){
-			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
+			if(randomizeSelection){	
+				Random randomNumber = new Random();
+				choosenOne = randomNumber.nextInt(attack.listValue().size());
+				System.out.println(choosenOne);
+			}
+			
 			//Ma zwróciæ tylko jedn¹ opcjê
-			for(int i = choosenOne; i < choosenOne + 1; i++){
-				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
+				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(choosenOne);
 				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
 				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());
 				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
-			}
 			
 			moveAI.sourceIndex = indexAI;
 			moveAI.targetIndex = indexEnemy; //Testowo wybieramy nastêpne pole
@@ -185,7 +181,7 @@ public class FOLController {
 		else{
 			System.out.println("Brak faktów do zwrócenia");
 		}
-		clips.reset();
+		clips.clear();
 	}
 
 	
@@ -198,9 +194,9 @@ public class FOLController {
 	}
 	public void gameMainLoop()
 	{
-		for (int i=0;i<2;i++)
+		for (int i=0;i<100;i++)
 		{
-			//System.out.println("tura "+i);
+			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
 			runAI("ai.clp");
 			game.makeMove();

@@ -1,7 +1,3 @@
-;==== RANDOM SELCTION OF FACTS OR CHOOSE FIRST BEST BASED ON YOUR ALGHORITM
-;==== yes/no
-(assert (randomizeSelection(random yes)))
-
 ;==== ADDITIONALS ===
 
 ;(defrule rollRandom

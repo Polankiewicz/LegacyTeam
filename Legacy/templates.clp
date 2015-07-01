@@ -28,7 +28,6 @@
 	(slot index (type INTEGER))
 	(slot iloscWoja (type INTEGER))
 	
-	;sloty dla s¹siada 0
 	(slot neighbour0coordX (type INTEGER))
 	(slot neighbour0coordY (type INTEGER))
 	(slot neighbour0index (type INTEGER))
@@ -37,28 +36,6 @@
     	(allowed-symbols yes no)
 	)
 	(slot neighbour0iloscWoja (type INTEGER))
-)
-
-(deftemplate neighbour
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index (type INTEGER))
-	(slot isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot iloscWoja (type INTEGER))
-)
-
-(deftemplate neighbour2lvl
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index (type INTEGER))
-	(slot isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot iloscWoja (type INTEGER))
 )
 
 (deftemplate foundEnemy
@@ -85,11 +62,9 @@
 )
 
 (deftemplate randomizeSelection
-  (slot answer
+  (slot random
     (type SYMBOL)
-    (allowed-symbols yes no)
-;    (default no)
-  )
+    (allowed-symbols yes no))
 )
 
 (deftemplate pI
