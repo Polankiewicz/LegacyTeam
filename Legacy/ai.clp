@@ -36,8 +36,9 @@
 		)
 		(test (eq ?neighbour0field none))
 		=>
+		(bind ?noweWojo (- ?iloscWoja 1))
 		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
+		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
 )
 
 (defrule ownField 

@@ -204,7 +204,7 @@ public class FOLController {
 	public void gameMainLoop()
 	{
 		randomNumber = new Random();
-		for (int i=0;i<12;i++)
+		for (int i=0;i<70;i++)
 		{
 //			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
