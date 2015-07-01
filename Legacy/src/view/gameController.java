@@ -212,7 +212,7 @@ public class gameController {
 		//folcontroller = new FOLController();
 		playerID.setText("Gracz niebieski");
 		playerID.setTextFill(Color.web("#523bff"));
-		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakoï¿½czyï¿½ turï¿½");
+		finishRoundLabel.setText("Gracz Niebieski - kliknij, by zakonczyc½");
 		turnID.setText("#" + 1);
 		troopsSize.setText("Kupa jednostek");
 		isTargetSelected=false;

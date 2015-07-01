@@ -15,33 +15,59 @@ END_VAR
 
 FUZZIFY myFields
 	// TU PISZECIE
-    TERM val1 := (1, 0) (25, 1); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM aFew := (0, 0) (4, 1) (6, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM averageMinus := (5, 0) (8, 1) (10, 1) (12, 0);
+    TERM averagePlus := (10, 0) (13, 1) (16, 1) (19, 0);
+    TERM aLot := (16, 0) (25, 1);
 END_FUZZIFY
 
 FUZZIFY emptyFields
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM closeToZero := (0,1) (3,1) (5,0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM little := (4,0) (6,1) (7,0);
+    TERM average := (6,0) (9,1) (15,1) (16,0);
+    TERM plenty := (14,0) (18,1) (19,1) (21,0);
+    TERM harvest := (19,0) (22,1) (25,1);
 END_FUZZIFY
 
 FUZZIFY enemyFields
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM aFew := (0, 1) (3, 1) (5, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM averageMinus := (3, 0) (5, 1) (9, 1) (10, 0);
+    TERM averagePlus := (8, 0) (11, 1) (15, 1) (17, 0);
+    TERM aLot := (15, 0) (17, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY mySoldiers
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM team := (0, 1) (10, 1) (15, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM squad := (7, 0) (20, 1) (30, 1) (35, 0);
+    TERM platoon := (25, 0) (40, 1) (55, 1) (60, 0);
+    TERM company := (50, 0) (65, 1) (75, 1) (80, 0);
+    TERM batallion := (70, 0) (85, 1) (90, 1) (95, 0);
+    TERM army := (85, 0) (95, 1) (100, 1);
 END_FUZZIFY
 
 FUZZIFY enemySoldiers
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM team := (0, 1) (10, 1) (15, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM squad := (7, 0) (20, 1) (30, 1) (35, 0);
+    TERM platoon := (25, 0) (40, 1) (55, 1) (60, 0);
+    TERM company := (50, 0) (65, 1) (75, 1) (80, 0);
+    TERM batallion := (70, 0) (85, 1) (90, 1) (95, 0);
+    TERM army := (85, 0) (95, 1) (100, 1);
 END_FUZZIFY
 
 
 DEFUZZIFY result
     // TU TEZ
-    TERM valueX := (1,0) (2,1);
+    TERM ParkTheBus := (-15, 1) (-13, 1) (-12, 0);
+    TERM SuperDefensive := (-14, 0) (-11, 1) (-9, 1) (-6, 0);
+    TERM Defensive := (-8, 0) (-6, 1) (-1, 1) (1, 0);
+    TERM Balanced := (-3, 0) (1, 1) (5, 1) (9, 0);
+    TERM Offensive := (6, 0) (9, 1) (11, 1) (13, 0);
+    TERM SuperOffensive := (11, 0) (13, 1) (15, 0);
+    TERM FullTeamAttack := (13,0) (15, 1);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
     DEFAULT := 2; // if no rule activates defuzzifier
@@ -53,8 +79,29 @@ RULEBLOCK No1
     AND : MIN; // Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
+    
+    RULE 1 : IF mySoldiers IS army AND enemySoldiers IS team OR enemySoldiers IS squad THEN result IS FullTeamAttack; 
+	RULE 2 : IF mySoldiers IS batallion AND enemySoldiers IS team OR enemySoldiers IS squad THEN result IS SuperOffensive;
+	RULE 3 : IF mySoldiers IS team AND myFields IS aFew AND emptyFields IS plenty THEN result IS SuperDefensive;
+	RULE 4 : IF mySoldiers IS team AND myFields IS aFew AND emptyFields IS harvest THEN result IS ParkTheBus;
+	RULE 5 : IF mySoldiers IS squad AND myFields IS aFew OR myFields IS averageMinus THEN result IS Defensive;
+	RULE 6 : IF mySoldiers IS platoon AND myFields IS averageMinus AND enemyFields IS averagePlus THEN result IS Defensive;
+	RULE 6 : IF mySoldiers IS company AND myFields IS averageMinus AND enemyFields IS averageMinus THEN result IS Offensive;
+	RULE 7 : IF mySoldiers IS company AND myFields IS averagePlus AND enemySoldiers IS platoon OR enemySoldiers IS squad THEN result IS Offensive;
+	RULE 8 : IF mySoldiers IS company AND myFields IS averagePlus AND enemySoldiers IS company THEN result IS Balanced;
+	RULE 9 : IF mySoldiers IS platoon AND myFields IS averagePlus AND enemySoldiers IS platoon OR enemySoldiers IS squad THEN result IS Offensive;
+	RULE 10 : IF emptyFields IS plenty AND enemyFields IS aFew AND myFields IS averageMinus THEN result IS SuperDefensive;
+	RULE 11 : IF emptyFields IS little OR emptyFields IS closeToZero AND myFields IS averagePlus OR myFields IS aLot THEN result IS SuperOffensive;
+	RULE 12 : IF emptyFields IS little AND myFields IS aFew OR myFields IS averageMinus THEN result IS Balanced;
+	RULE 13 : IF myFields IS aLot AND mySoldiers IS company THEN result IS Offensive;
+	RULE 14 : IF myFields IS aLot AND mySoldiers IS batallion OR mySoldiers IS army THEN result IS FullTeamAttack;
+	RULE 15 : IF emptyFields IS average AND myFields IS aFew OR myFields IS averageMinus THEN result IS Defensive;
+	RULE 16 : IF emptyFields IS little OR emptyFields IS closeToZero AND enemySoldiers IS company OR enemySoldiers IS batallion THEN result IS SuperOffensive;
+	RULE 17 : IF enemySoldiers IS platoon AND enemyFields IS averagePlus AND mySoldiers IS company OR mySoldiers IS platoon AND myFields IS averagePlus OR myFields IS aLot THEN result IS Offensive;
+	RULE 18 : IF enemySoldiers IS batallion OR enemySoldiers IS army AND mySoldiers IS company OR mySoldiers IS platoon AND emptyFields IS average OR emptyFields IS plenty THEN result IS Balanced;
+	RULE 19 : IF emptyFields IS harvest OR emptyFields IS plenty AND enemyFields IS averageMinus OR enemyFields is aFew AND myFields IS aFew OR myFields IS averageMinus THEN result IS SuperOffensive;
+	RULE 20 : IF mySoldiers IS platoon OR mySoldiers IS company AND myFields IS averagePlus AND enemyFields IS averageMinus THEN result IS SuperDefensive; 		
 
-	//RULE 1 : IF myFields IS val1 THEN result IS valueX;
 END_RULEBLOCK
 
 
