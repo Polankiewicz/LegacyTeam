@@ -131,7 +131,7 @@ public class FOLController {
 //			}
 //		}
 		
-		//£adowanie s¹siadów sztucznej inteligencji 
+		//£adowanie pola AI z s¹siadami 
 		String assertion = null;
 		for(int i = 0; i <gameField.size(); i++)
 			if(gameField.get(i).getSoldiersType() == type){
@@ -143,92 +143,31 @@ public class FOLController {
 						"iloscWoja "+gameField.get(i).getSoldiers()+")";
 				
 				for(int j=0; j<neighbour.size(); j++){
-					assertion += "(neighbour"+j+"coordX "+gameField.get(i).getCoordinates().x + ")("+
-							"neighbour"+j+"coordY "+gameField.get(i).getCoordinates().y + ")(" +
-							"neighbour"+j+"index "+gameField.get(i).getIndex()+")("+
-							"neighbour"+j+"iloscWoja "+gameField.get(i).getSoldiers()+")";
-				}
-				assertion += ")))";
+					int field = returnIndex(neighbour.get(j));	
+					String isEnemyField = (gameField.get(returnIndex(neighbour.get(j))).getSoldiersType() == type)? "yes" : "no"; 
+					assertion += "(neighbour"+j+"coordX "+gameField.get(field).getCoordinates().x + ")("+
+							"neighbour"+j+"coordY "+gameField.get(field).getCoordinates().y + ")(" +
+							"neighbour"+j+"index "+gameField.get(field).getIndex()+")("+
+							"neighbour"+j+"isEnemy "+isEnemyField+")("+
+							"neighbour"+j+"iloscWoja "+gameField.get(field).getSoldiers()+")))";
+					}
 				System.out.println(assertion);
 //				clips.eval(assertion);
 			}
-//		for(int i=0; i<gameField.size(); i++)
-//		{
-//			
-//			if(gameField.get(i).getSoldiersType() == type){
-//				//System.out.println("Szukanie s¹siadów pierwszego stopnia");
-//				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
-//				
-//				for(int j=0; j<neighbour.size(); j++)
-//				{
-//					for(int k=0; k<gameField.size(); k++)
-//					{
-//						if(neighbour.get(j).x == gameField.get(k).getCoordinates().x &&
-//							neighbour.get(j).y == gameField.get(k).getCoordinates().y)
-//						{
-//							//Tutaj ustawiæ zapis s¹siada pierwszego poziomu
-//							String isEnemy = (gameField.get(k).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
-//							
-//							String assertion = "(assert(neighbour(coordX "+gameField.get(k).getCoordinates().x+")("+
-//							"coordY "+gameField.get(k).getCoordinates().y+")("+
-//							"index "+gameField.get(k).getIndex()+")("+
-//							"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()+")))";
-//							//System.out.println("Coordy s¹siada x "+gameField.get(k).getCoordinates().x + 
-//							//		"y "+gameField.get(k).getCoordinates().y+")("+
-//								//	"indeks "+ gameField.get(k).getIndex()+")("+
-//								//	"isEnemy "+isEnemy+")(iloscWoja "+gameField.get(k).getSoldiers()
-//						//	);
-//							clips.eval(assertion);
-////							£ADUJEMY S¹SIADÓW DRUGIEGO POZIOMU, czyli s¹siad s¹siadów.
-//							ArrayList<Point> secondNeighbour = gameField.get(k).getNeighbours();
-//							
-//							for(int l=0; l<secondNeighbour.size(); l++)
-//							{
-//								for(int m=0; m<gameField.size(); m++)
-//								{
-//									if(secondNeighbour.get(l).x == gameField.get(m).getCoordinates().x &&
+		
+//		clips.load(ai);
 //
-//											secondNeighbour.get(l).y == gameField.get(m).getCoordinates().y){
-//										
-//										String isEnemy2 = (gameField.get(m).getSoldiersType() == PlayerType.PlayerA)? "yes" : "no";
-//										
-//										String assertion2 = "(assert(neighbour(coordX "+gameField.get(m).getCoordinates().x+")("+
-//										"coordY "+gameField.get(m).getCoordinates().y+")("+
-//										"index "+gameField.get(m).getIndex()+")("+
-//										"isEnemy "+isEnemy2+")(iloscWoja "+gameField.get(m).getSoldiers()+")))";
-//
-//										//System.out.println("Coordy s¹siada drugiego poziomu x "+gameField.get(m).getCoordinates().x + 
-//		//										" y "+gameField.get(m).getCoordinates().y+ 
-//		//										" indeks "+ gameField.get(m).getIndex());
-//
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
+//		clips.run();
+		
+//		if(type == PlayerType.PlayerA){
+//			moveAI.sourceIndex = 0;
+//			moveAI.targetIndex = 1;
+//			moveAI.howMany = 10;
 //		}
-		
-		clips.load(ai);
-
-		clips.run();
-		
-//		MultifieldValue attac = (MultifieldValue) clips.eval("(find-all-facts ((?f pI)) TRUE)");
-//		for(int i=0; i<attac.listValue().size(); i++){
-//			FactAddressValue attackFact = (FactAddressValue) attac.listValue().get(i);
-//			int indexToMove = Integer.parseInt(attackFact.getFactSlot("indexField").toString());
-//			if(indexToMove == 0){
-//				moveAI.sourceIndex = indexToMove;
-//				moveAI.targetIndex = 1;
-//				moveAI.howMany = 10;
-//			}
-//			else if(indexToMove == 24){
-//				moveAI.sourceIndex = indexToMove;
-//				moveAI.targetIndex = 23;
-//				moveAI.howMany = 10;
-//			}
-//			System.out.println("Wartosc: " + (attackFact.getFactSlot("indexField").toString()));
+//		else if(type == PlayerType.PlayerB){
+//			moveAI.sourceIndex = 24;
+//			moveAI.targetIndex = 19;
+//			moveAI.howMany = 10;
 //		}
 		
 		boolean randomizeSelection = false;

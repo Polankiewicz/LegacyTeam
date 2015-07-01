@@ -1,7 +1,6 @@
-;====
-(assert (
-	randomizeSelection(random yes))
-)
+;==== RANDOM SELCTION OF FACTS OR CHOOSE FIRST BEST BASED ON YOUR ALGHORITM
+;==== yes/no
+(assert (randomizeSelection(random yes)))
 
 ;==== ADDITIONALS ===
 
@@ -22,26 +21,8 @@
 	(assert (pI(indexField ?indexField)))
 )	
 
-;=======
-;============================================================
-;=================== PROCESS DATA ===========================
-=======
-;(defrule hasMore
-;	(boardInfo (coordX ?coordX)(coordY ?coordY)(index ?index)(iloscWoja ?iloscWoja))
-;	(test (< ?iloscWoja 50))
-;=>
-;	(printout t "Wspolrzedne gracza majacego mniej niz 50 to " ?coordX " oraz " ?coordY crlf)
-;	(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index)(iloscWoja ?iloscWoja)))
-;)
-
 
 ;============================================================
 ;=================== PROCESS DATA ===========================
 
-
-
-;============================================================
-;=================== PROCESS DATA ===========================
-;(defrule findMaxWarriors
-;	(AIFields(coordX ?coordX)(coordY ?coordY)(index ?index)(iloscWoja ?iloscWoja)
 
