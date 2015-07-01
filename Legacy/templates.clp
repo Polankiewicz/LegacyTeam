@@ -12,7 +12,6 @@
     	(type SYMBOL)
     	(allowed-symbols yes no))
 	(slot iloscWoja (type INTEGER))
-	
 )
 
 (deftemplate fieldType
@@ -28,28 +27,15 @@
 	(slot coordY (type INTEGER))
 	(slot index (type INTEGER))
 	(slot iloscWoja (type INTEGER))
-)
-
-(deftemplate neighbour
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index (type INTEGER))
-	(slot isEnemy
+	
+	(slot neighbour0coordX (type INTEGER))
+	(slot neighbour0coordY (type INTEGER))
+	(slot neighbour0index (type INTEGER))
+	(slot neighbour0isEnemy
 		(type SYMBOL)
     	(allowed-symbols yes no)
 	)
-	(slot iloscWoja (type INTEGER))
-)
-
-(deftemplate neighbour2lvl
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index (type INTEGER))
-	(slot isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot iloscWoja (type INTEGER))
+	(slot neighbour0iloscWoja (type INTEGER))
 )
 
 (deftemplate foundEnemy
@@ -73,6 +59,12 @@
 
 (deftemplate konkluzja
 	(slot tekst (type STRING))
+)
+
+(deftemplate randomizeSelection
+  (slot random
+    (type SYMBOL)
+    (allowed-symbols yes no))
 )
 
 (deftemplate pI
