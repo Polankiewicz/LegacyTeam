@@ -127,17 +127,18 @@ public class FOLController {
 							"coordY "+gameField.get(i).getCoordinates().y + ")(" +
 							"index "+gameField.get(i).getIndex()+")("+
 							"iloscWoja "+gameField.get(i).getSoldiers()+")";
+					
 					int field = returnIndex(neighbour.get(j));	
-					String isEnemyField = (gameField.get(returnIndex(neighbour.get(j))).getSoldiersType() == type)? "yes" : "no"; 
+					String isEnemyField = (gameField.get(field).getSoldiersType() == type)? "yes" : "no"; 
 					assertion += "(neighbour0coordX "+gameField.get(field).getCoordinates().x + ")("+
 							"neighbour0coordY "+gameField.get(field).getCoordinates().y + ")(" +
 							"neighbour0index "+gameField.get(field).getIndex()+")("+
 							"neighbour0isEnemy "+isEnemyField+")("+
 							"neighbour0iloscWoja "+gameField.get(field).getSoldiers()+
 							")))";
-					System.out.println(assertion);
+//					System.out.println(assertion);
+					clips.eval(assertion);
 					}
-				clips.eval(assertion);
 			}
 		
 		clips.load(ai);
@@ -145,21 +146,28 @@ public class FOLController {
 		clips.run();
 		
 		boolean randomizeSelection = false;
-		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		MultifieldValue random = (MultifieldValue) clips.eval("(find-all-facts ((?f randomizeSelection)) TRUE)");
 		if(random.listValue().size() != 0){
 			for(int i=0; i<1; i++){
 				FactAddressValue isRandomize = (FactAddressValue) random.listValue().get(i);
 				randomizeSelection = (isRandomize.toString() == "yes");
+				System.out.println("randomizeSelection" + randomizeSelection);
 			}
 		}
 		
 		Random randomNumber = new Random();
 		int choosenOne = 0;
 		
-		if(randomizeSelection)
+		if(randomizeSelection){
 			choosenOne = randomNumber.nextInt(random.listValue().size());
+		}
 		
+		if(type == PlayerType.PlayerA)
+			System.out.println("PLAYER A: przesuniêcia " + choosenOne);
+		else
+			System.out.println("PLAYER B: przesuniêcia " + choosenOne);
+
+		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		if(attack.listValue().size() != 0){
 			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
 			//Ma zwróciæ tylko jedn¹ opcjê
@@ -177,7 +185,7 @@ public class FOLController {
 		else{
 			System.out.println("Brak faktów do zwrócenia");
 		}
-		
+		clips.reset();
 	}
 
 	
@@ -190,7 +198,7 @@ public class FOLController {
 	}
 	public void gameMainLoop()
 	{
-		for (int i=0;i<100;i++)
+		for (int i=0;i<2;i++)
 		{
 			//System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
