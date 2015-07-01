@@ -36,8 +36,26 @@
 		)
 		(test (eq ?neighbour0field none))
 		=>
-		;(printout t "dla index " ?index " wolne jest " ?index0 "" crlf)
+		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
 		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
 )
 
+(defrule ownField 
+		(AIFields 
+			(coordX ?coordX)
+			(coordY ?coordY)
+			(index ?index)
+			(iloscWoja ?iloscWoja)
+			
+			(neighbour0coordX ?neighbour0coordX)
+			(neighbour0coordY ?neighbour0coordY)
+			(neighbour0index ?index0)
+			(neighbour0field ?neighbour0field)
+			(neighbour0iloscWoja ?wojo0)
+		)
+		(test (eq ?neighbour0field player))
+		=>
+		(printout t "PlayerField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
+		(assert (PlayerField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
+)
 

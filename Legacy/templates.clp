@@ -46,9 +46,15 @@
 )
 
 (deftemplate EmptyField
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index(type INTEGER))
+	(slot indexAI(type INTEGER))
+	(slot indexEnemy(type INTEGER))
+	(slot iloscWoja (type INTEGER))
+)
+
+(deftemplate PlayerField
+	(slot indexAI(type INTEGER))
+	(slot indexEnemy(type INTEGER))
+	(slot iloscWoja (type INTEGER))
 )
 
 (deftemplate kogoZaatakowac

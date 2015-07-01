@@ -146,7 +146,7 @@ public class FOLController {
 							"neighbour0field "+fieldType+")("+
 							"neighbour0iloscWoja "+gameField.get(field).getSoldiers()+
 							")))";
-					System.out.println(assertion);
+//					System.out.println(assertion);
 					clips.eval(assertion);
 					}
 			}
@@ -171,6 +171,7 @@ public class FOLController {
 
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		if(attack.listValue().size() != 0 && randomizeSelection){
+			System.out.println("Iloœæ mo¿liwoœci "+attack.listValue().size());
 			choosenOne = randomNumber.nextInt(attack.listValue().size());
 			System.out.println(choosenOne);
 			
@@ -194,16 +195,16 @@ public class FOLController {
 
 	
 	public int returnIndex(Point coords){
-		return coords.x+coords.y*5;
+		return coords.x+coords.y*5 - 1;
 	}
 	
 	public int returnIndexXY(int x, int y){
-		return x+y*5;
+		return x+y*5 - 1;
 	}
 	public void gameMainLoop()
 	{
 		randomNumber = new Random();
-		for (int i=0;i<3;i++)
+		for (int i=0;i<12;i++)
 		{
 //			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
