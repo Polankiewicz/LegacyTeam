@@ -31,6 +31,9 @@ public class FOLController {
 	private Player bluePlayer;
     private Player redPlayer;
     private Player actualPlayer;
+    
+    private Random randomNumber;
+	int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
    
 	private ArrayList<FieldUnit> gameField;
 	private gameController gc;
@@ -68,8 +71,8 @@ public class FOLController {
 			}
 			else
 			{
-				isMyCastle = gameField.get(i).getIndex() == 0  ? "yes" : "no";
-				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
+				isMyCastle = gameField.get(i).getIndex() == 24  ? "yes" : "no";
+				isCastleEnemy = gameField.get(i).getIndex() == 0 ? "yes" : "no";
 				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerB) ? "yes" : "no";
 				
 				//System.out.println("gracz to: " + type.toString() + " a typ pola to: " + gameField.get(i).getSoldiersType().toString());
@@ -128,15 +131,22 @@ public class FOLController {
 							"index "+gameField.get(i).getIndex()+")("+
 							"iloscWoja "+gameField.get(i).getSoldiers()+")";
 					
-					int field = returnIndex(neighbour.get(j));	
-					String isEnemyField = (gameField.get(field).getSoldiersType() == type)? "yes" : "no"; 
+					int field = returnIndex(neighbour.get(j));
+					String fieldType = null;
+					if(gameField.get(field).getSoldiersType() == PlayerType.NoOne)
+						fieldType = "none";
+					else if(gameField.get(field).getSoldiersType() == type)
+						fieldType = "player";
+					else
+						fieldType = "enemy";
+					
 					assertion += "(neighbour0coordX "+gameField.get(field).getCoordinates().x + ")("+
 							"neighbour0coordY "+gameField.get(field).getCoordinates().y + ")(" +
 							"neighbour0index "+gameField.get(field).getIndex()+")("+
-							"neighbour0isEnemy "+isEnemyField+")("+
+							"neighbour0field "+fieldType+")("+
 							"neighbour0iloscWoja "+gameField.get(field).getSoldiers()+
 							")))";
-//					System.out.println(assertion);
+					System.out.println(assertion);
 					clips.eval(assertion);
 					}
 			}
@@ -159,28 +169,26 @@ public class FOLController {
 		
 		
 
-		int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
-		if(attack.listValue().size() != 0){
-			if(randomizeSelection){	
-				Random randomNumber = new Random();
-				choosenOne = randomNumber.nextInt(attack.listValue().size());
-				System.out.println(choosenOne);
-			}
+		if(attack.listValue().size() != 0 && randomizeSelection){
+			choosenOne = randomNumber.nextInt(attack.listValue().size());
+			System.out.println(choosenOne);
 			
 			//Ma zwróciæ tylko jedn¹ opcjê
 				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(choosenOne);
 				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
 				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());
 				iloscWoja = Integer.parseInt(attackFacts.getFactSlot("iloscWoja").toString());
-			
+				System.out.println("Wylosowano " + choosenOne + " i idzie z "+indexAI + " do " + indexEnemy);
+				
 			moveAI.sourceIndex = indexAI;
 			moveAI.targetIndex = indexEnemy; //Testowo wybieramy nastêpne pole
-			moveAI.howMany = iloscWoja; //te¿ testowo, potem do podstawienia
+			moveAI.howMany = iloscWoja-1; //te¿ testowo, potem do podstawienia
 		}
 		else{
 			System.out.println("Brak faktów do zwrócenia");
 		}
+		
 		clips.clear();
 	}
 
@@ -194,17 +202,20 @@ public class FOLController {
 	}
 	public void gameMainLoop()
 	{
-		for (int i=0;i<100;i++)
+		randomNumber = new Random();
+		for (int i=0;i<3;i++)
 		{
-			System.out.println("tura "+i);
+//			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
 			runAI("ai.clp");
 			game.makeMove();
+			System.out.println("Gracz Niebiski wykona³ ruch");
 			if (game.isGameFinished())
 				break;
 			actualPlayer = redPlayer; 
 			runAI("ai.clp");
 			game.makeMove();
+			System.out.println("Gracz Czerwony wykona³ ruch");
 			if (game.isGameFinished())
 				break;
 		}

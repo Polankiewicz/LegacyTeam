@@ -20,6 +20,7 @@
 
 ;============================================================
 ;=================== PROCESS DATA ===========================
+
 (defrule freeField 
 		(AIFields 
 			(coordX ?coordX)
@@ -30,10 +31,13 @@
 			(neighbour0coordX ?neighbour0coordX)
 			(neighbour0coordY ?neighbour0coordY)
 			(neighbour0index ?index0)
-			(neighbour0isEnemy ?isEnemy0)
+			(neighbour0field ?neighbour0field)
 			(neighbour0iloscWoja ?wojo0)
 		)
-		(test (eq ?isEnemy0 no))
+		(test (eq ?neighbour0field none))
 		=>
+		;(printout t "dla index " ?index " wolne jest " ?index0 "" crlf)
 		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
 )
+
+

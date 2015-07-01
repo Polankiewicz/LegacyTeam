@@ -31,9 +31,9 @@
 	(slot neighbour0coordX (type INTEGER))
 	(slot neighbour0coordY (type INTEGER))
 	(slot neighbour0index (type INTEGER))
-	(slot neighbour0isEnemy
+	(slot neighbour0field
 		(type SYMBOL)
-    	(allowed-symbols yes no)
+    	(allowed-symbols player enemy none)
 	)
 	(slot neighbour0iloscWoja (type INTEGER))
 )
