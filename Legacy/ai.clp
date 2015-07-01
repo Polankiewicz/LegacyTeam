@@ -1,3 +1,8 @@
+;====
+(assert (
+	randomizeSelection(random yes))
+)
+
 ;==== ADDITIONALS ===
 
 (defrule rollRandom
@@ -16,8 +21,6 @@
 	(if (eq ?playerType playerb) then (bind ?indexField ?index)(printout t "Player B - bind index" crlf))	
 	(assert (pI(indexField ?indexField)))
 )	
-
-
 
 ;=======
 ;============================================================

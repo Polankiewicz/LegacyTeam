@@ -2,9 +2,11 @@ package firstOrderLogic;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import view.gameController;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.prism.image.Coords;
 
 import game.FieldUnit;
@@ -209,11 +211,25 @@ public class FOLController {
 //			System.out.println("Wartosc: " + (attackFact.getFactSlot("indexField").toString()));
 //		}
 		
+		boolean randomizeSelection = false;
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
+		MultifieldValue random = (MultifieldValue) clips.eval("(find-all-facts ((?f randomizeSelection)) TRUE)");
+		if(random.listValue().size() != 0){
+			for(int i=0; i<1; i++){
+				FactAddressValue isRandomize = (FactAddressValue) random.listValue().get(i);
+				randomizeSelection = (isRandomize.toString() == "yes");
+			}
+		}
+		Random randomNumber = new Random();
+		int choosenOne = 0;
+		
+		if(randomizeSelection)
+			choosenOne = randomNumber.nextInt(random.listValue().size());
+		
 		if(attack.listValue().size() != 0){
 			int indexAI = 0, indexEnemy = 0, iloscWoja = 0;
 			//Ma zwróciæ tylko jedn¹ opcjê
-			for(int i=0; i< 1; i++){
+			for(int i = choosenOne; i < choosenOne + 1; i++){
 				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(i);
 				indexAI = Integer.parseInt(attackFacts.getFactSlot("indexAI").toString());
 				indexEnemy = Integer.parseInt(attackFacts.getFactSlot("indexEnemy").toString());

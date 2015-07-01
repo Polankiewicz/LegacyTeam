@@ -12,7 +12,6 @@
     	(type SYMBOL)
     	(allowed-symbols yes no))
 	(slot iloscWoja (type INTEGER))
-	
 )
 
 (deftemplate fieldType
@@ -73,6 +72,14 @@
 
 (deftemplate konkluzja
 	(slot tekst (type STRING))
+)
+
+(deftemplate randomizeSelection
+  (slot answer
+    (type SYMBOL)
+    (allowed-symbols yes no)
+;    (default no)
+  )
 )
 
 (deftemplate pI
