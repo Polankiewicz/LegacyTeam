@@ -64,8 +64,6 @@ public class FOLController {
 				isCastleEnemy = gameField.get(i).getIndex() == 24 ? "yes" : "no";
 				isEnemy = (gameField.get(i).getSoldiersType() == PlayerType.PlayerA) ? "yes" : "no";
 				//System.out.println("gracz to: " + type.toString() + " a typ pola to: " + gameField.get(i).getSoldiersType().toString());
-				
-				 
 				//System.out.println(category);
 			}
 			else
@@ -119,56 +117,32 @@ public class FOLController {
 //			System.out.println(assertion);
 		}
 		
-	
-//		for(int i=0; i<gameField.size(); i++){
-//			if(gameField.get(i).getSoldiersType() == type){
-//				String assertion = "(assert(AIFields(coordX "+gameField.get(i).getCoordinates().x + ")("+
-//						"coordY "+gameField.get(i).getCoordinates().y + ")(" +
-//						"index "+gameField.get(i).getIndex()+")("+
-//						"iloscWoja "+gameField.get(i).getSoldiers()+")))";
-//				clips.eval(assertion);
-//				//System.out.println("Dodawanie pól AI: "+assertion);
-//			}
-//		}
-		
 		//£adowanie pola AI z s¹siadami 
 		String assertion = null;
 		for(int i = 0; i <gameField.size(); i++)
 			if(gameField.get(i).getSoldiersType() == type){
 				ArrayList<Point> neighbour = gameField.get(i).getNeighbours();
-				
-				assertion = "(assert(AIFields(coordX "+gameField.get(i).getCoordinates().x + ")("+
-						"coordY "+gameField.get(i).getCoordinates().y + ")(" +
-						"index "+gameField.get(i).getIndex()+")("+
-						"iloscWoja "+gameField.get(i).getSoldiers()+")";
-				
 				for(int j=0; j<neighbour.size(); j++){
+					assertion = "(assert(AIFields(coordX "+gameField.get(i).getCoordinates().x + ")("+
+							"coordY "+gameField.get(i).getCoordinates().y + ")(" +
+							"index "+gameField.get(i).getIndex()+")("+
+							"iloscWoja "+gameField.get(i).getSoldiers()+")";
 					int field = returnIndex(neighbour.get(j));	
 					String isEnemyField = (gameField.get(returnIndex(neighbour.get(j))).getSoldiersType() == type)? "yes" : "no"; 
-					assertion += "(neighbour"+j+"coordX "+gameField.get(field).getCoordinates().x + ")("+
-							"neighbour"+j+"coordY "+gameField.get(field).getCoordinates().y + ")(" +
-							"neighbour"+j+"index "+gameField.get(field).getIndex()+")("+
-							"neighbour"+j+"isEnemy "+isEnemyField+")("+
-							"neighbour"+j+"iloscWoja "+gameField.get(field).getSoldiers()+")))";
+					assertion += "(neighbour0coordX "+gameField.get(field).getCoordinates().x + ")("+
+							"neighbour0coordY "+gameField.get(field).getCoordinates().y + ")(" +
+							"neighbour0index "+gameField.get(field).getIndex()+")("+
+							"neighbour0isEnemy "+isEnemyField+")("+
+							"neighbour0iloscWoja "+gameField.get(field).getSoldiers()+
+							")))";
+					System.out.println(assertion);
 					}
-				System.out.println(assertion);
-//				clips.eval(assertion);
+				clips.eval(assertion);
 			}
 		
-//		clips.load(ai);
-//
-//		clips.run();
-		
-//		if(type == PlayerType.PlayerA){
-//			moveAI.sourceIndex = 0;
-//			moveAI.targetIndex = 1;
-//			moveAI.howMany = 10;
-//		}
-//		else if(type == PlayerType.PlayerB){
-//			moveAI.sourceIndex = 24;
-//			moveAI.targetIndex = 19;
-//			moveAI.howMany = 10;
-//		}
+		clips.load(ai);
+
+		clips.run();
 		
 		boolean randomizeSelection = false;
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");

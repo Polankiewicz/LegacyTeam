@@ -30,64 +30,13 @@
 	
 	;sloty dla s¹siada 0
 	(slot neighbour0coordX (type INTEGER))
-	(slot neighbour0coordX (type INTEGER))
-	(slot neighbour0index (type integer))
+	(slot neighbour0coordY (type INTEGER))
+	(slot neighbour0index (type INTEGER))
 	(slot neighbour0isEnemy
 		(type SYMBOL)
     	(allowed-symbols yes no)
 	)
-	(slot neighbour1iloscWoja (type INTEGER))
-	
-	;sloty dla s¹siada 1
-	(slot neighbour1coordX (type INTEGER))
-	(slot neighbour1coordX (type INTEGER))
-	(slot neighbour1index (type integer))
-	(slot neighbour1isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot neighbour1iloscWoja (type INTEGER))
-	
-	;sloty dla s¹siada 2
-	(slot neighbour2coordX (type INTEGER))
-	(slot neighbour2coordX (type INTEGER))
-	(slot neighbour2index (type integer))
-	(slot neighbour2isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot neighbour2iloscWoja (type INTEGER))
-	
-	;sloty dla s¹siada 3
-	(slot neighbour3coordX (type INTEGER))
-	(slot neighbour3coordX (type INTEGER))
-	(slot neighbour3index (type integer))
-	(slot neighbour3isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot neighbour3iloscWoja (type INTEGER))
-	
-	;sloty dla s¹siada 4
-	(slot neighbour4coordX (type INTEGER))
-	(slot neighbour4co
-	ordX (type INTEGER))
-	(slot neighbour4index (type integer))
-	(slot neighbour4isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot neighbour4iloscWoja (type INTEGER))
-	
-	;sloty dla s¹siada 5
-	(slot neighbour5coordX (type INTEGER))
-	(slot neighbour5coordX (type INTEGER))
-	(slot neighbour5index (type integer))
-	(slot neighbour5isEnemy
-		(type SYMBOL)
-    	(allowed-symbols yes no)
-	)
-	(slot neighbour5iloscWoja (type INTEGER))
+	(slot neighbour0iloscWoja (type INTEGER))
 )
 
 (deftemplate neighbour
