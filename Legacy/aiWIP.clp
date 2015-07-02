@@ -35,11 +35,16 @@
 			(neighbour0iloscWoja ?wojo0)
 		)
 		(test (eq ?neighbour0field none))
+		(test (> ?iloscWoja 2))
 		=>
-		(bind ?noweWojo (- ?iloscWoja 1))
 		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
+        (bind ?f (assert (EmptyField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))))
+        (bind ?i (fact-index ?f))
+        (assert(rememberData(index ?i)))
+        (printout t "Index faktu EmptyField to: " ?i crlf)
 )
+
+
 
 (defrule ownField 
 		(AIFields 
@@ -59,6 +64,7 @@
 		(printout t "PlayerField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
 		(bind ?f (assert (PlayerField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))))
 		(bind ?i (fact-index ?f))
+		(assert(rememberData(index ?i)))
 		(printout t "Index faktu PlayerField to: " ?i crlf)
 )
 
@@ -81,7 +87,7 @@
 	(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
     (bind ?f (assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference))))
     (bind ?i (fact-index ?f))
-   ; (assert(rememberData(index ?i)))
+   	(assert(rememberData(index ?i)))
     (printout t "Index faktu EnemyField to: " ?i crlf)
 	
 )
@@ -93,16 +99,16 @@
 	(printout t "Fakt o indeksie: " ?index " istnieje." crlf)
 )
 
-
-;(defrule enemyFieldExists
- ;   (rememberData (index ?index))
-	;    (if (fact-existp ?index) then
-     ;       (printout t "TRUE, enemyFields does exist." crlf)
-      ;  else
-       ; (printout t "FALSE, enemyFields does not exist." crlf)
-;
-;))
-
+(defrule enemyFieldExists
+	(rememberData (index ?index)
+	(if (fact-existp i) 
+		then 
+		(printout t "TRUE" crlf)
+		else
+		(printout t "FALSE" crlf)
+	)
+)
+	
 (defrule checkIfAttack
 		(EnemyField
 			(indexAI ?indexAI)
@@ -116,5 +122,3 @@
 		(bind ?noweWojo (- ?wojoAI 2))
 		(assert (kogoZaatakowac(indexAI ?indexAI)(indexEnemy ?indexEnemy)(iloscWoja ?noweWojo)))
 )
-
-
