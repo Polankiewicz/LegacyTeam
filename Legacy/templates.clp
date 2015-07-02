@@ -1,4 +1,6 @@
-
+(deftemplate rememberData
+	(slot index (type INTEGER))
+)
 
 (deftemplate boardInfo	 
 	(slot coordX (type INTEGER))

@@ -40,6 +40,7 @@
 		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
         (bind ?f (assert (EmptyField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))))
         (bind ?i (fact-index ?f))
+        (assert(rememberData(index ?i)))
         (printout t "Index faktu EmptyField to: " ?i crlf)
 )
 
@@ -61,7 +62,9 @@
 		(test (eq ?neighbour0field player))
 		=>
 		(printout t "PlayerField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (PlayerField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
+		(bind ?f (assert (PlayerField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))))
+		(bind ?i (fact-index ?f))
+		(printout t "Index faktu PlayerField to: " ?i crlf)
 )
 
 (defrule enemyField 
@@ -81,8 +84,17 @@
 	=>
 	(bind ?difference (- ?iloscWoja ?wojo0))
 	(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-    (assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference)))
+    (bind ?f (assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference))))
+    (bind ?i (fact-index ?f))
+    (printout t "Index faktu EnemyField to: " ?i crlf)
 	
+)
+
+(defrule doFactExist
+	(rememberData (index ?index))
+	(test (fact-existp ?index))
+	=>
+	(printout t "Fakt o indeksie: " ?index " istnieje." crlf)
 )
 
 (defrule checkIfAttack
