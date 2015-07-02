@@ -61,50 +61,50 @@
 )
 
 (defrule enemyField 
-		(AIFields 
-			(coordX ?coordX)
-			(coordY ?coordY)
-			(index ?index)
-			(iloscWoja ?iloscWoja)
-			
-			(neighbour0coordX ?neighbour0coordX)
-			(neighbour0coordY ?neighbour0coordY)
-			(neighbour0index ?index0)
-			(neighbour0field ?neighbour0field)
-			(neighbour0iloscWoja ?wojo0)
-		)
-		(test (eq ?neighbour0field enemy))
-		=>
-;		(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)))
+	(AIFields 
+		(coordX ?coordX)
+		(coordY ?coordY)
+		(index ?index)
+		(iloscWoja ?iloscWoja)
+		
+		(neighbour0coordX ?neighbour0coordX)
+		(neighbour0coordY ?neighbour0coordY)
+		(neighbour0index ?index0)
+		(neighbour0field ?neighbour0field)
+		(neighbour0iloscWoja ?wojo0)
+	)
+	(test (eq ?neighbour0field enemy))
+	=>
+	(bind ?difference (- ?iloscWoja ?wojo0))
+	(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
+	(assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference)))
 )
 
-(defrule checkIfAttack(
+(defrule checkIfAttack
 		(EnemyField
 			(indexAI ?indexAI)
 			(indexEnemy ?indexEnemy)
 			(wojoAI ?wojoAI)
 			(wojoEnemy ?wojoEnemy)
+			(difference ?difference)
 		)
-	
-		;je¿eli po pokonaniu zostanie nam 2 woja to wpierdoliæ mu, idzie na blacklistê		
-		(bind ?rest (- ?wojoAI ?wojoEnemy))
-		(test (> ?rest 2))
+		(test (> ?difference 2))
 		=>
-		;2 prze¿yje, jeden zapas = 3
-		(bind ?noweWojo (- ?wojoAI 3))
-		(assert(kogoZaatakowac (indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
-))
+		(bind ?noweWojo (- ?wojoAI 2))
+		(assert (kogoZaatakowac(indexAI ?indexAI)(indexEnemy ?indexEnemy)(iloscWoja ?noweWojo)))
+)
 
-(defrule goOn(
-	(PlayerField
+(defrule moveOn	
+	(EmptyField
 		(indexAI ?index)
 		(indexEnemy ?index0)
 		(iloscWoja ?iloscWoja)
 	)
-	;je¿eli nigdzie nie ma przeciwnika, to idŸ do przodu zgodnie z za³o¿eniem
-	(test (not (exist (EnemyField))))
-	=>
-	(assert(kogoZaatakowac ((indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))
-))
-
+	(if (test (exists kogoZaatakowac))
+		then
+		(printout "Jest kogo zaatakowac")
+		else
+		(printout "idz normalnie")
+		(assert(kogoZaatakowac
+	
+)

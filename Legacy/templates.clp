@@ -43,6 +43,7 @@
 	(slot indexEnemy(type INTEGER))
 	(slot wojoAI (type INTEGER))
 	(slot wojoEnemy (type INTEGER))
+	(slot difference (type INTEGER))
 )
 
 (deftemplate EmptyField
@@ -67,8 +68,4 @@
   (slot random
     (type SYMBOL)
     (allowed-symbols yes no))
-)
-
-(deftemplate pI
-	(slot indexField(type INTEGER))
 )
