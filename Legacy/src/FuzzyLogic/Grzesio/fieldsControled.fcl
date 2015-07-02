@@ -15,36 +15,57 @@ END_VAR
 
 FUZZIFY myFields
 	// TU PISZECIE
-    TERM val1 := (1, 0) (25, 1); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM poczatek := (1, 1) (8, 1) (10, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM srodek := (9,0) (11, 1) (13, 1) (15, 0);
+    TERM zaawansowany := (14, 0) (16, 1) (19, 1) (21, 0);
+    TERM koniec := (20, 0) (22, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY emptyFields
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM koniec := (1, 1) (4, 1) (6, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM malo := (5,0) (7, 1) (9, 1) (10, 1);
+    TERM duzo := (8, 0) (10, 1) (14, 1) (17, 0);
+    TERM pelno := (15, 0) (17, 1) (20, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY enemyFields
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM poczatek := (1, 1) (8, 1) (10, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM srodek := (9,0) (11, 1) (13, 1) (15, 0);
+    TERM zaawansowany := (14, 0) (16, 1) (19, 1) (21, 0);
+    TERM koniec := (20, 0) (22, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY mySoldiers
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM malo := (1, 1) (9, 1) (10, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM srednio := (8, 0) (15, 1) (30, 0); 
+    TERM sporo := (25, 0) (50, 1) (70, 0);
+    TERM duzo := (65, 0) (80, 1) (90, 0);
+    TERM pelno := (85, 0) (100, 1);
 END_FUZZIFY
 
 FUZZIFY enemySoldiers
 	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM malo := (1, 1) (9, 1) (10, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM srednio := (8, 0) (15, 1) (30, 0); 
+    TERM sporo := (25, 0) (50, 1) (70, 0);
+    TERM duzo := (65, 0) (80, 1) (90, 0);
+    TERM pelno := (85, 0) (100, 1);
 END_FUZZIFY
 
 
 DEFUZZIFY result
     // TU TEZ
-    TERM valueX := (1,0) (2,1);
+    TERM defensywna := (-10, 1) (-5, 1) (-4, 0);
+    TERM pasywna := (-5, 0) (-4, 1) (-2, 0);
+    TERM umiarkowana := (-2, 0) (0, 1) (2, 1) (3, 0);
+    TERM ofensywna := (2, 0) (5, 1) (10, 0);
+    TERM blitzkrieg := (8, 0) (10, 1) (15, 1);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
-    DEFAULT := 2; // if no rule activates defuzzifier
+    DEFAULT := 5; // if no rule activates defuzzifier
 END_DEFUZZIFY
 
 
@@ -54,7 +75,21 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-	//RULE 1 : IF myFields IS val1 THEN result IS valueX;
+	RULE 1 : IF myFields IS poczatek AND emptyFields IS pelno THEN result IS blitzkrieg;
+	RULE 2 : IF myFields IS poczatek AND emptyFields IS koniec AND enemySoldiers IS duzo OR enemySoldiers IS pelno THEN result IS defensywna;
+	RULE 3 : IF myFields IS poczatek AND emptyFields IS koniec OR emptyFields IS malo AND enemySoldiers IS srednio OR enemySoldiers IS sporo AND mySoldiers IS duzo OR mySoldiers IS sporo THEN result IS ofensywna;
+	RULE 4 : IF myFields IS srodek AND mySoldiers IS malo OR mySoldiers IS srednio THEN result IS defensywna;
+	RULE 5 : IF myFields IS srodek AND mySoldiers IS duzo OR mySoldiers IS sporo THEN result IS ofensywna;
+	RULE 6 : IF myFields IS srodek AND mySoldiers IS pelno THEN result IS blitzkrieg;
+	RULE 7 : IF myFields IS srodek AND mySoldiers IS srednio OR mySoldiers IS sporo AND enemySoldiers IS srednio OR enemySoldiers IS malo THEN result IS pasywna;
+	RULE 8 : IF myFields IS srodek AND emptyFields IS duzo AND enemySoldiers IS srednio OR enemySoldiers IS malo THEN result IS ofensywna;
+	RULE 9 : IF myFields IS srodek AND enemyFields IS poczatek THEN result IS ofensywna;
+	RULE 10 : IF myFields IS zaawansowany AND mySoldiers IS duzo OR mySoldiers IS sporo AND enemySoldiers IS malo OR enemySoldiers IS srednio THEN result IS blitzkrieg;
+	RULE 11 : IF myFields IS zaawansowany AND mySoldiers IS duzo OR mySoldiers IS pelno AND enemySoldiers IS malo OR enemySoldiers IS srednio OR enemySoldiers IS sporo THEN result IS blitzkrieg;
+	RULE 12 : IF myFields IS zaawansowany AND mySoldiers IS duzo OR mySoldiers IS sporo AND enemySoldiers IS sporo THEN result IS umiarkowana;
+	RULE 13 : IF myFields IS koniec AND mySoldiers IS duzo OR mySoldiers IS pelno THEN result IS blitzkrieg;
+	RULE 14 : IF myFields IS koniec AND mySoldiers IS sporo AND enemySoldiers IS sporo THEN result IS umiarkowana;
+	
 END_RULEBLOCK
 
 
