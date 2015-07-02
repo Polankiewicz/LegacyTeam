@@ -35,10 +35,10 @@
 			(neighbour0iloscWoja ?wojo0)
 		)
 		(test (eq ?neighbour0field none))
+		(test (> ?iloscWoja 2))
 		=>
-		(bind ?noweWojo (- ?iloscWoja 1))
 		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (kogoZaatakowac(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
+		(assert (EmptyField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
 )
 
 (defrule ownField 
@@ -59,4 +59,52 @@
 		(printout t "PlayerField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
 		(assert (PlayerField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
 )
+
+(defrule enemyField 
+		(AIFields 
+			(coordX ?coordX)
+			(coordY ?coordY)
+			(index ?index)
+			(iloscWoja ?iloscWoja)
+			
+			(neighbour0coordX ?neighbour0coordX)
+			(neighbour0coordY ?neighbour0coordY)
+			(neighbour0index ?index0)
+			(neighbour0field ?neighbour0field)
+			(neighbour0iloscWoja ?wojo0)
+		)
+		(test (eq ?neighbour0field enemy))
+		=>
+;		(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
+		(assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)))
+)
+
+(defrule checkIfAttack(
+		(EnemyField
+			(indexAI ?indexAI)
+			(indexEnemy ?indexEnemy)
+			(wojoAI ?wojoAI)
+			(wojoEnemy ?wojoEnemy)
+		)
+	
+		;je¿eli po pokonaniu zostanie nam 2 woja to wpierdoliæ mu, idzie na blacklistê		
+		(bind ?rest (- ?wojoAI ?wojoEnemy))
+		(test (> ?rest 2))
+		=>
+		;2 prze¿yje, jeden zapas = 3
+		(bind ?noweWojo (- ?wojoAI 3))
+		(assert(kogoZaatakowac (indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
+))
+
+(defrule goOn(
+	(PlayerField
+		(indexAI ?index)
+		(indexEnemy ?index0)
+		(iloscWoja ?iloscWoja)
+	)
+	;je¿eli nigdzie nie ma przeciwnika, to idŸ do przodu zgodnie z za³o¿eniem
+	(test (not (exist (EnemyField))))
+	=>
+	(assert(kogoZaatakowac ((indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))
+))
 

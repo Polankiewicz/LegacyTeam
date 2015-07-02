@@ -51,14 +51,14 @@ public class FOLController {
 		this.game = siseGame;
 	}
 	
-	public void runAI(String ai){
+	public void runAI(String ai, String templates){
 		int castleX, castleY, x, y, soldiers, index, playerType;
 		Boolean enemy;
 		
 		PlayerType type = actualPlayer.getPlayerType();
 		clips = new Environment();
 		
-		clips.load("templates.clp");
+		clips.load(templates);
 		//£adowanie ca³ej planszy
 		for(int i=0; i<gameField.size(); i++){
 			if (type == PlayerType.PlayerB)
@@ -133,6 +133,7 @@ public class FOLController {
 					
 					int field = returnIndex(neighbour.get(j));
 					String fieldType = null;
+					System.out.println("Pole do obliczenia " + field);
 					if(gameField.get(field).getSoldiersType() == PlayerType.NoOne)
 						fieldType = "none";
 					else if(gameField.get(field).getSoldiersType() == type)
@@ -171,9 +172,9 @@ public class FOLController {
 
 		MultifieldValue attack = (MultifieldValue) clips.eval("(find-all-facts ((?f kogoZaatakowac)) TRUE)");
 		if(attack.listValue().size() != 0 && randomizeSelection){
-			System.out.println("Iloœæ mo¿liwoœci "+attack.listValue().size());
+//			System.out.println("Iloœæ mo¿liwoœci "+attack.listValue().size());
 			choosenOne = randomNumber.nextInt(attack.listValue().size());
-			System.out.println(choosenOne);
+//			System.out.println(choosenOne);
 			
 			//Ma zwróciæ tylko jedn¹ opcjê
 				FactAddressValue attackFacts = (FactAddressValue) attack.listValue().get(choosenOne);
@@ -204,19 +205,17 @@ public class FOLController {
 	public void gameMainLoop()
 	{
 		randomNumber = new Random();
-		for (int i=0;i<70;i++)
+		for (int i=0;i<98 ;i++)
 		{
 //			System.out.println("tura "+i);
 			actualPlayer = bluePlayer;
-			runAI("ai.clp");
+			runAI("ai.clp", "templates.clp");
 			game.makeMove();
-			System.out.println("Gracz Niebiski wykona³ ruch");
 			if (game.isGameFinished())
 				break;
 			actualPlayer = redPlayer; 
-			runAI("ai.clp");
+			runAI("ai.clp", "templates.clp");
 			game.makeMove();
-			System.out.println("Gracz Czerwony wykona³ ruch");
 			if (game.isGameFinished())
 				break;
 		}
