@@ -99,7 +99,7 @@ RULEBLOCK No1
 	RULE 16 : IF emptyFields IS little OR emptyFields IS closeToZero AND enemySoldiers IS company OR enemySoldiers IS batallion THEN result IS SuperOffensive;
 	RULE 17 : IF enemySoldiers IS platoon AND enemyFields IS averagePlus AND mySoldiers IS company OR mySoldiers IS platoon AND myFields IS averagePlus OR myFields IS aLot THEN result IS Offensive;
 	RULE 18 : IF enemySoldiers IS batallion OR enemySoldiers IS army AND mySoldiers IS company OR mySoldiers IS platoon AND emptyFields IS average OR emptyFields IS plenty THEN result IS Balanced;
-	RULE 19 : IF emptyFields IS harvest OR emptyFields IS plenty AND enemyFields IS averageMinus OR enemyFields is aFew AND myFields IS aFew OR myFields IS averageMinus THEN result IS SuperOffensive;
+	RULE 19 : IF emptyFields IS harvest OR emptyFields IS plenty AND enemyFields IS averageMinus OR enemyFields IS aFew AND myFields IS aFew OR myFields IS averageMinus THEN result IS SuperOffensive;
 	RULE 20 : IF mySoldiers IS platoon OR mySoldiers IS company AND myFields IS averagePlus AND enemyFields IS averageMinus THEN result IS SuperDefensive; 		
 
 END_RULEBLOCK

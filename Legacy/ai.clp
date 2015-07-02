@@ -38,8 +38,12 @@
 		(test (> ?iloscWoja 2))
 		=>
 		(printout t "EmptyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-		(assert (EmptyField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja)))
+        (bind ?f (assert (EmptyField(indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))))
+        (bind ?i (fact-index ?f))
+        (printout t "Index faktu EmptyField to: " ?i crlf)
 )
+
+
 
 (defrule ownField 
 		(AIFields 
@@ -77,7 +81,8 @@
 	=>
 	(bind ?difference (- ?iloscWoja ?wojo0))
 	(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
-	(assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference)))
+    (assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference)))
+	
 )
 
 (defrule checkIfAttack
@@ -94,17 +99,3 @@
 		(assert (kogoZaatakowac(indexAI ?indexAI)(indexEnemy ?indexEnemy)(iloscWoja ?noweWojo)))
 )
 
-(defrule moveOn	
-	(EmptyField
-		(indexAI ?index)
-		(indexEnemy ?index0)
-		(iloscWoja ?iloscWoja)
-	)
-	(if (test (exists kogoZaatakowac))
-		then
-		(printout "Jest kogo zaatakowac")
-		else
-		(printout "idz normalnie")
-		(assert(kogoZaatakowac
-	
-)

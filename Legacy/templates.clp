@@ -1,3 +1,5 @@
+
+
 (deftemplate boardInfo	 
 	(slot coordX (type INTEGER))
 	(slot coordY (type INTEGER))
