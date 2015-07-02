@@ -79,7 +79,7 @@
 		(assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)))
 )
 
-(defrule checkIfAttack(
+(defrule checkIfAttack
 		(EnemyField
 			(indexAI ?indexAI)
 			(indexEnemy ?indexEnemy)
@@ -88,23 +88,23 @@
 		)
 	
 		;je¿eli po pokonaniu zostanie nam 2 woja to wpierdoliæ mu, idzie na blacklistê		
-		(bind ?rest (- ?wojoAI ?wojoEnemy))
+	    (bind ?rest (- ?wojoAI ?wojoEnemy))
 		(test (> ?rest 2))
 		=>
 		;2 prze¿yje, jeden zapas = 3
 		(bind ?noweWojo (- ?wojoAI 3))
-		(assert(kogoZaatakowac (indexAI ?index)(indexEnemy ?index0)(iloscWoja ?noweWojo)))
-))
+		(assert(kogoZaatakowac (indexAI ?indexAI)(indexEnemy ?indexEnemy)(iloscWoja ?noweWojo)))
+)
 
-(defrule goOn(
+(defrule goOn
 	(PlayerField
 		(indexAI ?index)
 		(indexEnemy ?index0)
 		(iloscWoja ?iloscWoja)
 	)
 	;je¿eli nigdzie nie ma przeciwnika, to idŸ do przodu zgodnie z za³o¿eniem
-	(test (not (exist (EnemyField))))
+	(exists (EnemyField))
 	=>
-	(assert(kogoZaatakowac ((indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))
+	(assert(kogoZaatakowac (indexAI ?index)(indexEnemy ?index0)(iloscWoja ?iloscWoja))
 ))
 
