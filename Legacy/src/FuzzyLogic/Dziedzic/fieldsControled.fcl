@@ -15,7 +15,7 @@ END_VAR
 
 FUZZIFY myFields
 	// TU PISZECIE
-    TERM aFew := (0, 0) (4, 1) (6, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM aFew := (0, 1) (4, 1) (6, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
     TERM averageMinus := (5, 0) (8, 1) (10, 1) (12, 0);
     TERM averagePlus := (10, 0) (13, 1) (16, 1) (19, 0);
     TERM aLot := (16, 0) (25, 1);

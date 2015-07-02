@@ -101,7 +101,7 @@
 
 (defrule enemyFieldExists
 	(rememberData (index ?index)
-	(if (fact-existp i) 
+	(if (fact-existp ?index) 
 		then 
 		(printout t "TRUE" crlf)
 		else
