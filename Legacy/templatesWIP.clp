@@ -1,3 +1,7 @@
+(deftemplate rememberData
+	(slot index (type INTEGER))
+)
+
 (deftemplate boardInfo	 
 	(slot coordX (type INTEGER))
 	(slot coordY (type INTEGER))
@@ -38,11 +42,12 @@
 	(slot neighbour0iloscWoja (type INTEGER))
 )
 
-(deftemplate foundEnemy
-	(slot coordX (type INTEGER))
-	(slot coordY (type INTEGER))
-	(slot index(type INTEGER))
-	(slot iloscWoja (type INTEGER))
+(deftemplate EnemyField
+	(slot indexAI(type INTEGER))
+	(slot indexEnemy(type INTEGER))
+	(slot wojoAI (type INTEGER))
+	(slot wojoEnemy (type INTEGER))
+	(slot difference (type INTEGER))
 )
 
 (deftemplate EmptyField
@@ -63,16 +68,8 @@
 	(slot iloscWoja (type INTEGER))
 )
 
-(deftemplate konkluzja
-	(slot tekst (type STRING))
-)
-
 (deftemplate randomizeSelection
   (slot random
     (type SYMBOL)
     (allowed-symbols yes no))
-)
-
-(deftemplate pI
-	(slot indexField(type INTEGER))
 )
