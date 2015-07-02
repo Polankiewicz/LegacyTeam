@@ -86,6 +86,7 @@
 	(printout t "EnemyField indexAI" ?index " indexEnemy " ?index0 " iloscWoja " ?iloscWoja crlf)
     (bind ?f (assert (EnemyField(indexAI ?index)(indexEnemy ?index0)(wojoAI ?iloscWoja)(wojoEnemy ?wojo0)(difference ?difference))))
     (bind ?i (fact-index ?f))
+   ; (assert(rememberData(index ?i)))
     (printout t "Index faktu EnemyField to: " ?i crlf)
 	
 )
@@ -96,6 +97,16 @@
 	=>
 	(printout t "Fakt o indeksie: " ?index " istnieje." crlf)
 )
+
+
+;(defrule enemyFieldExists
+ ;   (rememberData (index ?index))
+	;    (if (fact-existp ?index) then
+     ;       (printout t "TRUE, enemyFields does exist." crlf)
+      ;  else
+       ; (printout t "FALSE, enemyFields does not exist." crlf)
+;
+;))
 
 (defrule checkIfAttack
 		(EnemyField
