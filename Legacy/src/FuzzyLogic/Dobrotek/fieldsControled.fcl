@@ -84,6 +84,7 @@ RULEBLOCK No1
 	RULE 8 : IF emptyFields IS horde OR emptyFields IS lots THEN result IS StayTuned;
 	RULE 9 : IF emptyFields IS pack OR emptyFields IS  several THEN result IS Prepare;
 	RULE 10: IF EnemyFields IS few OR enemyFields IS several THEN result IS Prepare;
+	
 END_RULEBLOCK
 
 
