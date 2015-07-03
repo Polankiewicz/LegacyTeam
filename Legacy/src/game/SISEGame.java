@@ -197,7 +197,7 @@ public class SISEGame extends Application {
     		
     		if(autoPlay) //wywolanie gracza testowego 
     		{
-    			if(!fuzzyOrFOL)
+    			if(fuzzyOrFOL)
     				fuzzyLogicAutoPlay.gameMainLoop();
     			else
     				folController.gameMainLoop(); 
