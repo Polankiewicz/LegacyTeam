@@ -15,33 +15,53 @@ END_VAR
 
 FUZZIFY myFields
 	// TU PISZECIE
-    TERM val1 := (1, 0) (25, 1); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+	TERM few := (0, 1) (4, 1) (6, 0);
+	TERM several := (5, 0) (6, 1) (10, 1) (11, 0);
+	TERM pack := (9, 0) (10, 1) (14, 1) (15, 0);
+    TERM lots := (14, 0)(16, 1)(19, 1)(20, 1);
+    TERM horde := (18,0)(19, 1)(25, 1);
 END_FUZZIFY
 
 FUZZIFY emptyFields
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+	// TU PISZECIE-
+	TERM few := (0, 1) (2, 1) (6, 0);
+	TERM several := (4, 0) (5, 1) (10, 1) (11, 0);
+	TERM pack := (9, 0) (10, 1) (14, 1) (15, 0);
+    TERM lots := (13, 0)(16, 1)(19, 1)(20, 1);
+    TERM horde := (17,0)(19, 1)(25, 1);
 END_FUZZIFY
 
 FUZZIFY enemyFields
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+	TERM few := (0, 1) (2, 1) (6, 0);
+	TERM several := (4, 0) (5, 1) (10, 1) (11, 0);
+	TERM pack := (9, 0) (10, 1) (14, 1) (15, 0);
+    TERM lots := (13, 0)(16, 1)(19, 1)(20, 1);
+    TERM horde := (17,0)(19, 1)(25, 1);
 END_FUZZIFY
 
 FUZZIFY mySoldiers
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+	TERM smallArmy := (0, 1)(13, 1)(17, 0);
+	TERM severalArmy := (10, 0)(20, 1)(33, 1)(35, 0);
+	TERM groupArmy := (30, 0)(40, 1)(50, 1)(60, 0);
+	TERM seriousArmy := (55, 0)(65, 1)(80, 1)(90,0);
+	TERM holySh := (80, 0)(90, 1)(120, 1)(140, 0);
 END_FUZZIFY
 
 FUZZIFY enemySoldiers
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+	TERM smallArmy := (0, 1)(13, 1)(17, 0);
+	TERM severalArmy := (10, 0)(20, 1)(33, 1)(35, 0);
+	TERM groupArmy := (30, 0)(40, 1)(50, 1)(60, 0);
+	TERM seriousArmy := (55, 0)(65, 1)(80, 1)(90,0);
+	TERM holySh := (80, 0)(90, 1)(120, 1)(140, 0);	// TU PISZECIE
 END_FUZZIFY
 
 
 DEFUZZIFY result
-    // TU TEZ
-    TERM valueX := (1,0) (2,1);
+    TERM StayTuned := (-14, 1)(-10, 1)(-8, 0); 
+    TERM Prepare := (-9,0)(-7, 1)(-5, 1)(-3, 0);
+    TERM Mobilize := (-4, 0)(-2, 1)(5, 1)(7,0);
+    TERM Attack := (6, 0)(8, 1)(10, 1)(12, 0);
+    TERM FlushEnemy := (10, 0)(14, 1);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
     DEFAULT := 2; // if no rule activates defuzzifier
@@ -54,7 +74,16 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-	//RULE 1 : IF myFields IS val1 THEN result IS valueX;
+	RULE 1 : IF mySoldiers IS holySh AND enemySoldiers IS seriousArmy OR enemySolider IS groupArmy OR enemySoldiers IS severalArmy OR enemySoldiers IS smallArmy THEN result IS FlushEnemy;
+	RULE 2 : IF mySoldiers IS seriousArmy AND enemySoldiers IS seriousArmy THEN result IS Mobilize;
+	RULE 3 : IF mySoldiers IS seriousArmy AND enemySoldiers IS groupArmy OR enemySoldiers IS severalArmy OR enemySoldiers IS smallArmy THEN result IS Attack; 
+	RULE 4 : IF mySoldiers IS groupArmy AND enemySoliders IS severalarmy OR enemySoliders IS smallArmy THEN result IS Attack;
+	RULE 5 : IF mySoldiers IS severalArmy AND enemySoldiers IS smallArmy THEN result IS Mobilize;
+	RULE 6 : IF mySoldiers IS smallArmy AND enemySoldiers IS smallArmy OR enemySoldiers IS severalArmy THEN result IS Prepare;
+	RULE 7 : IF mySoldiers IS severalArmy AND enemySoldiers is groupArmy OR enemySoldiers IS seriousArmy THEN result IS Prepare; 
+	RULE 8 : IF emptyFields IS horde OR emptyFields IS lots THEN result IS StayTuned;
+	RULE 9 : IF emptyFields IS pack OR emptyFields IS  several THEN result IS Prepare;
+	RULE 10: IF EnemyFields IS few OR enemyFields IS several THEN result IS Prepare;
 END_RULEBLOCK
 
 
