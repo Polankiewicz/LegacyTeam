@@ -40,11 +40,11 @@ FUZZIFY enemyFields
 END_FUZZIFY
 
 FUZZIFY mySoldiers
-	TERM smallArmy := (0, 1)(13, 1)(17, 0);
-	TERM severalArmy := (10, 0)(20, 1)(33, 1)(35, 0);
+	TERM smallArmy := (0, 1)(10, 1)(13, 0);
+	TERM severalArmy := (5, 0)(20, 1)(33, 1)(35, 0);
 	TERM groupArmy := (30, 0)(40, 1)(50, 1)(60, 0);
 	TERM seriousArmy := (55, 0)(65, 1)(80, 1)(90,0);
-	TERM holySh := (80, 0)(90, 1)(100, 1);	// TU PISZECIE
+	TERM holySh := (80, 0)(95, 1)(100, 1);	// TU PISZECIE
 END_FUZZIFY
 
 FUZZIFY enemySoldiers
@@ -52,16 +52,17 @@ FUZZIFY enemySoldiers
 	TERM severalArmy := (10, 0)(20, 1)(33, 1)(35, 0);
 	TERM groupArmy := (30, 0)(40, 1)(50, 1)(60, 0);
 	TERM seriousArmy := (55, 0)(65, 1)(80, 1)(90,0);
-	TERM holySh := (80, 0)(90, 1)(100, 1);	// TU PISZECIE
+	TERM holySh := (80, 0)(85, 1)(100, 0);	// TU PISZECIE
 END_FUZZIFY
 
 
 DEFUZZIFY result
-    TERM StayTuned := (-14, 1)(-10, 1)(-8, 0); 
+    TERM StayTuned := (-16, 1)(-10, 1)(-8, 0); 
     TERM Prepare := (-9,0)(-7, 1)(-5, 1)(-3, 0);
     TERM Mobilize := (-4, 0)(-2, 1)(5, 1)(7,0);
-    TERM Attack := (6, 0)(8, 1)(10, 1)(12, 0);
+    TERM Attack := (6, 0)(7, 1)(10, 1)(12, 0);
     TERM FlushEnemy := (10, 0)(14, 1);
+    
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
     DEFAULT := 2; // if no rule activates defuzzifier
@@ -74,20 +75,20 @@ RULEBLOCK No1
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
 
-	RULE 1 : IF mySoldiers IS holySh AND enemySoldiers IS seriousArmy OR enemySoldiers IS groupArmy OR enemySoldiers IS severalArmy OR enemySoldiers IS smallArmy THEN result IS FlushEnemy;
-	RULE 2 : IF mySoldiers IS seriousArmy AND enemySoldiers IS seriousArmy THEN result IS Mobilize;
-	RULE 3 : IF mySoldiers IS seriousArmy AND enemySoldiers IS groupArmy OR enemySoldiers IS severalArmy OR enemySoldiers IS smallArmy THEN result IS Attack; 
-	RULE 4 : IF mySoldiers IS groupArmy AND enemySoldiers IS severalArmy OR enemySoldiers IS smallArmy THEN result IS Attack;
-	RULE 5 : IF mySoldiers IS severalArmy AND enemySoldiers IS smallArmy THEN result IS Mobilize;
-	RULE 6 : IF mySoldiers IS smallArmy AND enemySoldiers IS smallArmy OR enemySoldiers IS severalArmy THEN result IS Prepare;
-	RULE 7 : IF mySoldiers IS severalArmy AND enemySoldiers IS groupArmy OR enemySoldiers IS seriousArmy THEN result IS Prepare; 
-	RULE 8 : IF emptyFields IS horde OR emptyFields IS lots THEN result IS StayTuned;
-	RULE 9 : IF emptyFields IS pack OR emptyFields IS  several THEN result IS Prepare;
-	RULE 10: IF enemyFields IS few OR enemyFields IS several THEN result IS Prepare;
-	RULE 11: IF enemyFields IS pack OR enemyFields IS lots THEN result IS Attack;
-	RULE 12: IF myFields IS few THEN result IS StayTuned;
-	RULE 13: IF myFields IS several THEN result IS Prepare;
-	RULE 14: IF myFields IS pack THEN result IS Mobilize;
+	RULE 1 : IF emptyFields IS horde OR emptyFields IS lots THEN result IS Attack;
+	RULE 2 : IF emptyFields IS pack THEN result IS Mobilize;
+	RULE 3 : IF emptyFields IS few OR emptyFields IS several THEN result IS StayTuned;
+	RULE 4 : IF enemyFields IS few AND enemySoldiers IS smallArmy THEN result IS Attack;
+	RULE 5 : IF enemyFields IS several AND enemySoldiers IS severalArmy THEN result IS Mobilize;
+	RULE 6 : IF enemyFields IS several AND enemySoldiers IS smallArmy THEN result IS Attack;
+	RULE 7 : IF enemyFields IS pack AND enemySoldiers IS smallArmy THEN result IS Attack;
+	RULE 8 : IF enemyFields IS pack AND enemySoldiers IS severalArmy THEN result IS StayTuned;
+	RULE 9 : IF enemyFields IS lots AND enemySoldiers IS smallArmy THEN result IS Mobilize;
+	RULE 10: IF enemyFields IS pack OR enemyFields IS lots OR enemyFields IS horde THEN result IS StayTuned;
+	RULE 11: IF mySoldiers IS holySh AND enemySoldiers IS smallArmy OR enemySoldiers IS severalArmy THEN result IS Attack;
+	RULE 12 : IF mySoldiers IS seriousArmy AND enemySoldiers IS severalArmy THEN result IS Attack;
+	RULE 13: IF mySoldiers IS groupArmy OR mySoldiers IS severalArmy OR mySoldiers IS smallArmy THEN result IS StayTuned;
+	RULE 14: IF emptyFields IS few AND mySoldiers IS smallArmy OR mySoldiers IS severalArmy THEN result IS StayTuned;	
 END_RULEBLOCK
 
 
