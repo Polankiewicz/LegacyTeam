@@ -49,12 +49,12 @@ END_FUZZIFY
 
 
 DEFUZZIFY result
-    TERM standStill := (-10, 0) (-8, 1) (-6, 0);
+    TERM standStill := (-8, 1) (-6, 0);
     TERM passive := (-8, 0) (-4, 1) (-2, 0);
     TERM average := (-3, 0) (1, 1) (2, 0);
     TERM offensive := (1, 0) (6, 1) (8, 0);
     TERM aggressive := (6, 0) (15, 1);
-    TERM superAggressive := (13, 0) (20, 1);
+    TERM superAggressive := (13, 0) (16, 1) (20, 1);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
     DEFAULT := 1; // if no rule activates defuzzifier
@@ -73,14 +73,13 @@ RULEBLOCK No1
 	RULE 4 : IF myFields IS soso AND emptyFields IS notMany AND mySoldiers IS worse THEN result IS passive;
 	RULE 5 : IF enemyFields IS many AND emptyFields IS many THEN result IS superAggressive;
 	RULE 6 : IF mySoldiers IS worse AND myFields IS many OR myFields IS soso THEN result IS standStill;
-	RULE 7 : IF mySoldiers IS best THEN result IS aggressive;
+	RULE 7 : IF mySoldiers IS best THEN result IS superAggressive;
 	RULE 8 : IF mySoldiers IS better THEN result IS offensive;
 	RULE 9 : IF myFields IS many AND emptyFields IS notMany AND mySoldiers IS good OR mySoldiers IS better THEN result IS offensive;
 	RULE 10 : IF myFields IS soso AND emptyFields IS notMany AND mySoldiers IS good OR mySoldiers IS better THEN result IS average;
-	RULE 11 : IF enemyFields IS notMany THEN result IS aggressive;
-	RULE 12 : IF enemyFields IS soso AND mySoldiers IS good OR mySoldiers IS better THEN result IS superAggressive;
+	RULE 11 : IF enemyFields IS soso AND mySoldiers IS good OR mySoldiers IS better THEN result IS aggressive;
+	RULE 12 : IF enemyFields IS notMany AND mySoldiers IS good OR mySoldiers IS better THEN result IS superAggressive;
 	RULE 13 : IF enemyFields IS soso AND mySoldiers IS worse OR mySoldiers IS worst THEN result IS passive;
-
 END_RULEBLOCK
 
 
