@@ -48,8 +48,8 @@ public class FuzzyLogicAutoPlay {
 		this.game = game;
 		
 		// Auto Players: Damian, Dopek, Polka, Grzesio, Dziedzic, Dobrotek
-		autoBluePlayer = new String("Damian");
-		autoRedPlayer = new String("Polka");
+		autoBluePlayer = new String("Dopek");
+		autoRedPlayer = new String("Grzesio");
 		
 		// Blue Player FCL files
 		this.fuzzyLogicControlForBluePlayer = new FuzzyLogicControl(
