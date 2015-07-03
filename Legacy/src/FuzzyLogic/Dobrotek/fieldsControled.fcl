@@ -80,12 +80,11 @@ RULEBLOCK No1
 	RULE 4 : IF mySoldiers IS groupArmy AND enemySoliders IS severArmy OR enemySoliders IS smallArmy THEN result IS Attack;
 	RULE 5 : IF mySoldiers IS severalArmy AND enemySoldiers IS smallArmy THEN result IS Mobilize;
 	RULE 6 : IF mySoldiers IS smallArmy AND enemySoldiers IS smallArmy OR enemySoldiers IS severalArmy THEN result IS Prepare;
-	RULE 7 : IF mySoldiers IS severalArmy AND enemySoldiers is groupArmy OR enemySoldiers IS seriousArmy THEN result IS Prepare; 
+	RULE 7 : IF mySoldiers IS severalArmy AND enemySoldiers IS groupArmy OR enemySoldiers IS seriousArmy THEN result IS Prepare; 
 	RULE 8 : IF emptyFields IS horde OR emptyFields IS lots THEN result IS StayTuned;
 	RULE 9 : IF emptyFields IS pack OR emptyFields IS  several THEN result IS Prepare;
 	RULE 10: IF enemyFields IS few OR enemyFields IS several THEN result IS Prepare;
 	RULE 11: IF enemyFields IS pack OR enemyFields IS lots THEN result is Attack;
-	RULE 12: IF enemyFields IS 
 END_RULEBLOCK
 
 
