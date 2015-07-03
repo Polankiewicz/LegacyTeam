@@ -14,37 +14,50 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY myFields
-	// TU PISZECIE
-    TERM val1 := (1, 0) (25, 1); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+	TERM notMany := (1, 1) (5, 1) (8, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM soso := (8, 0) (10, 1) (12, 1) (21, 0);
+    TERM many := (20, 0) (23, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY emptyFields
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+	TERM notMany := (1, 1) (5, 1) (8, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM soso := (8, 0) (10, 1) (12, 1) (21, 0);
+    TERM many := (20, 0) (23, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY enemyFields
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);  // 0-25 ; myFields + emptyFields + enemyFields = 25
+	TERM notMany := (1, 1) (5, 1) (8, 0); 	// 0-25 ; myFields + emptyFields + enemyFields = 25
+    TERM soso := (8, 0) (10, 1) (12, 1) (21, 0);
+    TERM many := (20, 0) (23, 1) (25, 1);
 END_FUZZIFY
 
 FUZZIFY mySoldiers
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0);	// 0%-100% ; mySoldiers + enemySoldiers = 100%
+	TERM worst := (0, 0) (8, 1) (15, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM worse := (13, 0) (25, 1) (39, 1) (46, 0);
+    TERM good := (40, 0) (55, 1) (65, 0);
+    TERM better := (60, 0) (70, 1) (75, 0);
+    TERM best := (70, 0) (90, 1) (100, 1);
 END_FUZZIFY
 
-FUZZIFY enemySoldiers
-	// TU PISZECIE
-    TERM begining := (1, 1) (2, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+FUZZIFY enemySoldiers //names from enemy's perspective
+	TERM worst := (0, 0) (8, 1) (15, 0); // 0%-100% ; mySoldiers + enemySoldiers = 100%
+    TERM worse := (13, 0) (25, 1) (39, 1) (46, 0);
+    TERM good := (40, 0) (55, 1) (65, 0);
+    TERM better := (60, 0) (70, 1) (75, 0);
+    TERM best := (70, 0) (90, 1) (100, 1);
 END_FUZZIFY
 
 
 DEFUZZIFY result
-    // TU TEZ
-    TERM valueX := (1,0) (2,1);
+    TERM standStill := (-10, 0) (-8, 1) (-6, 0);
+    TERM passive := (-8, 0) (-4, 1) (-2, 0);
+    TERM average := (-3, 0) (1, 1) (2, 0);
+    TERM offensive := (1, 0) (6, 1) (8, 0);
+    TERM aggressive := (6, 0) (15, 1);
+    TERM superAggressive := (13, 0) (20, 1);
     
     METHOD : COG; // Use 'Center Of Gravity' defuzzification method
-    DEFAULT := 2; // if no rule activates defuzzifier
+    DEFAULT := 1; // if no rule activates defuzzifier
 END_DEFUZZIFY
 
 
@@ -53,8 +66,21 @@ RULEBLOCK No1
     AND : MIN; // Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
     ACT : MIN; // Use 'min' activation method
     ACCU : MAX; // Use 'max' accumulation method
+	
+	RULE 1 : IF emptyFields IS many AND enemyFields IS notMany OR enemyFields IS soso THEN result IS superAggressive;
+	RULE 2 : IF emptyFields IS soso OR emptyFields IS many AND enemyFields IS many THEN result IS average;
+	RULE 3 : IF myFields IS many AND emptyFields IS notMany AND mySoldiers IS worse THEN result IS passive;
+	RULE 4 : IF myFields IS soso AND emptyFields IS notMany AND mySoldiers IS worse THEN result IS passive;
+	RULE 5 : IF enemyFields IS many AND emptyFields IS many THEN result IS superAggressive;
+	RULE 6 : IF mySoldiers IS worse AND myFields IS many OR myFields IS soso THEN result IS standStill;
+	RULE 7 : IF mySoldiers IS best THEN result IS aggressive;
+	RULE 8 : IF mySoldiers IS better THEN result IS offensive;
+	RULE 9 : IF myFields IS many AND emptyFields IS notMany AND mySoldiers IS good OR mySoldiers IS better THEN result IS offensive;
+	RULE 10 : IF myFields IS soso AND emptyFields IS notMany AND mySoldiers IS good OR mySoldiers IS better THEN result IS average;
+	RULE 11 : IF enemyFields IS notMany THEN result IS aggressive;
+	RULE 12 : IF enemyFields IS soso AND mySoldiers IS good OR mySoldiers IS better THEN result IS superAggressive;
+	RULE 13 : IF enemyFields IS soso AND mySoldiers IS worse OR mySoldiers IS worst THEN result IS passive;
 
-	//RULE 1 : IF myFields IS val1 THEN result IS valueX;
 END_RULEBLOCK
 
 
